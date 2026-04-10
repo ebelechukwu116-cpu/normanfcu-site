@@ -23,10 +23,10 @@
           Secure sign in
         </div>
 
-        <h1 style="font-size:44px; line-height:1.08; margin:0 0 14px;">Access your account with a real login system.</h1>
+        <h1 style="font-size:44px; line-height:1.08; margin:0 0 14px;">Access your account.</h1>
 
         <p style="font-size:17px; line-height:1.7; color:#e5e7eb; max-width:540px;">
-          Sign in with Firebase Authentication and load your saved profile from Firestore.
+          Sign in with Firebase Authentication and load your saved profile.
         </p>
       </div>
 
@@ -56,12 +56,12 @@
     import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 
     const firebaseConfig = {
-      apiKey: "PASTE_YOUR_API_KEY",
-      authDomain: "PASTE_YOUR_AUTH_DOMAIN",
-      projectId: "PASTE_YOUR_PROJECT_ID",
-      storageBucket: "PASTE_YOUR_STORAGE_BUCKET",
-      messagingSenderId: "PASTE_YOUR_MESSAGING_SENDER_ID",
-      appId: "PASTE_YOUR_APP_ID"
+      apiKey: "AIzaSyDa9f0xnUb-xvhByuRo1q0_HMQ14V4JITc",
+      authDomain: "adovest-7obch3.firebaseapp.com",
+      projectId: "adovest-7obch3",
+      storageBucket: "adovest-7obch3.firebasestorage.app",
+      messagingSenderId: "678461021523",
+      appId: "1:678461021523:web:eee791ec001c2826a815a6"
     };
 
     const app = initializeApp(firebaseConfig);
@@ -81,7 +81,7 @@
       const password = document.getElementById("password").value.trim();
 
       if (!email || !password) {
-        statusEl.textContent = "Please enter email and password.";
+        statusEl.textContent = "Enter email and password.";
         return;
       }
 
