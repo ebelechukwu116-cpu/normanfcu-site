@@ -1,85 +1,43 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Dashboard - Norman FCU</title>
+<body style="font-family: Arial; background: #0b1f3a; color: white;">
 
-<style>
-body {
-    margin: 0;
-    font-family: Arial;
-    background: #0b1e3c;
-    color: white;
-}
+    <h1 style="text-align:center;">Norman Federal Credit Union</h1>
 
-.header {
-    padding: 20px;
-    font-size: 20px;
-    font-weight: bold;
-}
+    <!-- BANK IMAGE -->
+    <div style="text-align:center;">
+        <img src="https://images.unsplash.com/photo-1565372910946-7c1d7c1b8c8b"
+             style="width:90%; max-width:500px; border-radius:10px;">
+    </div>
 
-.container {
-    padding: 20px;
-}
+    <h2 style="text-align:center;">Dashboard</h2>
 
-.card {
-    background: #1e3a8a;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-}
+    <!-- BALANCE -->
+    <div style="background:#1e3a5f; padding:15px; margin:20px; border-radius:10px;">
+        <h3>Available Balance</h3>
+        <p style="font-size:24px;">$12,450.75</p>
+    </div>
 
-.balance {
-    font-size: 28px;
-    margin-top: 10px;
-}
+    <!-- ACCOUNT DETAILS -->
+    <div style="background:#132c4c; padding:15px; margin:20px; border-radius:10px;">
+        <h3>Account Details</h3>
+        <p><b>Account Name:</b> John Doe</p>
+        <p><b>Account Number:</b> 0987654321</p>
+        <p><b>Routing Number:</b> 021000021</p>
+        <p><b>Account Type:</b> Checking</p>
+    </div>
 
-.actions {
-    display: flex;
-    gap: 10px;
-}
+    <!-- ABOUT BANK -->
+    <div style="background:#1e3a5f; padding:15px; margin:20px; border-radius:10px;">
+        <h3>About Our Bank</h3>
+        <p>
+            Norman Federal Credit Union provides secure and trusted banking services.
+            We offer savings, transfers, and modern financial solutions for all customers.
+        </p>
+    </div>
 
-button {
-    padding: 10px;
-    border: none;
-    border-radius: 6px;
-    background: #2563eb;
-    color: white;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #1e40af;
-}
-
-a {
-    text-decoration: none;
-}
-</style>
-</head>
-
-<body>
-
-<div class="header">
-    Norman Federal Credit Union
-</div>
-
-<div class="container">
-
-    <div class="card">
-        <h3>Available Balance</h3>
-        <div class="balance">$12,450.75</div>
-    </div>
-
-    <div class="card">
-        <h3>Quick Actions</h3>
-
-        <div class="actions">
-            <a href="transfer.html"><button>Send Money</button></a>
-            <a href="transactions.html"><button>Transactions</button></a>
-        </div>
-    </div>
-
-</div>
+    <!-- QUICK ACTIONS -->
+    <div style="text-align:center; margin-top:20px;">
+        <a href="transfer.html" style="padding:10px 20px; background:#4CAF50; color:white; border-radius:5px;">Send Money</a>
+        <a href="transactions.html" style="padding:10px 20px; background:#2196F3; color:white; border-radius:5px;">Transactions</a>
+    </div>
 
 </body>
-</html>
