@@ -1,9 +1,219 @@
 <!DOCTYPE html>
 <html>
-<head><title>Norman FCU</title></head>
-<body style="font-family:Arial;text-align:center;padding:50px;">
-<h1>Welcome to Norman Federal Credit Union</h1>
-<p>Secure. Trusted. USD Banking Experience.</p>
-<a href="login.html">Login</a>
+<head>
+  <title>Norman FCU Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Arial,sans-serif;
+      background:linear-gradient(135deg,#e0f2fe,#ffffff);
+      color:#0f172a;
+    }
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:18px 24px;
+      background:rgba(255,255,255,.8);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid #dbeafe;
+      position:sticky;
+      top:0;
+    }
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .logo-icon{
+      width:42px;
+      height:42px;
+      border-radius:12px;
+      background: linear-gradient(135deg, #38bdf8, #2563eb);
+      color:white;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:bold;
+      font-size:20px;
+      box-shadow: 0 8px 20px rgba(37,99,235,.25);
+    }
+    .logo-text{
+      display:flex;
+      flex-direction:column;
+      line-height:1.1;
+    }
+    .logo-text strong{font-size:18px}
+    .logo-text span{font-size:12px;color:#64748b}
+    .nav a{
+      text-decoration:none;
+      color:#0f172a;
+      margin-left:18px;
+      font-size:14px;
+    }
+    .hero{
+      max-width:1100px;
+      margin:auto;
+      padding:60px 20px;
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:30px;
+      align-items:center;
+    }
+    .hero h1{
+      font-size:46px;
+      margin:0 0 14px;
+    }
+    .hero p{
+      font-size:18px;
+      color:#475569;
+      line-height:1.6;
+      margin-bottom:24px;
+    }
+    .btns{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      text-decoration:none;
+      padding:13px 18px;
+      border-radius:10px;
+      font-weight:bold;
+      display:inline-block;
+    }
+    .btn-primary{
+      background:#38bdf8;
+      color:white;
+    }
+    .btn-secondary{
+      background:white;
+      color:#0f172a;
+      border:1px solid #cbd5e1;
+    }
+    .hero-card{
+      background:white;
+      border-radius:20px;
+      padding:24px;
+      box-shadow:0 16px 40px rgba(15,23,42,.08);
+    }
+    .balance-card{
+      background:linear-gradient(135deg,#2563eb,#38bdf8);
+      color:white;
+      padding:22px;
+      border-radius:18px;
+      margin-bottom:18px;
+    }
+    .balance-card small{opacity:.9}
+    .balance{
+      font-size:34px;
+      font-weight:bold;
+      margin-top:8px;
+    }
+    .mini-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+    .mini{
+      background:#f8fafc;
+      border:1px solid #e2e8f0;
+      padding:16px;
+      border-radius:14px;
+    }
+    .section{
+      max-width:1100px;
+      margin:auto;
+      padding:10px 20px 50px;
+    }
+    .features{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+    .feature{
+      background:white;
+      border-radius:18px;
+      padding:22px;
+      box-shadow:0 10px 30px rgba(15,23,42,.06);
+    }
+    .feature h3{margin-top:0}
+    @media (max-width:900px){
+      .hero,.features{grid-template-columns:1fr}
+      .hero h1{font-size:36px}
+    }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <div class="logo">
+      <div class="logo-icon">N</div>
+      <div class="logo-text">
+        <strong>Norman FCU</strong>
+        <span>Demo Banking</span>
+      </div>
+    </div>
+    <div>
+      <a href="login.html">Login</a>
+      <a href="signup.html">Open Account</a>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div>
+      <h1>Modern digital banking with a clean finance experience.</h1>
+      <p>
+        Manage demo accounts, view balances, explore transactions, and test a polished finance dashboard in a safe sandbox environment.
+      </p>
+      <div class="btns">
+        <a class="btn btn-primary" href="signup.html">Create Account</a>
+        <a class="btn btn-secondary" href="login.html">Account Login</a>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="balance-card">
+        <small>Available Balance</small>
+        <div class="balance">$12,450.75</div>
+      </div>
+      <div class="mini-grid">
+        <div class="mini">
+          <strong>Checking</strong>
+          <p>Fast access to daily funds.</p>
+        </div>
+        <div class="mini">
+          <strong>Transfers</strong>
+          <p>Quick demo movement tools.</p>
+        </div>
+        <div class="mini">
+          <strong>Cards</strong>
+          <p>Card details and account view.</p>
+        </div>
+        <div class="mini">
+          <strong>Security</strong>
+          <p>Demo-only protected login flow.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="features">
+      <div class="feature">
+        <h3>Account Access</h3>
+        <p>Simple login and signup flow for demo users.</p>
+      </div>
+      <div class="feature">
+        <h3>Clean Dashboard</h3>
+        <p>See balances, account details, cards, and quick actions.</p>
+      </div>
+      <div class="feature">
+        <h3>Admin Controls</h3>
+        <p>Edit demo account values and display details in a sandbox.</p>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
