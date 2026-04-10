@@ -2,45 +2,78 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Norman FCU</title>
+<title>Dashboard - Norman FCU</title>
 </head>
 
 <body style="margin:0; font-family:Arial; background:linear-gradient(135deg,#000000,#5b0000); color:white;">
 
-<!-- NAV -->
+<!-- TOP BAR -->
 <div style="display:flex; justify-content:space-between; padding:20px; background:#111;">
-  <h2 style="margin:0; color:red;">Norman FCU</h2>
-
-  <div>
-    <a href="login.html" style="color:white; margin-right:15px; text-decoration:none;">Login</a>
-    <a href="signup.html" style="color:white; text-decoration:none;">Create Account</a>
-  </div>
+  <h2 style="margin:0; color:red;">Norman FCU</h2>
+  <a href="index.html" style="color:white; text-decoration:none;">Logout</a>
 </div>
 
-<!-- HERO -->
-<div style="text-align:center; margin-top:120px;">
+<!-- MAIN -->
+<div style="padding:30px;">
 
-  <h1 style="font-size:50px;">Modern Digital Banking</h1>
+  <h2>Dashboard</h2>
 
-  <p style="color:#ccc;">Secure. Fast. Trusted banking experience.</p>
+  <!-- CARD UI -->
+  <div style="background:#111; padding:25px; border-radius:12px; margin-top:20px; box-shadow:0 0 20px rgba(255,0,0,0.2);">
+    
+    <h3 style="color:red;">Available Balance</h3>
+    
+    <h1 id="balance" style="font-size:40px;">$0</h1>
 
-  <br>
+    <p id="accountNumber"></p>
+    <p id="routingNumber"></p>
 
-  <a href="login.html" style="padding:12px 25px; background:#222; color:white; text-decoration:none; border-radius:6px;">Login</a>
+  </div>
 
-  <a href="signup.html" style="padding:12px 25px; background:red; color:white; text-decoration:none; border-radius:6px;">Create Account</a>
+  <!-- ACTIONS -->
+  <div style="margin-top:30px;">
+    <a href="transfer.html" style="padding:12px 20px; background:red; color:white; text-decoration:none; border-radius:6px;">Transfer</a>
+    <a href="transactions.html" style="padding:12px 20px; background:#222; color:white; text-decoration:none; border-radius:6px;">Transactions</a>
+  </div>
 
 </div>
 
-<!-- FEATURES -->
-<div style="display:flex; justify-content:center; gap:20px; margin-top:80px;">
+<!-- SCRIPT -->
+<script>
 
-  <div style="background:#111; padding:20px; border-radius:10px; width:200px;">
-    <h3 style="color:red;">Secure</h3>
-    <p>Bank-level protection</p>
-  </div>
+// GENERATORS
+function generateAccountNumber() {
+  return String(Math.floor(1000000000 + Math.random() * 9000000000));
+}
 
-  <div style="background:#111; padding:20px; border-radius:10px; width:200px;">
-    <h3 style="color:red;">Fast</h3>
-    <p>Instant transfers</p>
-  </div>
+function generateRoutingNumber() {
+  return "021000021";
+}
+
+// SET VALUES
+const accountNumber = generateAccountNumber();
+const routingNumber = generateRoutingNumber();
+
+document.getElementById("accountNumber").innerText = "Account Number: " + accountNumber;
+document.getElementById("routingNumber").innerText = "Routing Number: " + routingNumber;
+
+// ANIMATED BALANCE
+let balance = 0;
+let target = 12450;
+
+let interval = setInterval(() => {
+  balance += 150;
+
+  if(balance >= target){
+    balance = target;
+    clearInterval(interval);
+  }
+
+  document.getElementById("balance").innerText = "$" + balance.toLocaleString();
+
+}, 30);
+
+</script>
+
+</body>
+</html>
