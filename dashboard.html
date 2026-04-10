@@ -2,10 +2,11 @@
 <html>
 <head>
   <title>Dashboard - Norman FCU Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body id="page" style="margin:0; font-family:Arial,sans-serif; min-height:100vh; background:linear-gradient(rgba(0,102,204,0.85), rgba(0,51,153,0.95)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1600&q=80'); background-size:cover; background-position:center; color:white;">
+<body id="page" style="margin:0; font-family:Arial,sans-serif; min-height:100vh; background:linear-gradient(rgba(0,102,204,0.86), rgba(0,51,153,0.95)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1600&q=80'); background-size:cover; background-position:center; color:white;">
 
-<div style="display:flex; justify-content:space-between; align-items:center; padding:20px 28px; background:rgba(0,0,0,0.28); backdrop-filter:blur(8px);">
+<div style="display:flex; justify-content:space-between; align-items:center; padding:18px 22px; background:rgba(0,0,0,0.28); backdrop-filter:blur(8px);">
   <div style="display:flex; align-items:center; gap:12px;">
     <div style="width:42px; height:42px; border-radius:12px; background:linear-gradient(135deg,#38bdf8,#2563eb); display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:20px;">N</div>
     <div>
@@ -14,62 +15,112 @@
     </div>
   </div>
 
-  <div>
-    <a href="transactions.html" style="color:white; margin-right:15px; text-decoration:none;">Transactions</a>
-    <a href="transfer.html" style="color:white; margin-right:15px; text-decoration:none;">Transfer</a>
-    <a href="admin-login.html" style="color:white; margin-right:15px; text-decoration:none;">Admin</a>
-    <a href="#" onclick="toggleTheme()" style="color:white; text-decoration:none;">Toggle Theme</a>
+  <div style="display:flex; gap:14px; flex-wrap:wrap;">
+    <a href="transactions.html" style="color:white; text-decoration:none;">Transactions</a>
+    <a href="transfer.html" style="color:white; text-decoration:none;">Transfer</a>
+    <a href="admin-login.html" style="color:white; text-decoration:none;">Admin</a>
+    <a href="#" onclick="toggleTheme()" style="color:white; text-decoration:none;">Theme</a>
   </div>
 </div>
 
-<div style="padding:30px; max-width:1100px; margin:auto;">
+<div style="background:#facc15; color:black; text-align:center; padding:6px; font-weight:bold;">
+  DEMO BANKING SYSTEM
+</div>
 
-  <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
-    <div style="background:rgba(255,255,255,0.14); padding:24px; border-radius:18px; backdrop-filter:blur(10px); box-shadow:0 10px 24px rgba(0,0,0,0.18);">
-      <h3>Available Balance</h3>
-      <h1 id="balanceBox" style="margin:10px 0;">$0.00</h1>
-      <p id="accInfo">Account: --</p>
-      <p id="routeInfo">Routing: --</p>
-    </div>
+<div style="max-width:1150px; margin:26px auto; padding:0 16px;">
 
-    <div style="background:linear-gradient(135deg,#111827,#1d4ed8); padding:24px; border-radius:18px; box-shadow:0 10px 30px rgba(0,0,0,0.25);">
-      <div style="display:flex; justify-content:space-between;">
-        <strong>Norman FCU</strong>
-        <span>Demo Debit</span>
-      </div>
+  <div style="display:grid; grid-template-columns:1.1fr .9fr; gap:20px;">
+    
+    <div>
+      <div style="background:linear-gradient(135deg,#00c6ff,#0072ff); border-radius:20px; padding:24px; box-shadow:0 14px 34px rgba(0,0,0,0.22);">
+        <div style="font-size:13px; opacity:.95;">Available Balance</div>
+        <div id="balanceBox" style="font-size:40px; font-weight:bold; margin-top:8px;">$0.00</div>
+        <div id="accInfo" style="margin-top:14px; font-size:14px;">Account: --</div>
+        <div id="routeInfo" style="margin-top:6px; font-size:14px;">Routing: --</div>
 
-      <div style="margin-top:28px; width:52px; height:36px; border-radius:8px; background:linear-gradient(135deg,#e5e7eb,#94a3b8);"></div>
-
-      <div id="cardNumber" style="margin-top:24px; font-size:24px; letter-spacing:2px;">**** **** **** 4821</div>
-
-      <div style="display:flex; justify-content:space-between; margin-top:22px; font-size:13px;">
-        <div>
-          <div style="opacity:.8;">CARD HOLDER</div>
-          <div id="cardName">Member Name</div>
-        </div>
-        <div>
-          <div style="opacity:.8;">EXPIRES</div>
-          <div id="cardExpiry">12/28</div>
+        <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
+          <a href="transfer.html" style="display:inline-block; padding:12px 18px; background:white; color:#003366; border-radius:10px; text-decoration:none; font-weight:bold;">Send Money</a>
+          <a href="transactions.html" style="display:inline-block; padding:12px 18px; background:rgba(255,255,255,0.18); color:white; border:1px solid rgba(255,255,255,0.28); border-radius:10px; text-decoration:none; font-weight:bold;">View Activity</a>
         </div>
       </div>
+
+      <div style="margin-top:18px; background:rgba(255,255,255,0.14); backdrop-filter:blur(10px); border-radius:18px; padding:22px; box-shadow:0 10px 24px rgba(0,0,0,0.18);">
+        <h3 style="margin-top:0;">Spending Overview</h3>
+        <div style="display:flex; align-items:flex-end; gap:14px; height:180px; margin-top:18px;">
+          <div style="flex:1; background:rgba(255,255,255,0.14); border-radius:10px 10px 0 0; height:55%; position:relative;">
+            <span style="position:absolute; bottom:-26px; left:50%; transform:translateX(-50%); font-size:12px;">Mon</span>
+          </div>
+          <div style="flex:1; background:#93c5fd; border-radius:10px 10px 0 0; height:78%; position:relative;">
+            <span style="position:absolute; bottom:-26px; left:50%; transform:translateX(-50%); font-size:12px;">Tue</span>
+          </div>
+          <div style="flex:1; background:rgba(255,255,255,0.14); border-radius:10px 10px 0 0; height:42%; position:relative;">
+            <span style="position:absolute; bottom:-26px; left:50%; transform:translateX(-50%); font-size:12px;">Wed</span>
+          </div>
+          <div style="flex:1; background:#60a5fa; border-radius:10px 10px 0 0; height:88%; position:relative;">
+            <span style="position:absolute; bottom:-26px; left:50%; transform:translateX(-50%); font-size:12px;">Thu</span>
+          </div>
+          <div style="flex:1; background:rgba(255,255,255,0.14); border-radius:10px 10px 0 0; height:64%; position:relative;">
+            <span style="position:absolute; bottom:-26px; left:50%; transform:translateX(-50%); font-size:12px;">Fri</span>
+          </div>
+        </div>
+        <div style="margin-top:34px; font-size:13px; opacity:.92;">Weekly activity preview</div>
+      </div>
+
+      <div style="margin-top:18px; background:rgba(255,255,255,0.14); backdrop-filter:blur(10px); border-radius:18px; padding:22px; box-shadow:0 10px 24px rgba(0,0,0,0.18);">
+        <h3 style="margin-top:0;">Recent Transactions</h3>
+        <div id="txPreview"></div>
+      </div>
     </div>
-  </div>
 
-  <div style="margin-top:20px; background:rgba(255,255,255,0.14); padding:22px; border-radius:18px; backdrop-filter:blur(10px); box-shadow:0 10px 24px rgba(0,0,0,0.18);">
-    <h3>User Details</h3>
-    <div id="userBox"></div>
+    <div>
+      <div style="background:linear-gradient(135deg,#111827,#1d4ed8); padding:24px; border-radius:20px; box-shadow:0 10px 30px rgba(0,0,0,0.25);">
+        <div style="display:flex; justify-content:space-between;">
+          <strong>Norman FCU</strong>
+          <span>Demo Debit</span>
+        </div>
 
-    <div style="margin-top:18px;">
-      <a href="transfer.html" style="display:inline-block; padding:12px 18px; background:white; color:#003366; border-radius:8px; text-decoration:none; margin-right:8px;">Send Money</a>
-      <a href="transactions.html" style="display:inline-block; padding:12px 18px; background:#00c2ff; color:white; border-radius:8px; text-decoration:none;">View Transactions</a>
+        <div style="margin-top:28px; width:52px; height:36px; border-radius:8px; background:linear-gradient(135deg,#e5e7eb,#94a3b8);"></div>
+
+        <div id="cardNumber" style="margin-top:24px; font-size:24px; letter-spacing:2px;">**** **** **** 4821</div>
+
+        <div style="display:flex; justify-content:space-between; margin-top:22px; font-size:13px;">
+          <div>
+            <div style="opacity:.8;">CARD HOLDER</div>
+            <div id="cardName">Member Name</div>
+          </div>
+          <div>
+            <div style="opacity:.8;">EXPIRES</div>
+            <div id="cardExpiry">12/28</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:18px; background:rgba(255,255,255,0.14); backdrop-filter:blur(10px); border-radius:18px; padding:22px; box-shadow:0 10px 24px rgba(0,0,0,0.18);">
+        <h3 style="margin-top:0;">Notifications</h3>
+
+        <div style="padding:14px; border-radius:14px; background:rgba(255,255,255,0.12); margin-bottom:12px;">
+          <div style="font-weight:bold;">Transfer Alert</div>
+          <div style="font-size:13px; opacity:.92; margin-top:4px;">Your latest transfer activity has been updated.</div>
+        </div>
+
+        <div style="padding:14px; border-radius:14px; background:rgba(255,255,255,0.12); margin-bottom:12px;">
+          <div style="font-weight:bold;">Card Notice</div>
+          <div style="font-size:13px; opacity:.92; margin-top:4px;">Card details are visible in this dashboard preview.</div>
+        </div>
+
+        <div style="padding:14px; border-radius:14px; background:rgba(255,255,255,0.12);">
+          <div style="font-weight:bold;">Profile Update</div>
+          <div style="font-size:13px; opacity:.92; margin-top:4px;">Review account data from the admin panel when needed.</div>
+        </div>
+      </div>
+
+      <div style="margin-top:18px; background:rgba(255,255,255,0.14); backdrop-filter:blur(10px); border-radius:18px; padding:22px; box-shadow:0 10px 24px rgba(0,0,0,0.18);">
+        <h3 style="margin-top:0;">Member Profile</h3>
+        <div id="userBox"></div>
+      </div>
     </div>
-  </div>
 
-  <div style="margin-top:20px; background:rgba(255,255,255,0.14); padding:22px; border-radius:18px; backdrop-filter:blur(10px); box-shadow:0 10px 24px rgba(0,0,0,0.18);">
-    <h3 style="margin-top:0;">Recent Transactions</h3>
-    <div id="txPreview"></div>
   </div>
-
 </div>
 
 <script>
@@ -125,9 +176,10 @@ function render() {
   document.getElementById("userBox").innerHTML = `
     <p><b>Name:</b> ${user.name || "Jordan Miles"}</p>
     <p><b>Email:</b> ${user.email || "member@example.com"}</p>
+    <p><b>Status:</b> Active</p>
   `;
 
-  document.getElementById("txPreview").innerHTML = txs.slice(0,3).map(tx => `
+  document.getElementById("txPreview").innerHTML = txs.slice(0,4).map(tx => `
     <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid rgba(255,255,255,0.18);">
       <div>
         <div style="font-weight:bold;">${tx.title}</div>
@@ -141,7 +193,7 @@ function toggleTheme() {
   const page = document.getElementById("page");
   if (page.dataset.theme === "light") {
     page.dataset.theme = "dark";
-    page.style.background = "linear-gradient(rgba(0,102,204,0.85), rgba(0,51,153,0.95)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1600&q=80')";
+    page.style.background = "linear-gradient(rgba(0,102,204,0.86), rgba(0,51,153,0.95)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1600&q=80')";
     page.style.backgroundSize = "cover";
     page.style.backgroundPosition = "center";
     page.style.color = "white";
