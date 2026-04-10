@@ -1,135 +1,218 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard - Norman FCU</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - Norman FCU</title>
 </head>
+<body id="page" style="margin:0; font-family:Arial,sans-serif; background:linear-gradient(135deg,#000000,#3b0000,#5b0000); color:white; min-height:100vh;">
 
-<body style="margin:0; font-family:Arial; background:linear-gradient(135deg,#000000,#3b0000,#5b0000); color:white;">
+  <div style="display:flex; min-height:100vh;">
 
-<!-- NAV -->
-<div style="display:flex; justify-content:space-between; padding:20px; background:#111;">
-  <h2 style="margin:0; color:red;">Norman FCU</h2>
-  <button onclick="logout()" style="background:red; color:white; border:none; padding:10px; border-radius:6px;">Logout</button>
-</div>
+    <aside style="width:240px; background:#0f0f0f; padding:25px 18px; box-sizing:border-box; border-right:1px solid rgba(255,255,255,0.08);">
+      <h2 style="margin-top:0; color:#ff3b3b;">Norman FCU</h2>
+      <p style="color:#aaa; font-size:13px;">Finance App</p>
 
-<!-- MAIN -->
-<div style="padding:30px;">
+      <a href="dashboard.html" style="display:block; padding:12px 14px; margin-top:20px; background:#2a0000; color:white; text-decoration:none; border-radius:8px;">Dashboard</a>
+      <a href="transfer.html" style="display:block; padding:12px 14px; margin-top:10px; background:#181818; color:white; text-decoration:none; border-radius:8px;">Transfer</a>
+      <a href="transactions.html" style="display:block; padding:12px 14px; margin-top:10px; background:#181818; color:white; text-decoration:none; border-radius:8px;">Transactions</a>
+      <a href="index.html" style="display:block; padding:12px 14px; margin-top:10px; background:#181818; color:white; text-decoration:none; border-radius:8px;">Home</a>
 
-  <h2>Dashboard</h2>
+      <button id="logoutBtn" style="margin-top:18px; width:100%; padding:12px; background:#ff2d2d; color:white; border:none; border-radius:8px; cursor:pointer;">
+        Logout
+      </button>
+    </aside>
 
-  <!-- BALANCE CARD -->
-  <div style="background:#111; padding:25px; border-radius:12px; margin-top:20px; box-shadow:0 0 20px rgba(255,0,0,0.2);">
-    
-    <h3 style="color:red;">Available Balance</h3>
-    <h1 id="balance">$0.00</h1>
+    <main style="flex:1; padding:28px; box-sizing:border-box;">
 
-    <p id="account"></p>
-    <p id="routing"></p>
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+        <div>
+          <h1 style="margin:0;">Dashboard</h1>
+          <p style="margin:6px 0 0; color:#ddd;">Live balance and transactions</p>
+        </div>
 
+        <div style="width:56px; height:56px; border-radius:50%; background:#ff2d2d; display:flex; align-items:center; justify-content:center; font-size:24px; box-shadow:0 10px 20px rgba(0,0,0,0.3);">
+          💬
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1.1fr .9fr; gap:22px; margin-top:24px;">
+
+        <section style="background:linear-gradient(135deg,#190000,#7a0000); border-radius:18px; padding:24px; box-shadow:0 14px 30px rgba(0,0,0,0.28);">
+          <div style="font-size:13px; color:#f0caca;">Available Balance</div>
+          <div id="balanceBox" style="font-size:42px; font-weight:bold; margin-top:10px;">$0.00</div>
+          <div id="accountBox" style="margin-top:16px; font-size:14px;">Account Number: --</div>
+          <div id="routingBox" style="margin-top:6px; font-size:14px;">Routing Number: --</div>
+
+          <div style="margin-top:20px;">
+            <a href="transfer.html" style="display:inline-block; padding:12px 18px; background:white; color:#7a0000; text-decoration:none; border-radius:8px; font-weight:bold; margin-right:8px;">Send Money</a>
+            <a href="transactions.html" style="display:inline-block; padding:12px 18px; background:#ff2d2d; color:white; text-decoration:none; border-radius:8px; font-weight:bold;">View Activity</a>
+          </div>
+        </section>
+
+        <section style="background:linear-gradient(135deg,#111111,#2a0000); border-radius:18px; padding:24px; box-shadow:0 14px 30px rgba(0,0,0,0.28); position:relative; overflow:hidden;">
+          <div style="position:absolute; right:-20px; top:-20px; width:120px; height:120px; border-radius:50%; background:rgba(255,255,255,0.05);"></div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; position:relative;">
+            <strong>Norman FCU</strong>
+            <span style="color:#ff9b9b;">Card UI</span>
+          </div>
+
+          <div style="margin-top:28px; width:54px; height:36px; border-radius:8px; background:linear-gradient(135deg,#f3d27b,#92731d);"></div>
+
+          <div id="cardNumber" style="margin-top:26px; font-size:25px; letter-spacing:3px;">**** **** **** ----</div>
+
+          <div style="display:flex; justify-content:space-between; margin-top:24px; font-size:13px;">
+            <div>
+              <div style="opacity:0.7;">CARD HOLDER</div>
+              <div id="cardName" style="margin-top:4px;">--</div>
+            </div>
+            <div>
+              <div style="opacity:0.7;">EXPIRES</div>
+              <div id="cardExpiry" style="margin-top:4px;">--/--</div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:22px;">
+
+        <section style="background:rgba(255,255,255,0.08); border-radius:16px; padding:22px; box-shadow:0 10px 24px rgba(0,0,0,0.2);">
+          <h3 style="margin-top:0;">Recent Transactions</h3>
+          <div id="txBox">
+            <div style="color:#ddd;">Loading transactions...</div>
+          </div>
+        </section>
+
+        <section style="background:rgba(255,255,255,0.08); border-radius:16px; padding:22px; box-shadow:0 10px 24px rgba(0,0,0,0.2);">
+          <h3 style="margin-top:0;">Profile</h3>
+          <div id="profileBox">
+            <p>Loading profile...</p>
+          </div>
+        </section>
+
+      </div>
+
+    </main>
   </div>
 
-  <!-- TRANSACTIONS -->
-  <div style="margin-top:30px;">
-    <h3>Recent Transactions</h3>
-    <div id="transactions"></div>
-  </div>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+    import {
+      getFirestore,
+      doc,
+      onSnapshot,
+      collection,
+      query,
+      orderBy,
+      limit
+    } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
-</div>
+    const firebaseConfig = {
+      apiKey: "PASTE_YOUR_API_KEY",
+      authDomain: "PASTE_YOUR_AUTH_DOMAIN",
+      projectId: "PASTE_YOUR_PROJECT_ID",
+      storageBucket: "PASTE_YOUR_STORAGE_BUCKET",
+      messagingSenderId: "PASTE_YOUR_MESSAGING_SENDER_ID",
+      appId: "PASTE_YOUR_APP_ID"
+    };
 
-<!-- FIREBASE SCRIPT -->
-<script type="module">
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
-import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
-import { getFirestore, doc, getDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+    const balanceBox = document.getElementById("balanceBox");
+    const accountBox = document.getElementById("accountBox");
+    const routingBox = document.getElementById("routingBox");
+    const cardNumber = document.getElementById("cardNumber");
+    const cardName = document.getElementById("cardName");
+    const cardExpiry = document.getElementById("cardExpiry");
+    const txBox = document.getElementById("txBox");
+    const profileBox = document.getElementById("profileBox");
+    const logoutBtn = document.getElementById("logoutBtn");
 
-const firebaseConfig = {
-  apiKey: "PASTE_YOUR_API_KEY",
-  authDomain: "PASTE_YOUR_AUTH_DOMAIN",
-  projectId: "PASTE_YOUR_PROJECT_ID",
-  storageBucket: "PASTE_YOUR_STORAGE_BUCKET",
-  messagingSenderId: "PASTE_YOUR_MESSAGING_SENDER_ID",
-  appId: "PASTE_YOUR_APP_ID"
-};
+    function animateBalance(target) {
+      let current = 0;
+      const safeTarget = Number(target) || 0;
+      const step = safeTarget / 60;
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= safeTarget) {
+          current = safeTarget;
+          clearInterval(timer);
+        }
 
-const balanceEl = document.getElementById("balance");
-const accountEl = document.getElementById("account");
-const routingEl = document.getElementById("routing");
-const txEl = document.getElementById("transactions");
-
-function animateBalance(target){
-  let current = 0;
-  const step = target / 50;
-
-  const timer = setInterval(() => {
-    current += step;
-    if(current >= target){
-      current = target;
-      clearInterval(timer);
+        balanceBox.textContent = "$" + current.toLocaleString(undefined, {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        });
+      }, 18);
     }
 
-    balanceEl.innerText = "$" + current.toLocaleString(undefined,{
-      minimumFractionDigits:2,
-      maximumFractionDigits:2
+    logoutBtn.addEventListener("click", async () => {
+      await signOut(auth);
+      window.location.href = "login.html";
     });
 
-  },20);
-}
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = "login.html";
+        return;
+      }
 
-onAuthStateChanged(auth, async (user) => {
+      const userRef = doc(db, "users", user.uid);
 
-  if(!user){
-    window.location.href = "login.html";
-    return;
-  }
+      onSnapshot(userRef, (snap) => {
+        if (!snap.exists()) return;
 
-  const uid = user.uid;
+        const data = snap.data();
+        const balance = Number(data.balance) || 0;
 
-  // GET USER DATA
-  const userDoc = await getDoc(doc(db,"users",uid));
+        animateBalance(balance);
+        accountBox.textContent = "Account Number: " + (data.accountNumber || "--");
+        routingBox.textContent = "Routing Number: " + (data.routingNumber || "--");
+        cardNumber.textContent = data.cardNumber || "**** **** **** ----";
+        cardName.textContent = data.fullName || "User";
+        cardExpiry.textContent = data.cardExpiry || "--/--";
 
-  if(userDoc.exists()){
-    const data = userDoc.data();
+        profileBox.innerHTML = `
+          <p><b>Name:</b> ${data.fullName || "User"}</p>
+          <p><b>Email:</b> ${data.email || user.email || ""}</p>
+          <p><b>Status:</b> Active</p>
+        `;
+      });
 
-    const balance = Number(data.balance) || 0;
+      const txRef = collection(db, "users", user.uid, "transactions");
+      const txQuery = query(txRef, orderBy("createdAt", "desc"), limit(8));
 
-    animateBalance(balance);
+      onSnapshot(txQuery, (snapshot) => {
+        if (snapshot.empty) {
+          txBox.innerHTML = "<div style='color:#ddd;'>No transactions yet.</div>";
+          return;
+        }
 
-    accountEl.innerText = "Account Number: " + data.accountNumber;
-    routingEl.innerText = "Routing Number: " + data.routingNumber;
-  }
+        txBox.innerHTML = snapshot.docs.map((docSnap) => {
+          const tx = docSnap.data();
+          const isCredit = String(tx.amount || "").startsWith("+");
 
-  // GET TRANSACTIONS
-  const querySnapshot = await getDocs(collection(db,"users",uid,"transactions"));
-
-  txEl.innerHTML = "";
-
-  querySnapshot.forEach(doc => {
-    const tx = doc.data();
-
-    txEl.innerHTML += `
-      <div style="background:#111; padding:15px; margin-top:10px; border-radius:8px;">
-        <strong>${tx.title}</strong><br>
-        ${tx.amount} - ${tx.date}
-      </div>
-    `;
-  });
-
-});
-
-// LOGOUT
-window.logout = function(){
-  signOut(auth).then(()=>{
-    window.location.href = "login.html";
-  });
-};
-
-</script>
+          return `
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid rgba(255,255,255,0.1);">
+              <div>
+                <div style="font-weight:bold;">${tx.title || "Transaction"}</div>
+                <div style="font-size:13px; opacity:0.75;">${tx.date || ""}</div>
+              </div>
+              <div style="font-weight:bold; color:${isCredit ? "#9cffb0" : "#ffaaaa"};">
+                ${tx.amount || "$0.00"}
+              </div>
+            </div>
+          `;
+        }).join("");
+      });
+    });
+  </script>
 
 </body>
 </html>
