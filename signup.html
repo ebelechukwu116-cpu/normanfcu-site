@@ -1,127 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Create Account - Norman FCU</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signup</title>
 </head>
-<body style="margin:0; font-family:Arial,sans-serif; min-height:100vh; background:linear-gradient(135deg,#000000,#3b0000,#5b0000); color:white;">
 
-  <div style="display:flex; justify-content:space-between; align-items:center; padding:18px 22px; background:#111;">
-    <div style="font-size:22px; font-weight:bold; color:#ff3b3b;">Norman FCU</div>
-    <div>
-      <a href="index.html" style="color:white; text-decoration:none; margin-right:14px;">Home</a>
-      <a href="login.html" style="color:white; text-decoration:none;">Login</a>
-    </div>
-  </div>
+<body style="margin:0; font-family:Arial; background:linear-gradient(135deg,#000,#3b0000,#5b0000); color:white; display:flex; align-items:center; justify-content:center; min-height:100vh;">
 
-  <div style="display:flex; align-items:center; justify-content:center; min-height:calc(100vh - 70px); padding:24px;">
-    <div style="width:100%; max-width:980px; display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:center;">
-      
-      <div>
-        <div style="display:inline-block; padding:8px 12px; border-radius:999px; background:rgba(255,255,255,0.08); margin-bottom:16px;">
-          Create your account
-        </div>
+<div style="background:white; color:black; padding:25px; border-radius:15px; width:90%; max-width:400px;">
+<h2>Create Account</h2>
 
-        <h1 style="font-size:44px; line-height:1.08; margin:0 0 14px;">Open your account with a secure black and red finance layout.</h1>
+<input id="name" placeholder="Full Name" style="width:100%; padding:12px; margin:8px 0;">
+<input id="email" placeholder="Email" style="width:100%; padding:12px; margin:8px 0;">
+<input id="password" type="password" placeholder="Password" style="width:100%; padding:12px; margin:8px 0;">
 
-        <p style="font-size:17px; line-height:1.7; color:#e5e7eb; max-width:560px;">
-          This signup flow creates a real authenticated app user and stores profile data in Firestore.
-        </p>
-      </div>
+<button onclick="signup()" style="width:100%; padding:12px; background:red; color:white; border:none;">Create Account</button>
 
-      <div style="background:rgba(255,255,255,0.97); color:#111827; border-radius:22px; padding:28px; box-shadow:0 22px 50px rgba(0,0,0,0.22);">
-        <h2 style="margin:0 0 8px; color:#7a0000;">Create Account</h2>
-        <div style="color:#6b7280; font-size:14px; margin-bottom:18px;">Secure signup</div>
+<p id="msg"></p>
 
-        <input id="fullName" type="text" placeholder="Full Name" style="width:100%; padding:13px; margin:8px 0; border:1px solid #d1d5db; border-radius:10px; box-sizing:border-box;">
-        <input id="email" type="email" placeholder="Email Address" style="width:100%; padding:13px; margin:8px 0; border:1px solid #d1d5db; border-radius:10px; box-sizing:border-box;">
-        <input id="password" type="password" placeholder="Password" style="width:100%; padding:13px; margin:8px 0; border:1px solid #d1d5db; border-radius:10px; box-sizing:border-box;">
+<a href="login.html">Already have account? Login</a>
+</div>
 
-        <button id="signupBtn" style="width:100%; padding:13px; border:none; border-radius:10px; background:#dc2626; color:white; font-weight:bold; margin-top:10px; cursor:pointer;">
-          Create Account
-        </button>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 
-        <div id="status" style="margin-top:14px; font-size:14px; color:#7a0000;"></div>
+const firebaseConfig = {
+  apiKey: "AIzaSyDa9f0xnUb-xvhByuRo1q0_HMQ14V4JITc",
+  authDomain: "adovest-7obch3.firebaseapp.com",
+  projectId: "adovest-7obch3",
+  storageBucket: "adovest-7obch3.firebasestorage.app",
+  messagingSenderId: "678461021523",
+  appId: "1:678461021523:web:eee791ec001c2826a815a6"
+};
 
-        <a href="login.html" style="display:block; text-align:center; margin-top:14px; text-decoration:none; color:#b91c1c;">
-          Already have an account? Login
-        </a>
-      </div>
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-    </div>
-  </div>
+window.signup = async function(){
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const msg = document.getElementById("msg");
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
-    import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "PASTE_YOUR_API_KEY",
-      authDomain: "PASTE_YOUR_AUTH_DOMAIN",
-      projectId: "PASTE_YOUR_PROJECT_ID",
-      storageBucket: "PASTE_YOUR_STORAGE_BUCKET",
-      messagingSenderId: "PASTE_YOUR_MESSAGING_SENDER_ID",
-      appId: "PASTE_YOUR_APP_ID"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-
-    function generateAccountNumber() {
-      return String(Math.floor(1000000000 + Math.random() * 9000000000));
-    }
-
-    function generateRoutingNumber() {
-      return "021000021";
-    }
-
-    function generateCardLast4() {
-      return String(Math.floor(1000 + Math.random() * 9000));
-    }
-
-    const signupBtn = document.getElementById("signupBtn");
-    const statusEl = document.getElementById("status");
-
-    signupBtn.addEventListener("click", async () => {
-      const fullName = document.getElementById("fullName").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value.trim();
-
-      if (!fullName || !email || !password) {
-        statusEl.textContent = "Please complete all fields.";
-        return;
-      }
-
-      try {
-        signupBtn.disabled = true;
-        statusEl.textContent = "Creating account...";
-
-        const cred = await createUserWithEmailAndPassword(auth, email, password);
-        const uid = cred.user.uid;
-
-        await setDoc(doc(db, "users", uid), {
-          fullName,
-          email,
-          balance: 12450.75,
-          accountNumber: generateAccountNumber(),
-          routingNumber: generateRoutingNumber(),
-          cardNumber: "**** **** **** " + generateCardLast4(),
-          cardExpiry: "12/28",
-          createdAt: serverTimestamp()
-        });
-
-        statusEl.textContent = "Account created successfully.";
-        window.location.href = "dashboard.html";
-      } catch (err) {
-        statusEl.textContent = err.message;
-      } finally {
-        signupBtn.disabled = false;
-      }
-    });
-  </script>
+  try{
+    await createUserWithEmailAndPassword(auth, email, password);
+    msg.innerText = "Account created successfully";
+    window.location.href = "login.html";
+  }catch(e){
+    msg.innerText = e.message;
+  }
+}
+</script>
 
 </body>
 </html>
