@@ -1,187 +1,103 @@
-<div class="logo">
-  <div class="logo-icon">N</div>
-  <div class="logo-text">
-    <strong>Norman FCU</strong>
-    <span>Demo Banking</span>
-  </div>
-</div>
-<style>
-.logo{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-.logo-icon{
-  width:42px;
-  height:42px;
-  border-radius:12px;
-  background: linear-gradient(135deg, #38bdf8, #2563eb);
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:bold;
-  font-size:20px;
-  box-shadow: 0 8px 20px rgba(37,99,235,.25);
-}
-.logo-text{
-  display:flex;
-  flex-direction:column;
-  line-height:1.1;
-}
-.logo-text strong{
-  font-size:18px;
-}
-.logo-text span{
-  font-size:12px;
-  color:#64748b;
-}
-</style>
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login - Norman FCU Demo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:Arial,sans-serif;
-      background:linear-gradient(135deg,#e0f2fe,#ffffff);
-      color:#0f172a;
-      min-height:100vh;
-    }
-    .nav{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:18px 24px;
-      background:rgba(255,255,255,.8);
-      border-bottom:1px solid #dbeafe;
-    }
-    .logo{
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
-    .logo-icon{
-      width:42px;height:42px;border-radius:12px;
-      background: linear-gradient(135deg, #38bdf8, #2563eb);
-      color:white;display:flex;align-items:center;justify-content:center;
-      font-weight:bold;font-size:20px;
-    }
-    .logo-text{display:flex;flex-direction:column;line-height:1.1}
-    .logo-text strong{font-size:18px}
-    .logo-text span{font-size:12px;color:#64748b}
-    .wrap{
-      max-width:1100px;
-      margin:auto;
-      padding:40px 20px;
-      display:grid;
-      grid-template-columns:1fr 420px;
-      gap:28px;
-      align-items:center;
-    }
-    .left h1{
-      font-size:40px;
-      margin-bottom:10px;
-    }
-    .left p{
-      color:#475569;
-      line-height:1.6;
-    }
-    .card{
-      background:white;
-      padding:26px;
-      border-radius:18px;
-      box-shadow:0 16px 40px rgba(15,23,42,.08);
-    }
-    input{
-      width:100%;
-      padding:13px;
-      margin:10px 0;
-      border:1px solid #cbd5e1;
-      border-radius:10px;
-    }
-    button{
-      width:100%;
-      padding:13px;
-      margin-top:10px;
-      border:none;
-      border-radius:10px;
-      background:#38bdf8;
-      color:white;
-      font-weight:bold;
-      cursor:pointer;
-    }
-    a{
-      display:block;
-      text-align:center;
-      margin-top:12px;
-      color:#2563eb;
-      text-decoration:none;
-    }
-    .tag{
-      display:inline-block;
-      padding:6px 10px;
-      border-radius:999px;
-      background:#e0f2fe;
-      color:#0369a1;
-      font-size:12px;
-      margin-bottom:10px;
-    }
-    @media (max-width:900px){
-      .wrap{grid-template-columns:1fr}
-    }
-  </style>
+<title>Login - Norman FCU</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #dbeafe, #ffffff);
+}
+
+/* NAVBAR */
+.navbar {
+    background: #0a3d91;
+    color: white;
+    padding: 15px 30px;
+}
+
+/* CENTER BOX */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.login-box {
+    background: white;
+    padding: 30px;
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.login-box h2 {
+    color: #0a3d91;
+}
+
+/* INPUTS */
+input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* BUTTON */
+button {
+    width: 100%;
+    padding: 12px;
+    background: #0a3d91;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* LINKS */
+.links {
+    margin-top: 10px;
+}
+
+.links a {
+    color: #0a3d91;
+    text-decoration: none;
+    font-size: 14px;
+}
+</style>
 </head>
+
 <body>
-  <div class="nav">
-    <div class="logo">
-      <div class="logo-icon">N</div>
-      <div class="logo-text">
-        <strong>Norman FCU</strong>
-        <span>Demo Banking</span>
-      </div>
-    </div>
-  </div>
 
-  <div class="wrap">
-    <div class="left">
-      <div class="tag">Demo environment</div>
-      <h1>Secure account login with a modern finance layout.</h1>
-      <p>
-        Access your demo account dashboard, review account information, and explore a polished banking-style interface.
-      </p>
-    </div>
+<div class="navbar">
+    <h2>Norman FCU</h2>
+</div>
 
-    <div class="card">
-      <h2>Account Login</h2>
-      <input id="email" type="email" placeholder="Email">
-      <input id="password" type="password" placeholder="Password">
-      <button onclick="login()">Login</button>
-      <a href="signup.html">Create a new account</a>
-      <a href="admin.html">Open admin panel</a>
-    </div>
-  </div>
+<div class="container">
+    <div class="login-box">
+        <h2>Account Login</h2>
 
-  <script>
-    function login() {
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value.trim();
-      const user = JSON.parse(localStorage.getItem("demoUser"));
+        <input type="text" placeholder="Username">
+        <input type="password" placeholder="Password">
 
-      if (!user) {
-        alert("No demo account found. Create one first.");
-        return;
-      }
+        <button onclick="login()">Login</button>
 
-      if (user.email === email && user.password === password) {
-        window.location.href = "dashboard.html";
-      } else {
-        alert("Invalid demo login details.");
-      }
-    }
-  </script>
+        <div class="links">
+            <a href="signup.html">Create Account</a><br>
+            <a href="admin.html">Admin Panel</a>
+        </div>
+    </div>
+</div>
+
+<script>
+function login() {
+    window.location.href = "dashboard.html";
+}
+</script>
+
 </body>
 </html>
