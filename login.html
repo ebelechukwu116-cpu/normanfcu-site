@@ -3,57 +3,84 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login - Norman FCU</title>
+  <title>Login</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #000000, #3b0000, #5b0000);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .box {
+      background: white;
+      color: black;
+      padding: 25px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 400px;
+      box-sizing: border-box;
+    }
+    h2 {
+      margin: 0 0 10px;
+      color: #5b0000;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border: none;
+      background: #f2f2f2;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    #msg {
+      margin-top: 12px;
+      color: red;
+      min-height: 20px;
+    }
+    a {
+      display: block;
+      margin-top: 10px;
+      text-align: center;
+      color: red;
+      text-decoration: none;
+    }
+  </style>
 </head>
-<body style="margin:0; font-family:Arial,sans-serif; min-height:100vh; background:linear-gradient(135deg,#000000,#3b0000,#5b0000); color:white;">
+<body>
 
-  <div style="display:flex; justify-content:space-between; align-items:center; padding:18px 22px; background:#111;">
-    <div style="font-size:22px; font-weight:bold; color:#ff3b3b;">Norman FCU</div>
-    <div>
-      <a href="index.html" style="color:white; text-decoration:none; margin-right:14px;">Home</a>
-      <a href="signup.html" style="color:white; text-decoration:none;">Create Account</a>
-    </div>
-  </div>
+  <div class="box">
+    <h2>Login</h2>
+    <p>Secure member access</p>
 
-  <div style="display:flex; align-items:center; justify-content:center; min-height:calc(100vh - 70px); padding:24px;">
-    <div style="width:100%; max-width:900px; display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:center;">
+    <input id="email" type="email" placeholder="Email">
+    <input id="password" type="password" placeholder="Password">
 
-      <div>
-        <div style="display:inline-block; padding:8px 12px; border-radius:999px; background:rgba(255,255,255,0.08); margin-bottom:16px;">
-          Secure sign in
-        </div>
+    <button type="button" id="loginBtn">Login</button>
 
-        <h1 style="font-size:44px; line-height:1.08; margin:0 0 14px;">Access your account.</h1>
+    <p id="msg"></p>
 
-        <p style="font-size:17px; line-height:1.7; color:#e5e7eb; max-width:540px;">
-          Sign in with Firebase Authentication and load your saved profile.
-        </p>
-      </div>
-
-      <div style="background:rgba(255,255,255,0.97); color:#111827; border-radius:22px; padding:28px; box-shadow:0 22px 50px rgba(0,0,0,0.22);">
-        <h2 style="margin:0 0 8px; color:#7a0000;">Login</h2>
-        <div style="color:#6b7280; font-size:14px; margin-bottom:18px;">Secure member access</div>
-
-        <input id="email" type="email" placeholder="Email Address" style="width:100%; padding:13px; margin:8px 0; border:1px solid #d1d5db; border-radius:10px; box-sizing:border-box;">
-        <input id="password" type="password" placeholder="Password" style="width:100%; padding:13px; margin:8px 0; border:1px solid #d1d5db; border-radius:10px; box-sizing:border-box;">
-
-        <button id="loginBtn" style="width:100%; padding:13px; border:none; border-radius:10px; background:#dc2626; color:white; font-weight:bold; margin-top:10px; cursor:pointer;">
-          Login
-        </button>
-
-        <div id="status" style="margin-top:14px; font-size:14px; color:#7a0000;"></div>
-
-        <a href="signup.html" style="display:block; text-align:center; margin-top:14px; text-decoration:none; color:#b91c1c;">
-          Need an account? Create one
-        </a>
-      </div>
-
-    </div>
+    <a href="signup.html">Need an account? Create one</a>
   </div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyDa9f0xnUb-xvhByuRo1q0_HMQ14V4JITc",
@@ -68,30 +95,33 @@
     const auth = getAuth(app);
 
     const loginBtn = document.getElementById("loginBtn");
-    const statusEl = document.getElementById("status");
-
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        window.location.href = "dashboard.html";
-      }
-    });
+    const msg = document.getElementById("msg");
 
     loginBtn.addEventListener("click", async () => {
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value.trim();
 
       if (!email || !password) {
-        statusEl.textContent = "Enter email and password.";
+        msg.innerText = "Enter email and password";
         return;
       }
 
       try {
         loginBtn.disabled = true;
-        statusEl.textContent = "Signing in...";
+        msg.style.color = "black";
+        msg.innerText = "Signing in...";
+
         await signInWithEmailAndPassword(auth, email, password);
-        window.location.href = "dashboard.html";
-      } catch (err) {
-        statusEl.textContent = err.message;
+
+        msg.style.color = "green";
+        msg.innerText = "Login successful";
+
+        setTimeout(() => {
+          window.location.href = "dashboard.html";
+        }, 800);
+      } catch (error) {
+        msg.style.color = "red";
+        msg.innerText = error.message;
       } finally {
         loginBtn.disabled = false;
       }
