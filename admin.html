@@ -4,29 +4,35 @@
   <title>Admin Panel - Norman FCU</title>
 </head>
 
-<body style="margin:0; font-family:Arial,sans-serif; min-height:100vh; background:linear-gradient(rgba(0,102,204,0.85), rgba(0,51,153,0.95)), url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a'); background-size:cover; color:white;">
+<body style="margin:0; font-family:Arial,sans-serif; min-height:100vh; background:linear-gradient(rgba(0,102,204,0.85), rgba(0,51,153,0.95)), url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1600&q=80'); background-size:cover; color:white;">
 
-<!-- 🔐 ADMIN PROTECTION -->
 <script>
 if (localStorage.getItem("adminAccess") !== "true") {
   window.location = "admin-login.html";
 }
 </script>
 
-<!-- HEADER -->
 <div style="padding:20px; background:rgba(0,0,0,0.3); display:flex; justify-content:space-between;">
-  <h2>Admin Panel</h2>
+  <h2 style="margin:0;">Admin Panel</h2>
   <button onclick="logout()" style="background:red; color:white; border:none; padding:10px; border-radius:6px;">Logout</button>
 </div>
 
-<!-- CONTENT -->
-<div style="max-width:500px; margin:40px auto; background:white; color:black; padding:20px; border-radius:10px;">
+<div style="max-width:600px; margin:40px auto; background:white; color:black; padding:20px; border-radius:10px;">
 
   <h3>Edit Account</h3>
 
+  <input id="name" placeholder="Name" style="width:100%; padding:10px; margin:10px 0;">
+  <input id="email" placeholder="Email" style="width:100%; padding:10px; margin:10px 0;">
   <input id="balance" placeholder="New Balance" style="width:100%; padding:10px; margin:10px 0;">
   <input id="account" placeholder="Account Number" style="width:100%; padding:10px; margin:10px 0;">
   <input id="routing" placeholder="Routing Number" style="width:100%; padding:10px; margin:10px 0;">
+  <input id="cardNumber" placeholder="Card Number" style="width:100%; padding:10px; margin:10px 0;">
+  <input id="cardExpiry" placeholder="Card Expiry" style="width:100%; padding:10px; margin:10px 0;">
+
+  <h3>Add Transaction</h3>
+  <input id="txTitle" placeholder="Transaction Title" style="width:100%; padding:10px; margin:10px 0;">
+  <input id="txAmount" placeholder="Amount e.g. +$500 or -$80" style="width:100%; padding:10px; margin:10px 0;">
+  <input id="txDate" placeholder="Date e.g. Apr 10, 2026" style="width:100%; padding:10px; margin:10px 0;">
 
   <button onclick="saveData()" style="width:100%; padding:12px; background:#007bff; color:white; border:none; border-radius:6px;">
     Save Changes
@@ -35,30 +41,49 @@ if (localStorage.getItem("adminAccess") !== "true") {
 </div>
 
 <script>
-// LOAD EXISTING DATA
 let user = JSON.parse(localStorage.getItem("userData")) || {
+  name: "Jordan Miles",
+  email: "member@example.com",
   balance: 12450.75,
-  account: Math.floor(1000000000 + Math.random() * 9000000000),
-  routing: Math.floor(100000000 + Math.random() * 900000000)
+  account: "1234567890",
+  routing: "021000021",
+  cardNumber: "**** **** **** 4821",
+  cardExpiry: "12/28"
 };
 
-// FILL INPUTS
-document.getElementById("balance").value = user.balance;
-document.getElementById("account").value = user.account;
-document.getElementById("routing").value = user.routing;
+let txs = JSON.parse(localStorage.getItem("transactions")) || [];
 
-// SAVE DATA
+document.getElementById("name").value = user.name || "";
+document.getElementById("email").value = user.email || "";
+document.getElementById("balance").value = user.balance || "";
+document.getElementById("account").value = user.account || "";
+document.getElementById("routing").value = user.routing || "";
+document.getElementById("cardNumber").value = user.cardNumber || "";
+document.getElementById("cardExpiry").value = user.cardExpiry || "";
+
 function saveData() {
+  user.name = document.getElementById("name").value;
+  user.email = document.getElementById("email").value;
   user.balance = document.getElementById("balance").value;
   user.account = document.getElementById("account").value;
   user.routing = document.getElementById("routing").value;
+  user.cardNumber = document.getElementById("cardNumber").value;
+  user.cardExpiry = document.getElementById("cardExpiry").value;
 
   localStorage.setItem("userData", JSON.stringify(user));
 
-  alert("Updated Successfully ✅");
+  let title = document.getElementById("txTitle").value;
+  let amount = document.getElementById("txAmount").value;
+  let date = document.getElementById("txDate").value;
+
+  if (title && amount && date) {
+    txs.unshift({ title, amount, date });
+    localStorage.setItem("transactions", JSON.stringify(txs));
+  }
+
+  alert("Updated Successfully");
 }
 
-// LOGOUT
 function logout(){
   localStorage.removeItem("adminAccess");
   window.location = "admin-login.html";
