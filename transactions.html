@@ -1,54 +1,155 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Transactions - Norman FCU</title>
 </head>
+<body style="margin:0; font-family:Arial,sans-serif; background:linear-gradient(135deg,#000000,#3b0000,#5b0000); color:white; min-height:100vh;">
 
-<body style="margin:0; font-family:Arial,sans-serif; min-height:100vh; background:linear-gradient(rgba(0,102,204,0.82), rgba(0,51,153,0.92)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1600&q=80'); background-size:cover; background-position:center; background-repeat:no-repeat; color:white;">
+  <div style="display:flex; min-height:100vh;">
 
-<div style="display:flex; align-items:center; justify-content:space-between; padding:20px 28px; background:rgba(0,0,0,0.28); backdrop-filter:blur(8px);">
-  <div style="display:flex; align-items:center; gap:12px;">
-    <div style="width:42px; height:42px; border-radius:12px; background:linear-gradient(135deg,#38bdf8,#2563eb); display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:20px;">N</div>
-    <div>
-      <div style="font-size:20px; font-weight:bold;">Norman FCU</div>
-      <div style="font-size:12px; opacity:.9;">Demo Banking</div>
-    </div>
+    <aside style="width:240px; background:#0f0f0f; padding:25px 18px; box-sizing:border-box; border-right:1px solid rgba(255,255,255,0.08);">
+      <h2 style="margin-top:0; color:#ff3b3b;">Norman FCU</h2>
+      <p style="color:#aaa; font-size:13px;">Finance App</p>
+
+      <a href="dashboard.html" style="display:block; padding:12px 14px; margin-top:20px; background:#181818; color:white; text-decoration:none; border-radius:8px;">Dashboard</a>
+      <a href="transfer.html" style="display:block; padding:12px 14px; margin-top:10px; background:#181818; color:white; text-decoration:none; border-radius:8px;">Transfer</a>
+      <a href="transactions.html" style="display:block; padding:12px 14px; margin-top:10px; background:#2a0000; color:white; text-decoration:none; border-radius:8px;">Transactions</a>
+      <a href="index.html" style="display:block; padding:12px 14px; margin-top:10px; background:#181818; color:white; text-decoration:none; border-radius:8px;">Home</a>
+    </aside>
+
+    <main style="flex:1; padding:28px; box-sizing:border-box;">
+
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+        <div>
+          <h1 style="margin:0;">Transactions</h1>
+          <p style="margin:6px 0 0; color:#ddd;">Live activity from your account</p>
+        </div>
+
+        <a href="dashboard.html" style="display:inline-block; padding:12px 18px; background:#ff2d2d; color:white; text-decoration:none; border-radius:8px; font-weight:bold;">
+          Back to Dashboard
+        </a>
+      </div>
+
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr .8fr; gap:22px;">
+
+        <section style="background:rgba(255,255,255,0.08); border-radius:18px; padding:22px; box-shadow:0 10px 24px rgba(0,0,0,0.2);">
+          <h3 style="margin-top:0;">All Transactions</h3>
+          <div id="txBox">
+            <div style="color:#ddd;">Loading transactions...</div>
+          </div>
+        </section>
+
+        <section style="background:linear-gradient(135deg,#111111,#2a0000); border-radius:18px; padding:22px; box-shadow:0 10px 24px rgba(0,0,0,0.24);">
+          <h3 style="margin-top:0;">Summary</h3>
+
+          <div style="margin-top:18px; background:rgba(255,255,255,0.06); padding:16px; border-radius:12px;">
+            <div style="font-size:13px; opacity:.8;">Current Balance</div>
+            <div id="balanceBox" style="font-size:32px; font-weight:bold; margin-top:8px;">$0.00</div>
+          </div>
+
+          <div style="margin-top:16px; background:rgba(255,255,255,0.06); padding:16px; border-radius:12px;">
+            <div style="font-size:13px; opacity:.8;">Account Number</div>
+            <div id="accountBox" style="margin-top:8px; font-weight:bold;">--</div>
+          </div>
+
+          <div style="margin-top:16px; background:rgba(255,255,255,0.06); padding:16px; border-radius:12px;">
+            <div style="font-size:13px; opacity:.8;">Routing Number</div>
+            <div id="routingBox" style="margin-top:8px; font-weight:bold;">--</div>
+          </div>
+        </section>
+
+      </div>
+
+    </main>
   </div>
 
-  <div>
-    <a href="dashboard.html" style="color:white; text-decoration:none; margin-left:18px; font-size:15px; font-weight:bold;">Dashboard</a>
-    <a href="transfer.html" style="color:white; text-decoration:none; margin-left:18px; font-size:15px; font-weight:bold;">Transfer</a>
-  </div>
-</div>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+    import {
+      getFirestore,
+      doc,
+      onSnapshot,
+      collection,
+      query,
+      orderBy
+    } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
-<div style="max-width:760px; margin:40px auto; padding:0 20px;">
-  <div style="background:rgba(255,255,255,0.14); backdrop-filter:blur(10px); border-radius:18px; padding:24px; box-shadow:0 10px 24px rgba(0,0,0,0.18);">
-    <h2 style="margin-top:0; margin-bottom:18px;">Transactions</h2>
-    <div id="txBox"></div>
-  </div>
-</div>
+    const firebaseConfig = {
+      apiKey: "PASTE_YOUR_API_KEY",
+      authDomain: "PASTE_YOUR_AUTH_DOMAIN",
+      projectId: "PASTE_YOUR_PROJECT_ID",
+      storageBucket: "PASTE_YOUR_STORAGE_BUCKET",
+      messagingSenderId: "PASTE_YOUR_MESSAGING_SENDER_ID",
+      appId: "PASTE_YOUR_APP_ID"
+    };
 
-<script>
-let txs = JSON.parse(localStorage.getItem("transactions")) || [
-  { title: "Deposit", amount: "+$2,000", date: "Apr 10, 2026" },
-  { title: "Transfer", amount: "-$150", date: "Apr 09, 2026" },
-  { title: "Shopping", amount: "-$80", date: "Apr 08, 2026" }
-];
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
 
-localStorage.setItem("transactions", JSON.stringify(txs));
+    const txBox = document.getElementById("txBox");
+    const balanceBox = document.getElementById("balanceBox");
+    const accountBox = document.getElementById("accountBox");
+    const routingBox = document.getElementById("routingBox");
 
-document.getElementById("txBox").innerHTML = txs.map(tx => `
-  <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid rgba(255,255,255,0.2);">
-    <div>
-      <div style="font-weight:bold;">${tx.title}</div>
-      <div style="font-size:13px; opacity:.9;">${tx.date}</div>
-    </div>
-    <div style="font-weight:bold; color:${tx.amount.startsWith('+') ? '#d9ffe1' : '#ffd6d6'};">
-      ${tx.amount}
-    </div>
-  </div>
-`).join('');
-</script>
+    function formatMoney(value) {
+      const num = Number(value) || 0;
+      return "$" + num.toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = "login.html";
+        return;
+      }
+
+      const userRef = doc(db, "users", user.uid);
+
+      onSnapshot(userRef, (snap) => {
+        if (!snap.exists()) return;
+
+        const data = snap.data();
+        balanceBox.textContent = formatMoney(data.balance);
+        accountBox.textContent = data.accountNumber || "--";
+        routingBox.textContent = data.routingNumber || "--";
+      });
+
+      const txRef = collection(db, "users", user.uid, "transactions");
+      const txQuery = query(txRef, orderBy("createdAt", "desc"));
+
+      onSnapshot(txQuery, (snapshot) => {
+        if (snapshot.empty) {
+          txBox.innerHTML = "<div style='color:#ddd;'>No transactions yet.</div>";
+          return;
+        }
+
+        txBox.innerHTML = snapshot.docs.map((docSnap) => {
+          const tx = docSnap.data();
+          const amountText = tx.amount || "$0.00";
+          const isCredit = String(amountText).startsWith("+");
+
+          return `
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid rgba(255,255,255,0.08);">
+              <div>
+                <div style="font-weight:bold; font-size:16px;">${tx.title || "Transaction"}</div>
+                <div style="font-size:13px; opacity:.75; margin-top:4px;">${tx.date || ""}</div>
+                ${tx.bankName ? `<div style="font-size:12px; opacity:.65; margin-top:4px;">${tx.bankName}</div>` : ""}
+              </div>
+              <div style="font-weight:bold; color:${isCredit ? "#9cffb0" : "#ffaaaa"};">
+                ${amountText}
+              </div>
+            </div>
+          `;
+        }).join("");
+      });
+    });
+  </script>
 
 </body>
 </html>
