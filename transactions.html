@@ -1,48 +1,93 @@
-<div class="logo">
-  <div class="logo-icon">N</div>
-  <div class="logo-text">
-    <strong>Norman FCU</strong>
-    <span>Demo Banking</span>
-  </div>
-</div>
-<style>
-.logo{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-.logo-icon{
-  width:42px;
-  height:42px;
-  border-radius:12px;
-  background: linear-gradient(135deg, #38bdf8, #2563eb);
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:bold;
-  font-size:20px;
-  box-shadow: 0 8px 20px rgba(37,99,235,.25);
-}
-.logo-text{
-  display:flex;
-  flex-direction:column;
-  line-height:1.1;
-}
-.logo-text strong{
-  font-size:18px;
-}
-.logo-text span{
-  font-size:12px;
-  color:#64748b;
-}
-</style>
 <!DOCTYPE html>
 <html>
-<body style="font-family:Arial;padding:40px;">
-<h2>Transactions</h2>
-<p>+ $2000 Deposit</p>
-<p>- $150 Transfer</p>
-<p>- $80 Shopping</p>
+<head>
+<title>Transactions</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+
+    /* 🔥 BLUE BACKGROUND WITH IMAGE */
+    background: linear-gradient(rgba(0,102,204,0.8), rgba(0,51,153,0.9)),
+    url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d');
+
+    background-size:cover;
+    background-position:center;
+    color:white;
+}
+
+/* HEADER */
+.header{
+    padding:20px;
+    background:rgba(0,0,0,0.3);
+    display:flex;
+    align-items:center;
+}
+
+.logo{
+    width:40px;
+    height:40px;
+    background:#007bff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-right:10px;
+}
+
+/* CARD STYLE */
+.container{
+    max-width:500px;
+    margin:50px auto;
+    background:rgba(255,255,255,0.1);
+    padding:20px;
+    border-radius:15px;
+    backdrop-filter: blur(10px);
+}
+
+/* TRANSACTION ITEMS */
+.item{
+    padding:15px;
+    margin:10px 0;
+    background:rgba(255,255,255,0.15);
+    border-radius:10px;
+    display:flex;
+    justify-content:space-between;
+}
+
+.green{ color:lightgreen; }
+.red{ color:#ff6b6b; }
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="logo">N</div>
+    <h3>Norman FCU</h3>
+</div>
+
+<div class="container">
+    <h2>Transactions</h2>
+
+    <div class="item">
+        <span>Deposit</span>
+        <span class="green">+$2000</span>
+    </div>
+
+    <div class="item">
+        <span>Transfer</span>
+        <span class="red">-$150</span>
+    </div>
+
+    <div class="item">
+        <span>Shopping</span>
+        <span class="red">-$80</span>
+    </div>
+
+</div>
+
 </body>
 </html>
