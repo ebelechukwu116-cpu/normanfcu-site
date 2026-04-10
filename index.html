@@ -11,33 +11,162 @@ body {
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg,#2563eb,#0ea5e9);
     color:white;
+    overflow-x:hidden;
 }
 
-/* NAV */
 .nav {
     display:flex;
     justify-content:space-between;
     padding:20px;
-    background:rgba(0,0,0,0.3);
+    background:rgba(0,0,0,0.25);
+    animation: slideDown 1s ease;
 }
 
-/* HERO */
+.nav a {
+    color:white;
+    text-decoration:none;
+    margin-left:15px;
+    font-weight:bold;
+}
+
 .hero {
     text-align:center;
-    padding:120px 20px;
+    padding:120px 20px 80px;
 }
 
-/* BUTTONS */
+.hero h1 {
+    font-size:52px;
+    margin-bottom:10px;
+    animation: fadeUp 1s ease;
+}
+
+.hero p {
+    font-size:18px;
+    opacity:0.95;
+    animation: fadeUp 1.4s ease;
+}
+
 .btn {
     padding:12px 25px;
     border:none;
-    border-radius:6px;
+    border-radius:8px;
     margin:10px;
     cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeUp 1.8s ease;
 }
 
-.login {background:white; color:#2563eb;}
-.signup {background:#00ccff; color:white;}
+.btn:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.login {
+    background:white;
+    color:#2563eb;
+}
+
+.signup {
+    background:#00ccff;
+    color:white;
+}
+
+.features {
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    margin-top:50px;
+    flex-wrap:wrap;
+}
+
+.card {
+    background:rgba(255,255,255,0.12);
+    padding:25px;
+    border-radius:14px;
+    width:220px;
+    backdrop-filter:blur(8px);
+    box-shadow:0 10px 24px rgba(0,0,0,0.12);
+    transition: transform 0.35s ease, background 0.35s ease;
+    animation: floatIn 1.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    background:rgba(255,255,255,0.18);
+}
+
+.badge {
+    display:inline-block;
+    padding:8px 14px;
+    background:rgba(255,255,255,0.14);
+    border-radius:999px;
+    margin-bottom:18px;
+    animation: fadeIn 1.2s ease;
+}
+
+#chat {
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#00ccff;
+    color:white;
+    width:58px;
+    height:58px;
+    border-radius:50%;
+    font-size:24px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    box-shadow:0 10px 20px rgba(0,0,0,0.25);
+    animation: pulse 2s infinite;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity:0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity:1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity:0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity:1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes floatIn {
+    from {
+        opacity:0;
+        transform: translateY(40px) scale(0.95);
+    }
+    to {
+        opacity:1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity:0; }
+    to { opacity:1; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
 </style>
 </head>
 
@@ -46,18 +175,44 @@ body {
 <div class="nav">
     <b>Norman FCU</b>
     <div>
-        <a href="login.html" style="color:white;">Login</a>
-        <a href="signup.html" style="color:white; margin-left:15px;">Create Account</a>
+        <a href="login.html">Login</a>
+        <a href="signup.html">Create Account</a>
     </div>
 </div>
 
 <div class="hero">
+    <div class="badge">Modern Finance UI</div>
     <h1>Modern Digital Banking</h1>
     <p>Secure. Fast. Trusted experience.</p>
 
     <a href="login.html"><button class="btn login">Login</button></a>
     <a href="signup.html"><button class="btn signup">Create Account</button></a>
+
+    <div class="features">
+        <div class="card">
+            <h3>Secure</h3>
+            <p>Protected user experience with clean interface.</p>
+        </div>
+
+        <div class="card">
+            <h3>Fast Transfers</h3>
+            <p>Quick movement flow with polished layout.</p>
+        </div>
+
+        <div class="card">
+            <h3>24/7 Access</h3>
+            <p>Always available from your dashboard pages.</p>
+        </div>
+    </div>
 </div>
+
+<div id="chat" onclick="openChat()">💬</div>
+
+<script>
+function openChat() {
+    alert("Support is online.");
+}
+</script>
 
 </body>
 </html>
