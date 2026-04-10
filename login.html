@@ -4,75 +4,126 @@
   <title>Login - Norman FCU Demo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #dbeafe, #ffffff);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      color: #0f172a;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Arial,sans-serif;
+      background:linear-gradient(135deg,#e0f2fe,#ffffff);
+      color:#0f172a;
+      min-height:100vh;
     }
-    .box {
-      background: white;
-      width: 340px;
-      padding: 24px;
-      border-radius: 14px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:18px 24px;
+      background:rgba(255,255,255,.8);
+      border-bottom:1px solid #dbeafe;
     }
-    h2 {
-      margin-top: 0;
-      text-align: center;
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:12px;
     }
-    .demo {
-      font-size: 12px;
-      text-align: center;
-      color: #475569;
-      margin-bottom: 14px;
+    .logo-icon{
+      width:42px;height:42px;border-radius:12px;
+      background: linear-gradient(135deg, #38bdf8, #2563eb);
+      color:white;display:flex;align-items:center;justify-content:center;
+      font-weight:bold;font-size:20px;
     }
-    input {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
-      box-sizing: border-box;
+    .logo-text{display:flex;flex-direction:column;line-height:1.1}
+    .logo-text strong{font-size:18px}
+    .logo-text span{font-size:12px;color:#64748b}
+    .wrap{
+      max-width:1100px;
+      margin:auto;
+      padding:40px 20px;
+      display:grid;
+      grid-template-columns:1fr 420px;
+      gap:28px;
+      align-items:center;
     }
-    button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 8px;
-      background: #38bdf8;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
+    .left h1{
+      font-size:40px;
+      margin-bottom:10px;
     }
-    button:hover {
-      background: #0ea5e9;
+    .left p{
+      color:#475569;
+      line-height:1.6;
     }
-    a {
-      display: block;
-      text-align: center;
-      margin-top: 12px;
-      color: #2563eb;
-      text-decoration: none;
+    .card{
+      background:white;
+      padding:26px;
+      border-radius:18px;
+      box-shadow:0 16px 40px rgba(15,23,42,.08);
+    }
+    input{
+      width:100%;
+      padding:13px;
+      margin:10px 0;
+      border:1px solid #cbd5e1;
+      border-radius:10px;
+    }
+    button{
+      width:100%;
+      padding:13px;
+      margin-top:10px;
+      border:none;
+      border-radius:10px;
+      background:#38bdf8;
+      color:white;
+      font-weight:bold;
+      cursor:pointer;
+    }
+    a{
+      display:block;
+      text-align:center;
+      margin-top:12px;
+      color:#2563eb;
+      text-decoration:none;
+    }
+    .tag{
+      display:inline-block;
+      padding:6px 10px;
+      border-radius:999px;
+      background:#e0f2fe;
+      color:#0369a1;
+      font-size:12px;
+      margin-bottom:10px;
+    }
+    @media (max-width:900px){
+      .wrap{grid-template-columns:1fr}
     }
   </style>
 </head>
 <body>
-  <div class="box">
-    <h2>Account Login</h2>
-    <div class="demo">Demo environment only</div>
+  <div class="nav">
+    <div class="logo">
+      <div class="logo-icon">N</div>
+      <div class="logo-text">
+        <strong>Norman FCU</strong>
+        <span>Demo Banking</span>
+      </div>
+    </div>
+  </div>
 
-    <input id="email" type="email" placeholder="Email">
-    <input id="password" type="password" placeholder="Password">
+  <div class="wrap">
+    <div class="left">
+      <div class="tag">Demo environment</div>
+      <h1>Secure account login with a modern finance layout.</h1>
+      <p>
+        Access your demo account dashboard, review account information, and explore a polished banking-style interface.
+      </p>
+    </div>
 
-    <button onclick="login()">Login</button>
-    <a href="signup.html">Create a new account</a>
-    <a href="admin.html">Open admin panel</a>
+    <div class="card">
+      <h2>Account Login</h2>
+      <input id="email" type="email" placeholder="Email">
+      <input id="password" type="password" placeholder="Password">
+      <button onclick="login()">Login</button>
+      <a href="signup.html">Create a new account</a>
+      <a href="admin.html">Open admin panel</a>
+    </div>
   </div>
 
   <script>
@@ -82,7 +133,7 @@
       const user = JSON.parse(localStorage.getItem("demoUser"));
 
       if (!user) {
-        alert("No demo account found. Please create one first.");
+        alert("No demo account found. Create one first.");
         return;
       }
 
