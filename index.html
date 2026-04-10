@@ -1,34 +1,139 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Style Test</title>
-  <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #2563eb, #0ea5e9);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Norman FCU</title>
 
-    .box {
-      background: rgba(255,255,255,0.15);
-      padding: 30px;
-      border-radius: 16px;
-      backdrop-filter: blur(8px);
-      text-align: center;
-    }
-  </style>
+<style>
+body {
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(rgba(0,102,204,0.85), rgba(0,51,153,0.9)),
+    url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1600&q=80');
+    background-size: cover;
+    background-position: center;
+    color:white;
+}
+
+/* NAVBAR */
+.nav {
+    display:flex;
+    justify-content:space-between;
+    padding:20px;
+    background:rgba(0,0,0,0.3);
+}
+
+.nav a {
+    color:white;
+    text-decoration:none;
+    margin-left:15px;
+    font-weight:bold;
+}
+
+/* HERO */
+.hero {
+    text-align:center;
+    padding:120px 20px;
+}
+
+.hero h1 {
+    font-size:52px;
+}
+
+.hero p {
+    font-size:18px;
+    opacity:0.9;
+}
+
+/* BUTTONS */
+.btn {
+    padding:14px 28px;
+    border:none;
+    border-radius:8px;
+    margin:10px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.login {background:white; color:#0066cc;}
+.signup {background:#00ccff; color:white;}
+
+/* FEATURES */
+.features {
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    margin-top:50px;
+}
+
+.card {
+    background:rgba(255,255,255,0.1);
+    padding:25px;
+    border-radius:12px;
+    width:220px;
+    backdrop-filter:blur(10px);
+}
+</style>
 </head>
+
 <body>
-  <div class="box">
-    <h1>Styling Works</h1>
-    <p>If you see a blue gradient background, the file is loading correctly.</p>
-  </div>
+
+<div class="nav">
+    <div><b>Norman FCU</b></div>
+    <div>
+        <a href="login.html">Login</a>
+        <a href="signup.html">Create Account</a>
+    </div>
+</div>
+
+<div class="hero">
+    <h1>Modern Digital Banking</h1>
+    <p>Secure. Fast. Trusted experience.</p>
+
+    <a href="login.html"><button class="btn login">Login</button></a>
+    <a href="signup.html"><button class="btn signup">Create Account</button></a>
+
+    <div class="features">
+        <div class="card">
+            <h3>Secure</h3>
+            <p>Bank-level protection</p>
+        </div>
+
+        <div class="card">
+            <h3>Fast</h3>
+            <p>Instant transfers</p>
+        </div>
+
+        <div class="card">
+            <h3>24/7</h3>
+            <p>Always available</p>
+        </div>
+    </div>
+</div>
+
+<!-- LIVE CHAT -->
+<div id="chat" onclick="openChat()">💬</div>
+
+<script>
+function openChat(){
+    alert("Support is online.");
+}
+</script>
+
+<style>
+#chat {
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#00ccff;
+    color:white;
+    padding:15px;
+    border-radius:50%;
+    font-size:20px;
+    cursor:pointer;
+}
+</style>
+
 </body>
 </html>
