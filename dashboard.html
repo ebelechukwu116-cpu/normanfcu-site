@@ -1,54 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard - Norman FCU</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Norman FCU</title>
 </head>
+<body style="margin:0; font-family:Arial, sans-serif; min-height:100vh; background:linear-gradient(rgba(0,102,204,0.82), rgba(0,51,153,0.92)), url('https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1600&q=80'); background-size:cover; background-position:center; background-repeat:no-repeat; color:white;">
 
-<body style="margin:0; font-family:Arial, sans-serif; min-height:100vh; background:linear-gradient(rgba(0,102,204,0.85), rgba(0,51,153,0.95)), url('https://images.unsplash.com/photo-1601597111158-2fceff292cdc?auto=format&fit=crop&w=1600&q=80'); background-size:cover; background-position:center; color:white;">
-
-<!-- NAVBAR -->
-<div style="display:flex; justify-content:space-between; padding:20px; background:rgba(0,0,0,0.3); backdrop-filter:blur(10px);">
-  <h2>Norman FCU</h2>
-  <a href="index.html" style="color:white; text-decoration:none;">Logout</a>
-</div>
-
-<!-- BALANCE CARD -->
-<div style="padding:30px;">
-  <div style="background:linear-gradient(135deg,#00c6ff,#0072ff); padding:30px; border-radius:15px; width:320px; box-shadow:0 10px 30px rgba(0,0,0,0.3);">
-    <h3>Available Balance</h3>
-    <h1>$12,450.75</h1>
-    <p>Account No: 4532 8890 2211</p>
-  </div>
-</div>
-
-<!-- ACTION BUTTONS -->
-<div style="padding:0 30px;">
-  <a href="transfer.html" style="padding:12px 20px; background:white; color:#003366; border-radius:8px; text-decoration:none; margin-right:10px;">Send Money</a>
-  <a href="transactions.html" style="padding:12px 20px; background:#00c2ff; color:white; border-radius:8px; text-decoration:none;">Transactions</a>
-</div>
-
-<!-- TRANSACTIONS -->
-<div style="padding:30px;">
-  <h2>Recent Transactions</h2>
-
-  <div style="background:rgba(255,255,255,0.1); padding:15px; margin:10px 0; border-radius:10px;">
-    <p>Amazon Purchase</p>
-    <p>- $120.00</p>
+  <div style="display:flex; justify-content:space-between; align-items:center; padding:20px 28px; background:rgba(0,0,0,0.28); backdrop-filter:blur(8px);">
+    <div style="font-size:28px; font-weight:bold;">Norman FCU</div>
+    <div>
+      <a href="index.html" style="color:white; text-decoration:none; margin-left:18px; font-size:15px; font-weight:bold;">Home</a>
+      <a href="transactions.html" style="color:white; text-decoration:none; margin-left:18px; font-size:15px; font-weight:bold;">Transactions</a>
+      <a href="transfer.html" style="color:white; text-decoration:none; margin-left:18px; font-size:15px; font-weight:bold;">Transfer</a>
+    </div>
   </div>
 
-  <div style="background:rgba(255,255,255,0.1); padding:15px; margin:10px 0; border-radius:10px;">
-    <p>Salary Deposit</p>
-    <p>+ $3,200.00</p>
+  <div style="padding:30px; display:flex; flex-wrap:wrap; gap:24px;">
+
+    <div style="flex:1 1 320px; max-width:420px; background:linear-gradient(135deg,#00c6ff,#0072ff); border-radius:18px; padding:28px; box-shadow:0 12px 30px rgba(0,0,0,0.22);">
+      <div style="font-size:14px; opacity:.95;">Available Balance</div>
+      <div style="font-size:40px; font-weight:bold; margin-top:10px;">$12,450.75</div>
+      <div style="margin-top:16px; font-size:14px;">Account No: 4532 8890 2211</div>
+      <div style="margin-top:6px; font-size:14px;">Routing No: 021000021</div>
+    </div>
+
+    <div style="flex:1 1 320px; max-width:420px; background:rgba(255,255,255,0.16); backdrop-filter:blur(10px); border-radius:18px; padding:26px; box-shadow:0 12px 30px rgba(0,0,0,0.18);">
+      <h3 style="margin-top:0;">Quick Actions</h3>
+      <div style="margin-top:18px;">
+        <a href="transfer.html" style="display:inline-block; padding:12px 18px; margin:6px 8px 6px 0; border-radius:8px; text-decoration:none; font-weight:bold; background:white; color:#003366;">Send Money</a>
+        <a href="transactions.html" style="display:inline-block; padding:12px 18px; margin:6px 8px 6px 0; border-radius:8px; text-decoration:none; font-weight:bold; background:#00c2ff; color:white;">View Transactions</a>
+      </div>
+      <p style="margin-top:20px; line-height:1.6;">Manage balances, review activity, and navigate your finance dashboard in a cleaner layout.</p>
+    </div>
+
   </div>
 
-  <div style="background:rgba(255,255,255,0.1); padding:15px; margin:10px 0; border-radius:10px;">
-    <p>Transfer to John</p>
-    <p>- $450.00</p>
-  </div>
+  <div style="padding:0 30px 30px;">
+    <div style="background:rgba(255,255,255,0.14); backdrop-filter:blur(10px); border-radius:18px; padding:24px; box-shadow:0 10px 24px rgba(0,0,0,0.18);">
+      <h2 style="margin-top:0;">Recent Transactions</h2>
 
-</div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid rgba(255,255,255,0.2);">
+        <div>
+          <div style="font-weight:bold;">Amazon Purchase</div>
+          <div style="font-size:13px; opacity:.9;">Apr 10, 2026</div>
+        </div>
+        <div style="font-weight:bold; color:#ffd6d6;">- $120.00</div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid rgba(255,255,255,0.2);">
+        <div>
+          <div style="font-weight:bold;">Salary Deposit</div>
+          <div style="font-size:13px; opacity:.9;">Apr 09, 2026</div>
+        </div>
+        <div style="font-weight:bold; color:#d9ffe1;">+ $3,200.00</div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; padding:14px 0;">
+        <div>
+          <div style="font-weight:bold;">Transfer to John</div>
+          <div style="font-size:13px; opacity:.9;">Apr 08, 2026</div>
+        </div>
+        <div style="font-weight:bold; color:#ffd6d6;">- $450.00</div>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>
