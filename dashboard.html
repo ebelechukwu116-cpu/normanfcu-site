@@ -1,36 +1,117 @@
-<style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #e0f2fe, #ffffff);
-    color: #0b1e3c;
-}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard - Norman FCU Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #dbeafe, #ffffff);
+      color: #0f172a;
+    }
+    .header {
+      padding: 20px;
+      font-size: 22px;
+      font-weight: bold;
+      text-align: center;
+      background: #38bdf8;
+      color: white;
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 14px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+    .balance {
+      font-size: 32px;
+      font-weight: bold;
+    }
+    .images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+    .images img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+    .actions a {
+      display: inline-block;
+      margin-right: 10px;
+      margin-top: 10px;
+      padding: 10px 16px;
+      background: #38bdf8;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+    @media (max-width: 768px) {
+      .images {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">Norman FCU Demo Dashboard</div>
 
-.header {
-    padding: 20px;
-    font-size: 22px;
-    font-weight: bold;
-    text-align: center;
-    background: #2563eb;
-    color: white;
-}
+  <div class="container">
+    <div class="card">
+      <h3>Available Balance</h3>
+      <div class="balance" id="balance">$0.00</div>
+    </div>
 
-.container {
-    padding: 20px;
-    max-width: 1100px;
-    margin: auto;
-}
+    <div class="card" id="accountBox"></div>
 
-.card {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-}
+    <div class="card">
+      <h3>About the Demo Platform</h3>
+      <p>This is a demo finance dashboard with sample account data, sample card data, and sandbox-only account editing.</p>
+    </div>
 
-.balance {
-    font-size: 32px;
-    font-weight: bold;
-}
-</style>
+    <div class="card">
+      <h3>Highlights</h3>
+      <div class="images">
+        <img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80" alt="Finance team">
+        <img src="https://images.unsplash.com/photo-1521790797524-b2497295b8a0?auto=format&fit=crop&w=1200&q=80" alt="Support desk">
+      </div>
+    </div>
+
+    <div class="card actions">
+      <h3>Quick Actions</h3>
+      <a href="transfer.html">Send Money</a>
+      <a href="transactions.html">Transactions</a>
+      <a href="admin.html">Admin Panel</a>
+    </div>
+  </div>
+
+  <script>
+    const user = JSON.parse(localStorage.getItem("demoUser"));
+
+    if (!user) {
+      document.getElementById("accountBox").innerHTML = "<p>No demo account found. Please create one first from signup.</p>";
+    } else {
+      document.getElementById("balance").textContent = "$" + Number(user.balance).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+
+      document.getElementById("accountBox").innerHTML = `
+        <h3>Account Details</h3>
+        <p><strong>Account Name:</strong> ${user.fullname}</p>
+        <p><strong>Account Number:</strong> ${user.accountNumber}</p>
+        <p><strong>Routing Number:</strong> ${user.routingNumber}</p>
+        <p><strong>Card Number:</strong> ${user.cardNumber}</p>
+        <p><strong>Card Expiry:</strong> ${user.cardExpiry}</p>
+        <p><strong>Card Type:</strong> ${user.cardType}</p>
+      `;
+    }
+  </script>
+</body>
+</html>
