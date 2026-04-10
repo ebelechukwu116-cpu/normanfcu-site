@@ -1,68 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Dashboard</title>
-
-<style>
-body {
-    margin:0;
-    font-family:Arial;
-    background: linear-gradient(rgba(0,102,204,0.85), rgba(0,51,153,0.9)),
-    url('https://images.unsplash.com/photo-1559526324-4b87b5e36e44');
-    background-size:cover;
-    color:white;
-}
-
-.top {
-    display:flex;
-    justify-content:space-between;
-    padding:20px;
-}
-
-.container {
-    padding:30px;
-}
-
-.grid {
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:20px;
-}
-
-.card {
-    background:rgba(255,255,255,0.1);
-    padding:20px;
-    border-radius:10px;
-}
-</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - Norman FCU</title>
 </head>
 
-<body>
+<body style="margin:0; font-family:Arial; background:linear-gradient(rgba(0,102,204,0.85), rgba(0,51,153,0.9)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1600&q=80'); background-size:cover; background-position:center; color:white;">
 
-<div class="top">
-    <h2>Dashboard</h2>
-    <a href="index.html" style="color:white;">Logout</a>
+<!-- NAVBAR -->
+<div style="display:flex; justify-content:space-between; padding:20px; background:rgba(0,0,0,0.3);">
+    <h2>Norman FCU</h2>
+    <div>
+        <a href="index.html" style="color:white; margin-right:15px;">Home</a>
+        <a href="login.html" style="color:white;">Logout</a>
+    </div>
 </div>
 
-<div class="container">
-    <div class="grid">
-        <div class="card">
-            <h3>Balance</h3>
-            <h1>$12,450</h1>
-        </div>
+<!-- DASHBOARD -->
+<div style="padding:30px; max-width:1000px; margin:auto;">
 
-        <div class="card">
-            <h3>Account</h3>
-            <p>Checking</p>
-        </div>
-
-        <div class="card">
-            <h3>Recent Transactions</h3>
-            <p>+ $2000 Deposit</p>
-            <p>- $150 Transfer</p>
-            <p>- $80 Shopping</p>
-        </div>
+    <!-- BALANCE CARD -->
+    <div style="background:rgba(255,255,255,0.15); padding:25px; border-radius:15px; backdrop-filter:blur(10px); margin-bottom:20px;">
+        <h3>Available Balance</h3>
+        <h1>$12,450</h1>
+        <p>Account: 4587291034</p>
+        <p>Routing: 021000021</p>
     </div>
+
+    <!-- CARDS GRID -->
+    <div style="display:flex; gap:20px; flex-wrap:wrap;">
+
+        <div style="flex:1; min-width:250px; background:rgba(255,255,255,0.12); padding:20px; border-radius:12px;">
+            <h3>Transfer</h3>
+            <p>Send money instantly</p>
+            <a href="transfer.html"><button style="padding:10px 15px; background:#00ccff; border:none; color:white; border-radius:8px;">Send</button></a>
+        </div>
+
+        <div style="flex:1; min-width:250px; background:rgba(255,255,255,0.12); padding:20px; border-radius:12px;">
+            <h3>Transactions</h3>
+            <p>View history</p>
+            <a href="transactions.html"><button style="padding:10px 15px; background:#00ccff; border:none; color:white; border-radius:8px;">View</button></a>
+        </div>
+
+    </div>
+
+    <!-- TRANSACTIONS -->
+    <div style="background:rgba(255,255,255,0.15); padding:25px; border-radius:15px; margin-top:20px;">
+        <h3>Recent Transactions</h3>
+        <p>+ $2000 Deposit</p>
+        <p>- $150 Transfer</p>
+        <p>- $80 Shopping</p>
+    </div>
+
+</div>
+
+<!-- CHAT BUTTON -->
+<div onclick="alert('Support is online')" style="position:fixed; bottom:20px; right:20px; background:#00ccff; color:white; padding:15px; border-radius:50%; cursor:pointer;">
+💬
 </div>
 
 </body>
