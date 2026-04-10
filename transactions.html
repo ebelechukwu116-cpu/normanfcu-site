@@ -1,93 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Transactions</title>
-
-<style>
-body{
-    margin:0;
-    font-family:Arial;
-
-    /* 🔥 BLUE BACKGROUND WITH IMAGE */
-    background: linear-gradient(rgba(0,102,204,0.8), rgba(0,51,153,0.9)),
-    url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d');
-
-    background-size:cover;
-    background-position:center;
-    color:white;
-}
-
-/* HEADER */
-.header{
-    padding:20px;
-    background:rgba(0,0,0,0.3);
-    display:flex;
-    align-items:center;
-}
-
-.logo{
-    width:40px;
-    height:40px;
-    background:#007bff;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    margin-right:10px;
-}
-
-/* CARD STYLE */
-.container{
-    max-width:500px;
-    margin:50px auto;
-    background:rgba(255,255,255,0.1);
-    padding:20px;
-    border-radius:15px;
-    backdrop-filter: blur(10px);
-}
-
-/* TRANSACTION ITEMS */
-.item{
-    padding:15px;
-    margin:10px 0;
-    background:rgba(255,255,255,0.15);
-    border-radius:10px;
-    display:flex;
-    justify-content:space-between;
-}
-
-.green{ color:lightgreen; }
-.red{ color:#ff6b6b; }
-
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transactions - Norman FCU</title>
 </head>
+<body style="margin:0; font-family:Arial,sans-serif; min-height:100vh; background:linear-gradient(rgba(0,102,204,0.82), rgba(0,51,153,0.92)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1600&q=80'); background-size:cover; background-position:center; background-repeat:no-repeat; color:white;">
 
-<body>
-
-<div class="header">
-    <div class="logo">N</div>
-    <h3>Norman FCU</h3>
-</div>
-
-<div class="container">
-    <h2>Transactions</h2>
-
-    <div class="item">
-        <span>Deposit</span>
-        <span class="green">+$2000</span>
+  <div style="display:flex; align-items:center; justify-content:space-between; padding:20px 28px; background:rgba(0,0,0,0.28); backdrop-filter:blur(8px);">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <div style="width:42px; height:42px; border-radius:12px; background:linear-gradient(135deg,#38bdf8,#2563eb); display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:20px;">N</div>
+      <div>
+        <div style="font-size:20px; font-weight:bold;">Norman FCU</div>
+        <div style="font-size:12px; opacity:.9;">Demo Banking</div>
+      </div>
     </div>
 
-    <div class="item">
-        <span>Transfer</span>
-        <span class="red">-$150</span>
+    <div>
+      <a href="dashboard.html" style="color:white; text-decoration:none; margin-left:18px; font-size:15px; font-weight:bold;">Dashboard</a>
+      <a href="transfer.html" style="color:white; text-decoration:none; margin-left:18px; font-size:15px; font-weight:bold;">Transfer</a>
     </div>
+  </div>
 
-    <div class="item">
-        <span>Shopping</span>
-        <span class="red">-$80</span>
+  <div style="max-width:760px; margin:40px auto; padding:0 20px;">
+    <div style="background:rgba(255,255,255,0.14); backdrop-filter:blur(10px); border-radius:18px; padding:24px; box-shadow:0 10px 24px rgba(0,0,0,0.18);">
+      <h2 style="margin-top:0; margin-bottom:18px;">Transactions</h2>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid rgba(255,255,255,0.2);">
+        <div>
+          <div style="font-weight:bold;">Deposit</div>
+          <div style="font-size:13px; opacity:.9;">Apr 10, 2026</div>
+        </div>
+        <div style="font-weight:bold; color:#d9ffe1;">+$2,000</div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid rgba(255,255,255,0.2);">
+        <div>
+          <div style="font-weight:bold;">Transfer</div>
+          <div style="font-size:13px; opacity:.9;">Apr 09, 2026</div>
+        </div>
+        <div style="font-weight:bold; color:#ffd6d6;">-$150</div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0;">
+        <div>
+          <div style="font-weight:bold;">Shopping</div>
+          <div style="font-size:13px; opacity:.9;">Apr 08, 2026</div>
+        </div>
+        <div style="font-weight:bold; color:#ffd6d6;">-$80</div>
+      </div>
     </div>
-
-</div>
+  </div>
 
 </body>
 </html>
