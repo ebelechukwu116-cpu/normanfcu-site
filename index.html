@@ -1,169 +1,357 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Norman FCU</title>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <title>Norman FCU Demo</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-
-      /* Background image + blue overlay */
+      color: white;
       background:
-        linear-gradient(rgba(10, 61, 145, 0.6), rgba(14, 165, 233, 0.6)),
-        url("https://images.unsplash.com/photo-1605902711622-cfb43c4437b5?auto=format&fit=crop&w=1600&q=80");
-
+        linear-gradient(135deg, rgba(9,34,76,.82), rgba(14,165,233,.55)),
+        url("https://images.unsplash.com/photo-1554224155-1696413565d3?auto=format&fit=crop&w=1600&q=80");
       background-size: cover;
       background-position: center;
       min-height: 100vh;
-      color: white;
     }
 
     .nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 18px 24px;
-      background: rgba(0,0,0,0.3);
-      backdrop-filter: blur(8px);
+      padding: 18px 28px;
+      background: rgba(8,15,35,.35);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,.14);
     }
 
-    .logo {
+    .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
-    .logo-icon {
-      width: 40px;
-      height: 40px;
+    .brand-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
       background: linear-gradient(135deg, #38bdf8, #2563eb);
-      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 22px;
       font-weight: bold;
+      box-shadow: 0 10px 24px rgba(37,99,235,.35);
     }
 
-    .nav a {
+    .brand-text strong {
+      display: block;
+      font-size: 18px;
+    }
+
+    .brand-text span {
+      font-size: 12px;
+      opacity: .9;
+    }
+
+    .nav-links a {
       color: white;
       text-decoration: none;
-      margin-left: 15px;
+      margin-left: 18px;
       font-weight: bold;
+      font-size: 14px;
     }
 
     .hero {
-      display: flex;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 70px 20px 40px;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 26px;
       align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 80px 20px;
     }
 
-    .hero-box {
-      background: rgba(255,255,255,0.95);
-      color: #0f172a;
-      padding: 40px 30px;
-      border-radius: 20px;
-      max-width: 600px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    .hero-left h1 {
+      font-size: 54px;
+      line-height: 1.05;
+      margin: 0 0 16px;
     }
 
-    h1 {
-      font-size: 32px;
-      margin-bottom: 10px;
+    .hero-left p {
+      font-size: 18px;
+      line-height: 1.7;
+      color: #e2e8f0;
+      max-width: 620px;
+      margin-bottom: 26px;
     }
 
-    p {
-      color: #475569;
-      line-height: 1.6;
+    .pill {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.18);
+      margin-bottom: 18px;
+      font-size: 13px;
     }
 
     .buttons {
-      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
     .btn {
       display: inline-block;
-      padding: 12px 18px;
-      border-radius: 10px;
-      margin: 6px;
+      padding: 14px 20px;
+      border-radius: 12px;
       text-decoration: none;
       font-weight: bold;
     }
 
     .btn-primary {
-      background: #0ea5e9;
+      background: #38bdf8;
       color: white;
     }
 
-    .btn-outline {
-      border: 2px solid #0ea5e9;
-      color: #0ea5e9;
-      background: transparent;
+    .btn-secondary {
+      background: rgba(255,255,255,.12);
+      color: white;
+      border: 1px solid rgba(255,255,255,.25);
     }
 
-    .features {
-      margin-top: 25px;
+    .hero-right {
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.18);
+      backdrop-filter: blur(14px);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.18);
+    }
+
+    .balance-card {
+      background: linear-gradient(135deg, #1d4ed8, #38bdf8);
+      border-radius: 22px;
+      padding: 24px;
+      margin-bottom: 18px;
+      box-shadow: 0 18px 36px rgba(29,78,216,.32);
+    }
+
+    .balance-card small {
+      opacity: .9;
+      font-size: 13px;
+    }
+
+    .balance-amount {
+      font-size: 38px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .mini-box {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .mini-box strong {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .mini-box span {
+      color: #dbeafe;
       font-size: 14px;
-      color: #334155;
+      line-height: 1.5;
     }
 
-    @media(max-width:600px){
-      h1 { font-size: 24px; }
+    .section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 20px 70px;
+    }
+
+    .section-title {
+      font-size: 34px;
+      margin-bottom: 8px;
+    }
+
+    .section-sub {
+      color: #dbeafe;
+      margin-bottom: 22px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .feature {
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.18);
+      backdrop-filter: blur(14px);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .feature img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+    }
+
+    .feature-body {
+      padding: 18px;
+    }
+
+    .feature-body h3 {
+      margin-top: 0;
+    }
+
+    .feature-body p {
+      color: #e2e8f0;
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 22px;
+      font-size: 14px;
+      color: #dbeafe;
+      border-top: 1px solid rgba(255,255,255,.14);
+      background: rgba(8,15,35,.25);
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-left h1 {
+        font-size: 38px;
+      }
+
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .nav-links a {
+        margin-left: 0;
+        margin-right: 14px;
+      }
     }
   </style>
 </head>
-
 <body>
 
-  <!-- NAVBAR -->
   <div class="nav">
-    <div class="logo">
-      <div class="logo-icon">N</div>
-      <div>
-        <strong>Norman FCU</strong><br>
-        <small>Digital Banking</small>
+    <div class="brand">
+      <div class="brand-icon">N</div>
+      <div class="brand-text">
+        <strong>Norman FCU</strong>
+        <span>Demo Banking Experience</span>
       </div>
     </div>
 
-    <div>
+    <div class="nav-links">
       <a href="login.html">Login</a>
       <a href="signup.html">Open Account</a>
+      <a href="dashboard.html">Dashboard</a>
     </div>
   </div>
 
-  <!-- HERO -->
   <div class="hero">
-    <div class="hero-box">
-
-      <h1>Modern Digital Banking Experience</h1>
-
+    <div class="hero-left">
+      <div class="pill">Finance demo environment</div>
+      <h1>Modern banking design with a premium digital feel.</h1>
       <p>
-        Secure, fast and reliable banking interface. Manage accounts,
-        explore transactions and test a realistic finance dashboard.
+        Present balances, transactions, account details, and admin-controlled sandbox data
+        inside a cleaner finance-style website interface.
       </p>
 
       <div class="buttons">
-        <a class="btn btn-primary" href="login.html">Login</a>
-        <a class="btn btn-outline" href="signup.html">Create Account</a>
+        <a class="btn btn-primary" href="login.html">Account Login</a>
+        <a class="btn btn-secondary" href="signup.html">Create Demo Account</a>
       </div>
-
-      <div class="features">
-        Demo Features:
-        <br>
-        • Generated account numbers  
-        • Editable balance (admin panel)  
-        • Transaction dashboard  
-        • Clean banking UI  
-      </div>
-
     </div>
+
+    <div class="hero-right">
+      <div class="balance-card">
+        <small>Available Balance</small>
+        <div class="balance-amount">$12,450.75</div>
+      </div>
+
+      <div class="mini-grid">
+        <div class="mini-box">
+          <strong>Transfers</strong>
+          <span>Move through a cleaner send-money flow in a sandbox layout.</span>
+        </div>
+        <div class="mini-box">
+          <strong>Cards</strong>
+          <span>Show card details, balances, and account identity in one place.</span>
+        </div>
+        <div class="mini-box">
+          <strong>Security</strong>
+          <span>Demo-only login and local browser storage for test accounts.</span>
+        </div>
+        <div class="mini-box">
+          <strong>Admin</strong>
+          <span>Edit balances and card display values from the admin panel.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Built for a cleaner finance presentation</div>
+    <div class="section-sub">A more polished front page with image cards and stronger layout.</div>
+
+    <div class="feature-grid">
+      <div class="feature">
+        <img src="https://images.unsplash.com/photo-1601597111158-2fceff292cdc?auto=format&fit=crop&w=1200&q=80" alt="Cards">
+        <div class="feature-body">
+          <h3>Account Access</h3>
+          <p>Present demo accounts with cleaner navigation and more polished visual structure.</p>
+        </div>
+      </div>
+
+      <div class="feature">
+        <img src="https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=1200&q=80" alt="Dashboard">
+        <div class="feature-body">
+          <h3>Balance and Activity</h3>
+          <p>Show a clearer transaction layout, account summaries, and dashboard cards.</p>
+        </div>
+      </div>
+
+      <div class="feature">
+        <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80" alt="Support">
+        <div class="feature-body">
+          <h3>Member Services</h3>
+          <p>Use live image sections and better composition for a more complete finance homepage.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    © 2026 Norman FCU Demo
   </div>
 
 </body>
