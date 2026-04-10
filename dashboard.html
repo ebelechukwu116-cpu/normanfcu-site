@@ -1,360 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard - Norman FCU Demo</title>
-  <style>
-    * { box-sizing: border-box; }
+<title>Dashboard</title>
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 45%, #ffffff 100%);
-      color: #0f172a;
-    }
+<style>
+body {
+    margin:0;
+    font-family:Arial;
 
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 24px;
-      background: rgba(10, 61, 145, 0.95);
-      color: white;
-    }
+    background:
+    linear-gradient(rgba(10,61,145,0.8), rgba(14,165,233,0.7)),
+    url("https://images.unsplash.com/photo-1554224155-1696413565d3");
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+    background-size:cover;
+    background-position:center;
+}
 
-    .brand-icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #38bdf8, #2563eb);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: bold;
-      font-size: 20px;
-    }
+.top {
+    background:rgba(0,0,0,0.5);
+    padding:20px;
+    color:white;
+}
 
-    .brand-text strong {
-      display: block;
-      font-size: 18px;
-    }
+.card {
+    background:white;
+    padding:20px;
+    margin:20px;
+    border-radius:10px;
+}
 
-    .brand-text span {
-      font-size: 12px;
-      opacity: 0.9;
-    }
-
-    .nav-links a {
-      color: white;
-      text-decoration: none;
-      margin-left: 14px;
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    .wrap {
-      max-width: 1180px;
-      margin: auto;
-      padding: 24px 18px 40px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 22px;
-    }
-
-    .card {
-      background: white;
-      border-radius: 18px;
-      padding: 22px;
-      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
-      margin-bottom: 20px;
-    }
-
-    .balance-card {
-      background: linear-gradient(135deg, #1d4ed8, #38bdf8);
-      color: white;
-    }
-
-    .balance-card small {
-      opacity: 0.92;
-      font-size: 13px;
-    }
-
-    .big-balance {
-      font-size: 38px;
-      font-weight: bold;
-      margin-top: 10px;
-    }
-
-    .meta {
-      margin-top: 12px;
-      font-size: 14px;
-      opacity: 0.95;
-    }
-
-    .bank-card {
-      margin-top: 18px;
-      background: linear-gradient(135deg, #0f172a, #1e3a8a);
-      color: white;
-      border-radius: 18px;
-      padding: 20px;
-      max-width: 420px;
-      box-shadow: 0 16px 30px rgba(0,0,0,.18);
-    }
-
-    .chip {
-      width: 46px;
-      height: 34px;
-      border-radius: 8px;
-      background: linear-gradient(135deg, #f8fafc, #94a3b8);
-      margin-bottom: 18px;
-    }
-
-    .card-number {
-      font-size: 22px;
-      letter-spacing: 2px;
-      margin-bottom: 12px;
-    }
-
-    .card-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 13px;
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 11px 16px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .btn-primary {
-      background: #0ea5e9;
-      color: white;
-    }
-
-    .btn-secondary {
-      background: #eff6ff;
-      color: #0a3d91;
-      border: 1px solid #bfdbfe;
-    }
-
-    .tx-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 0;
-      border-bottom: 1px solid #e2e8f0;
-    }
-
-    .tx-row:last-child {
-      border-bottom: none;
-    }
-
-    .tx-title {
-      font-weight: bold;
-      margin-bottom: 4px;
-    }
-
-    .tx-date {
-      font-size: 12px;
-      color: #64748b;
-    }
-
-    .amt-plus {
-      color: #16a34a;
-      font-weight: bold;
-    }
-
-    .amt-minus {
-      color: #dc2626;
-      font-weight: bold;
-    }
-
-    .side-image {
-      width: 100%;
-      height: 210px;
-      object-fit: cover;
-      border-radius: 16px;
-      margin-top: 10px;
-    }
-
-    .notice {
-      background: #eff6ff;
-      border: 1px solid #bfdbfe;
-      padding: 14px;
-      border-radius: 12px;
-      color: #0a3d91;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    @media (max-width: 920px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .topbar {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-      }
-
-      .nav-links a {
-        margin-left: 0;
-        margin-right: 12px;
-      }
-    }
-  </style>
+.balance {
+    font-size:30px;
+}
+</style>
 </head>
+
 <body>
-  <div class="topbar">
-    <div class="brand">
-      <div class="brand-icon">N</div>
-      <div class="brand-text">
-        <strong>Norman FCU</strong>
-        <span>Demo Banking Dashboard</span>
-      </div>
-    </div>
 
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="transfer.html">Transfers</a>
-      <a href="transactions.html">Transactions</a>
-      <a href="admin.html">Admin</a>
-    </div>
-  </div>
+<div class="top">
+<h2>Norman FCU Dashboard</h2>
+</div>
 
-  <div class="wrap">
-    <div class="grid">
-      <div>
-        <div class="card balance-card">
-          <small>Available Balance</small>
-          <div class="big-balance" id="balance">$0.00</div>
-          <div class="meta" id="accountMeta">Demo account overview</div>
+<div class="card">
+<h3>Balance</h3>
+<div class="balance">$12,450</div>
+</div>
 
-          <div class="bank-card">
-            <div class="chip"></div>
-            <div class="card-number" id="cardNumber">**** **** **** 4821</div>
-            <div class="card-row">
-              <span id="cardName">Member Name</span>
-              <span id="cardExpiry">12/28</span>
-            </div>
-          </div>
-        </div>
+<div class="card">
+<h3>Account Details</h3>
+<p>Account Number: 1234567890</p>
+<p>Routing: 021000021</p>
+</div>
 
-        <div class="card">
-          <h3>Account Details</h3>
-          <div id="accountBox"></div>
+<div class="card">
+<a href="transfer.html">Send Money</a><br>
+<a href="transactions.html">Transactions</a><br>
+<a href="admin.html">Admin Panel</a>
+</div>
 
-          <div class="actions">
-            <a class="btn btn-primary" href="transfer.html">Send Money</a>
-            <a class="btn btn-secondary" href="transactions.html">View Transactions</a>
-            <a class="btn btn-secondary" href="admin.html">Admin Panel</a>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>Recent Activity</h3>
-          <div id="txList"></div>
-        </div>
-      </div>
-
-      <div>
-        <div class="card">
-          <h3>Member Services</h3>
-          <div class="notice">
-            This is a demo finance environment with generated account details and editable sandbox values.
-          </div>
-
-          <img class="side-image" src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80" alt="Finance team">
-        </div>
-
-        <div class="card">
-          <h3>Bank Highlights</h3>
-          <img class="side-image" src="https://images.unsplash.com/photo-1521790797524-b2497295b8a0?auto=format&fit=crop&w=1200&q=80" alt="Support desk">
-          <p style="margin-top:14px; color:#475569; line-height:1.6;">
-            Explore a more polished finance-style dashboard with styled balance cards, clearer activity rows, and editable demo account details.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    function defaultTransactions() {
-      return [
-        { title: "Payroll Deposit", date: "Apr 08, 2026", amount: 2000.00 },
-        { title: "Utility Payment", date: "Apr 07, 2026", amount: -120.45 },
-        { title: "Card Purchase", date: "Apr 06, 2026", amount: -78.20 },
-        { title: "Transfer Received", date: "Apr 04, 2026", amount: 450.00 }
-      ];
-    }
-
-    const user = JSON.parse(localStorage.getItem("demoUser"));
-
-    if (!user) {
-      document.getElementById("accountBox").innerHTML = "<p>No demo account found yet. Create one from signup.</p>";
-      document.getElementById("txList").innerHTML = "<p>No activity available.</p>";
-    } else {
-      const txs = user.transactions && user.transactions.length ? user.transactions : defaultTransactions();
-
-      document.getElementById("balance").textContent =
-        "$" + Number(user.balance).toLocaleString(undefined, {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2
-        });
-
-      document.getElementById("accountMeta").textContent =
-        "Account • " + user.accountNumber + " • " + user.routingNumber;
-
-      document.getElementById("cardNumber").textContent = user.cardNumber;
-      document.getElementById("cardName").textContent = user.fullname;
-      document.getElementById("cardExpiry").textContent = user.cardExpiry;
-
-      document.getElementById("accountBox").innerHTML = `
-        <p><strong>Account Name:</strong> ${user.fullname}</p>
-        <p><strong>Email:</strong> ${user.email}</p>
-        <p><strong>Account Number:</strong> ${user.accountNumber}</p>
-        <p><strong>Routing Number:</strong> ${user.routingNumber}</p>
-        <p><strong>Account Type:</strong> ${user.accountType || "Checking"}</p>
-        <p><strong>Card Type:</strong> ${user.cardType || "Demo Debit"}</p>
-      `;
-
-      document.getElementById("txList").innerHTML = txs.map(tx => `
-        <div class="tx-row">
-          <div>
-            <div class="tx-title">${tx.title}</div>
-            <div class="tx-date">${tx.date}</div>
-          </div>
-          <div class="${tx.amount >= 0 ? 'amt-plus' : 'amt-minus'}">
-            ${tx.amount >= 0 ? '+' : '-'}$${Math.abs(tx.amount).toLocaleString(undefined, {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2
-            })}
-          </div>
-        </div>
-      `).join('');
-    }
-  </script>
 </body>
 </html>
