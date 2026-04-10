@@ -1,61 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Dashboard</title>
-
-<style>
-body {
-    margin:0;
-    font-family:Arial;
-
-    background:
-    linear-gradient(rgba(10,61,145,0.8), rgba(14,165,233,0.7)),
-    url("https://images.unsplash.com/photo-1554224155-1696413565d3");
-
-    background-size:cover;
-    background-position:center;
-}
-
-.top {
-    background:rgba(0,0,0,0.5);
-    padding:20px;
-    color:white;
-}
-
-.card {
-    background:white;
-    padding:20px;
-    margin:20px;
-    border-radius:10px;
-}
-
-.balance {
-    font-size:30px;
-}
-</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - Norman FCU</title>
 </head>
 
-<body>
+<body style="margin:0; font-family:Arial, sans-serif; min-height:100vh; background:linear-gradient(rgba(0,102,204,0.85), rgba(0,51,153,0.95)), url('https://images.unsplash.com/photo-1601597111158-2fceff292cdc?auto=format&fit=crop&w=1600&q=80'); background-size:cover; background-position:center; color:white;">
 
-<div class="top">
-<h2>Norman FCU Dashboard</h2>
+<!-- NAVBAR -->
+<div style="display:flex; justify-content:space-between; padding:20px; background:rgba(0,0,0,0.3); backdrop-filter:blur(10px);">
+  <h2>Norman FCU</h2>
+  <a href="index.html" style="color:white; text-decoration:none;">Logout</a>
 </div>
 
-<div class="card">
-<h3>Balance</h3>
-<div class="balance">$12,450</div>
+<!-- BALANCE CARD -->
+<div style="padding:30px;">
+  <div style="background:linear-gradient(135deg,#00c6ff,#0072ff); padding:30px; border-radius:15px; width:320px; box-shadow:0 10px 30px rgba(0,0,0,0.3);">
+    <h3>Available Balance</h3>
+    <h1>$12,450.75</h1>
+    <p>Account No: 4532 8890 2211</p>
+  </div>
 </div>
 
-<div class="card">
-<h3>Account Details</h3>
-<p>Account Number: 1234567890</p>
-<p>Routing: 021000021</p>
+<!-- ACTION BUTTONS -->
+<div style="padding:0 30px;">
+  <a href="transfer.html" style="padding:12px 20px; background:white; color:#003366; border-radius:8px; text-decoration:none; margin-right:10px;">Send Money</a>
+  <a href="transactions.html" style="padding:12px 20px; background:#00c2ff; color:white; border-radius:8px; text-decoration:none;">Transactions</a>
 </div>
 
-<div class="card">
-<a href="transfer.html">Send Money</a><br>
-<a href="transactions.html">Transactions</a><br>
-<a href="admin.html">Admin Panel</a>
+<!-- TRANSACTIONS -->
+<div style="padding:30px;">
+  <h2>Recent Transactions</h2>
+
+  <div style="background:rgba(255,255,255,0.1); padding:15px; margin:10px 0; border-radius:10px;">
+    <p>Amazon Purchase</p>
+    <p>- $120.00</p>
+  </div>
+
+  <div style="background:rgba(255,255,255,0.1); padding:15px; margin:10px 0; border-radius:10px;">
+    <p>Salary Deposit</p>
+    <p>+ $3,200.00</p>
+  </div>
+
+  <div style="background:rgba(255,255,255,0.1); padding:15px; margin:10px 0; border-radius:10px;">
+    <p>Transfer to John</p>
+    <p>- $450.00</p>
+  </div>
+
 </div>
 
 </body>
