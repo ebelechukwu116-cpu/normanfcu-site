@@ -1,43 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login</title>
+<title>Login</title>
+
+<style>
+body {
+    margin:0;
+    font-family:Arial;
+    background: linear-gradient(rgba(0,102,204,0.85), rgba(0,51,153,0.9)),
+    url('https://images.unsplash.com/photo-1563013544-824ae1b704d3');
+    background-size:cover;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.box {
+    background:rgba(0,0,0,0.4);
+    padding:30px;
+    border-radius:10px;
+    width:300px;
+}
+
+input {
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+}
+
+button {
+    width:100%;
+    padding:10px;
+    background:#00ccff;
+    border:none;
+    color:white;
+}
+</style>
 </head>
-<body style="margin:0; font-family:Arial; min-height:100vh; background:linear-gradient(rgba(0,102,204,0.8), rgba(0,51,153,0.9)), url('https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=1600&q=80'); background-size:cover; background-position:center;">
 
-<div style="background:white; padding:30px; width:320px; margin:140px auto; border-radius:12px;">
-  <h2>Login</h2>
+<body>
 
-  <input id="email" placeholder="Email" style="width:100%; padding:10px; margin:10px 0;">
-  <input id="password" type="password" placeholder="Password" style="width:100%; padding:10px; margin:10px 0;">
-
-  <button onclick="login()" style="width:100%; padding:12px; background:#0ea5e9; color:white; border:none; border-radius:8px;">Login</button>
-
-  <div style="margin-top:12px;">
-    <a href="signup.html">Create Account</a><br>
-    <a href="admin.html">Admin Panel</a>
-  </div>
+<div class="box">
+    <h2>Login</h2>
+    <input placeholder="Email">
+    <input type="password" placeholder="Password">
+    <button onclick="login()">Login</button>
 </div>
 
 <script>
-function getUsers() {
-  return JSON.parse(localStorage.getItem("users") || "[]");
-}
-
-function login() {
-  const email = document.getElementById("email").value.trim().toLowerCase();
-  const password = document.getElementById("password").value.trim();
-
-  const users = getUsers();
-  const user = users.find(u => u.email === email && u.password === password);
-
-  if (!user) {
-    alert("Invalid login");
-    return;
-  }
-
-  localStorage.setItem("currentUserId", String(user.id));
-  window.location = "dashboard.html";
+function login(){
+    window.location.href="dashboard.html";
 }
 </script>
 
