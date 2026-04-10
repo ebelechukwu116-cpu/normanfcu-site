@@ -1,164 +1,132 @@
-<div class="logo">
-  <div class="logo-icon">N</div>
-  <div class="logo-text">
-    <strong>Norman FCU</strong>
-    <span>Demo Banking</span>
-  </div>
-</div>
-<style>
-.logo{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-.logo-icon{
-  width:42px;
-  height:42px;
-  border-radius:12px;
-  background: linear-gradient(135deg, #38bdf8, #2563eb);
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:bold;
-  font-size:20px;
-  box-shadow: 0 8px 20px rgba(37,99,235,.25);
-}
-.logo-text{
-  display:flex;
-  flex-direction:column;
-  line-height:1.1;
-}
-.logo-text strong{
-  font-size:18px;
-}
-.logo-text span{
-  font-size:12px;
-  color:#64748b;
-}
-</style>
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Admin - Norman FCU Demo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #dbeafe, #ffffff);
-      color: #0f172a;
-    }
-    .header {
-      background: #38bdf8;
-      color: white;
-      padding: 18px 20px;
-      font-size: 22px;
-      font-weight: bold;
-    }
-    .wrap {
-      max-width: 720px;
-      margin: 24px auto;
-      padding: 0 16px;
-    }
-    .card {
-      background: white;
-      border-radius: 14px;
-      padding: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-      margin-bottom: 20px;
-    }
-    input {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0 14px 0;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
-      box-sizing: border-box;
-    }
-    button {
-      padding: 12px 16px;
-      border: none;
-      border-radius: 8px;
-      background: #38bdf8;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      margin-right: 8px;
-    }
-    button:hover {
-      background: #0ea5e9;
-    }
-    .note {
-      color: #475569;
-      font-size: 13px;
-      margin-bottom: 10px;
-    }
-    .links a {
-      color: #2563eb;
-      text-decoration: none;
-      margin-right: 12px;
-    }
-  </style>
+  <title>Admin Panel - Norman FCU Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #dbeafe, #ffffff);
+      color: #0f172a;
+    }
+
+    .topbar {
+      background: #0a3d91;
+      color: white;
+      padding: 16px 24px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .wrap {
+      max-width: 760px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      margin-bottom: 20px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+    }
+
+    button {
+      padding: 12px 16px;
+      border: none;
+      border-radius: 10px;
+      background: #0ea5e9;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      margin-right: 8px;
+      margin-top: 6px;
+    }
+
+    .links a {
+      text-decoration: none;
+      margin-right: 12px;
+      color: #2563eb;
+    }
+
+    .note {
+      color: #64748b;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+  </style>
 </head>
 <body>
-  <div class="header">Admin Panel - Demo</div>
+  <div class="topbar">Admin Panel - Demo</div>
 
-  <div class="wrap">
-    <div class="card">
-      <div class="note">Demo environment only. This edits demo account data stored in the browser.</div>
+  <div class="wrap">
+    <div class="card">
+      <div class="note">This edits demo account data stored in the browser only.</div>
 
-      <label>New Balance</label>
-      <input id="balance" type="number" step="0.01" placeholder="12450.75">
+      <label>Balance</label>
+      <input id="balance" type="number" step="0.01" placeholder="12450.75">
 
-      <label>Card Number Display</label>
-      <input id="cardNumber" type="text" placeholder="**** **** **** 4821">
+      <label>Account Number</label>
+      <input id="accountNumber" type="text" placeholder="0987654321">
 
-      <label>Card Expiry</label>
-      <input id="cardExpiry" type="text" placeholder="12/28">
+      <label>Card Number Display</label>
+      <input id="cardNumber" type="text" placeholder="**** **** **** 4821">
 
-      <label>Account Number</label>
-      <input id="accountNumber" type="text" placeholder="0987654321">
+      <label>Card Expiry</label>
+      <input id="cardExpiry" type="text" placeholder="12/28">
 
-      <button onclick="loadUser()">Load Current Data</button>
-      <button onclick="updateUser()">Save Changes</button>
-    </div>
+      <button onclick="loadData()">Load Current Data</button>
+      <button onclick="saveData()">Save Changes</button>
+    </div>
 
-    <div class="card links">
-      <a href="dashboard.html">Go to Dashboard</a>
-      <a href="login.html">Go to Login</a>
-    </div>
-  </div>
+    <div class="card links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="login.html">Login</a>
+      <a href="index.html">Home</a>
+    </div>
+  </div>
 
-  <script>
-    function loadUser() {
-      const user = JSON.parse(localStorage.getItem("demoUser"));
-      if (!user) {
-        alert("No demo user found. Create one from signup first.");
-        return;
-      }
+  <script>
+    function loadData() {
+      const user = JSON.parse(localStorage.getItem("demoUser"));
+      if (!user) {
+        alert("No demo user found. Create one first.");
+        return;
+      }
 
-      document.getElementById("balance").value = user.balance ?? "";
-      document.getElementById("cardNumber").value = user.cardNumber ?? "";
-      document.getElementById("cardExpiry").value = user.cardExpiry ?? "";
-      document.getElementById("accountNumber").value = user.accountNumber ?? "";
-    }
+      document.getElementById("balance").value = user.balance ?? "";
+      document.getElementById("accountNumber").value = user.accountNumber ?? "";
+      document.getElementById("cardNumber").value = user.cardNumber ?? "";
+      document.getElementById("cardExpiry").value = user.cardExpiry ?? "";
+    }
 
-    function updateUser() {
-      const user = JSON.parse(localStorage.getItem("demoUser"));
-      if (!user) {
-        alert("No demo user found. Create one from signup first.");
-        return;
-      }
+    function saveData() {
+      const user = JSON.parse(localStorage.getItem("demoUser"));
+      if (!user) {
+        alert("No demo user found. Create one first.");
+        return;
+      }
 
-      user.balance = parseFloat(document.getElementById("balance").value || "0");
-      user.cardNumber = document.getElementById("cardNumber").value.trim();
-      user.cardExpiry = document.getElementById("cardExpiry").value.trim();
-      user.accountNumber = document.getElementById("accountNumber").value.trim();
+      user.balance = parseFloat(document.getElementById("balance").value || "0");
+      user.accountNumber = document.getElementById("accountNumber").value.trim();
+      user.cardNumber = document.getElementById("cardNumber").value.trim();
+      user.cardExpiry = document.getElementById("cardExpiry").value.trim();
 
-      localStorage.setItem("demoUser", JSON.stringify(user));
-      alert("Demo account updated.");
-    }
-  </script>
+      localStorage.setItem("demoUser", JSON.stringify(user));
+      alert("Demo account updated.");
+    }
+  </script>
 </body>
 </html>
