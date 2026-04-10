@@ -1,139 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Sign Up - Norman FCU Demo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background:
-        linear-gradient(rgba(8, 30, 60, 0.45), rgba(8, 30, 60, 0.45)),
-        url('https://images.unsplash.com/photo-1554224154-22dec7ec8818?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .box {
-      background: rgba(255,255,255,0.96);
-      width: 100%;
-      max-width: 390px;
-      padding: 26px;
-      border-radius: 18px;
-      box-shadow: 0 14px 40px rgba(0,0,0,0.18);
-    }
-
-    h2 {
-      margin-top: 0;
-      color: #0a3d91;
-      text-align: center;
-    }
-
-    .note {
-      text-align: center;
-      font-size: 12px;
-      color: #64748b;
-      margin-bottom: 16px;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      border: 1px solid #cbd5e1;
-      border-radius: 10px;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 10px;
-      background: #0ea5e9;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    a {
-      display: block;
-      text-align: center;
-      margin-top: 12px;
-      text-decoration: none;
-      color: #2563eb;
-    }
-  </style>
+  <title>Create Account</title>
 </head>
-<body>
-  <div class="box">
-    <h2>Create Demo Account</h2>
-    <div class="note">Demo environment only</div>
+<body style="margin:0; font-family:Arial; min-height:100vh; background:linear-gradient(rgba(0,102,204,0.8), rgba(0,51,153,0.9)), url('https://images.unsplash.com/photo-1554224154-22dec7ec8818?auto=format&fit=crop&w=1600&q=80'); background-size:cover; background-position:center; color:white;">
 
-    <input id="fullname" type="text" placeholder="Full Name">
-    <input id="email" type="email" placeholder="Email Address">
-    <input id="password" type="password" placeholder="Password">
+<div style="width:320px; margin:120px auto; background:white; padding:22px; border-radius:12px; color:black;">
+  <h2>Create Account</h2>
 
-    <select id="accountType">
-      <option value="Checking">Checking</option>
-      <option value="Savings">Savings</option>
-    </select>
+  <input id="name" placeholder="Full Name" style="width:100%; padding:10px; margin:10px 0;">
+  <input id="email" placeholder="Email" style="width:100%; padding:10px; margin:10px 0;">
+  <input id="password" type="password" placeholder="Password" style="width:100%; padding:10px; margin:10px 0;">
 
-    <button onclick="signup()">Create Account</button>
-    <a href="login.html">Back to Login</a>
-  </div>
+  <button onclick="createAccount()" style="width:100%; padding:12px; background:#0ea5e9; color:white; border:none; border-radius:8px;">Create Account</button>
+</div>
 
-  <script>
-    function generateAccountNumber() {
-      return Math.floor(1000000000 + Math.random() * 9000000000).toString();
-    }
+<script>
+function generateAccount() {
+  return String(Math.floor(1000000000 + Math.random() * 9000000000));
+}
 
-    function generateCardLast4() {
-      return Math.floor(1000 + Math.random() * 9000).toString();
-    }
+function getUsers() {
+  return JSON.parse(localStorage.getItem("users") || "[]");
+}
 
-    function seedTransactions() {
-      return [
-        { title: "Opening Balance", date: "Apr 10, 2026", amount: 12450.75 },
-        { title: "Demo Transfer", date: "Apr 10, 2026", amount: -85.00 },
-        { title: "Card Purchase", date: "Apr 09, 2026", amount: -42.18 }
-      ];
-    }
+function saveUsers(users) {
+  localStorage.setItem("users", JSON.stringify(users));
+}
 
-    function signup() {
-      const fullname = document.getElementById("fullname").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value.trim();
-      const accountType = document.getElementById("accountType").value;
+function createAccount() {
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim().toLowerCase();
+  const password = document.getElementById("password").value.trim();
 
-      if (!fullname || !email || !password) {
-        alert("Please complete all fields.");
-        return;
-      }
+  if (!name || !email || !password) {
+    alert("Fill all fields");
+    return;
+  }
 
-      const user = {
-        fullname,
-        email,
-        password,
-        accountType,
-        accountNumber: generateAccountNumber(),
-        routingNumber: "021000021",
-        balance: 12450.75,
-        cardNumber: "**** **** **** " + generateCardLast4(),
-        cardExpiry: "12/28",
-        cardType: "Demo Debit",
-        transactions: seedTransactions()
-      };
+  const users = getUsers();
+  if (users.some(u => u.email === email)) {
+    alert("User already exists");
+    return;
+  }
 
-      localStorage.setItem("demoUser", JSON.stringify(user));
-      alert("Demo account created.");
-      window.location.href = "login.html";
-    }
-  </script>
+  const newUser = {
+    id: Date.now(),
+    name,
+    email,
+    password,
+    account: generateAccount(),
+    routing: "021000021",
+    balance: 12450.75,
+    transactions: [
+      { title: "Opening Balance", amount: "+ $12,450.75", date: "Apr 10, 2026" }
+    ]
+  };
+
+  users.push(newUser);
+  saveUsers(users);
+  localStorage.setItem("currentUserId", String(newUser.id));
+
+  alert("Account created");
+  window.location = "dashboard.html";
+}
+</script>
+
 </body>
 </html>
