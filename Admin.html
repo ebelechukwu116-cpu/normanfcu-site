@@ -1,132 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Admin Panel - Norman FCU Demo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #dbeafe, #ffffff);
-      color: #0f172a;
-    }
-
-    .topbar {
-      background: #0a3d91;
-      color: white;
-      padding: 16px 24px;
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    .wrap {
-      max-width: 760px;
-      margin: 24px auto;
-      padding: 0 16px;
-    }
-
-    .card {
-      background: white;
-      border-radius: 18px;
-      padding: 22px;
-      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
-      margin-bottom: 20px;
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0 14px;
-      border: 1px solid #cbd5e1;
-      border-radius: 10px;
-    }
-
-    button {
-      padding: 12px 16px;
-      border: none;
-      border-radius: 10px;
-      background: #0ea5e9;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      margin-right: 8px;
-      margin-top: 6px;
-    }
-
-    .links a {
-      text-decoration: none;
-      margin-right: 12px;
-      color: #2563eb;
-    }
-
-    .note {
-      color: #64748b;
-      font-size: 13px;
-      margin-bottom: 12px;
-    }
-  </style>
+  <title>Admin Panel</title>
 </head>
-<body>
-  <div class="topbar">Admin Panel - Demo</div>
+<body style="margin:0; font-family:Arial; min-height:100vh; background:linear-gradient(rgba(0,102,204,0.82), rgba(0,51,153,0.92)), url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1600&q=80'); background-size:cover; background-position:center; color:white;">
 
-  <div class="wrap">
-    <div class="card">
-      <div class="note">This edits demo account data stored in the browser only.</div>
+<div style="padding:20px; background:rgba(0,0,0,0.28); font-size:28px; font-weight:bold;">
+  Norman FCU Admin
+</div>
 
-      <label>Balance</label>
-      <input id="balance" type="number" step="0.01" placeholder="12450.75">
+<div style="max-width:900px; margin:24px auto; background:rgba(255,255,255,0.95); color:black; padding:24px; border-radius:14px;">
+  <h2>Manage Users</h2>
 
-      <label>Account Number</label>
-      <input id="accountNumber" type="text" placeholder="0987654321">
+  <select id="userSelect" onchange="loadUser()" style="width:100%; padding:10px; margin:10px 0;"></select>
 
-      <label>Card Number Display</label>
-      <input id="cardNumber" type="text" placeholder="**** **** **** 4821">
+  <input id="balance" placeholder="Balance" style="width:100%; padding:10px; margin:10px 0;">
+  <input id="account" placeholder="Account Number" style="width:100%; padding:10px; margin:10px 0;">
+  <input id="routing" placeholder="Routing Number" style="width:100%; padding:10px; margin:10px 0;">
 
-      <label>Card Expiry</label>
-      <input id="cardExpiry" type="text" placeholder="12/28">
+  <button onclick="saveUser()" style="padding:12px 18px; background:#0ea5e9; color:white; border:none; border-radius:8px;">Save Changes</button>
+</div>
 
-      <button onclick="loadData()">Load Current Data</button>
-      <button onclick="saveData()">Save Changes</button>
-    </div>
+<script>
+function getUsers() {
+  return JSON.parse(localStorage.getItem("users") || "[]");
+}
 
-    <div class="card links">
-      <a href="dashboard.html">Dashboard</a>
-      <a href="login.html">Login</a>
-      <a href="index.html">Home</a>
-    </div>
-  </div>
+function saveUsers(users) {
+  localStorage.setItem("users", JSON.stringify(users));
+}
 
-  <script>
-    function loadData() {
-      const user = JSON.parse(localStorage.getItem("demoUser"));
-      if (!user) {
-        alert("No demo user found. Create one first.");
-        return;
-      }
+function fillSelect() {
+  const users = getUsers();
+  const select = document.getElementById("userSelect");
+  select.innerHTML = users.map(u => `<option value="${u.id}">${u.name} - ${u.email}</option>`).join("");
+  if (users.length) loadUser();
+}
 
-      document.getElementById("balance").value = user.balance ?? "";
-      document.getElementById("accountNumber").value = user.accountNumber ?? "";
-      document.getElementById("cardNumber").value = user.cardNumber ?? "";
-      document.getElementById("cardExpiry").value = user.cardExpiry ?? "";
-    }
+function loadUser() {
+  const users = getUsers();
+  const id = document.getElementById("userSelect").value;
+  const user = users.find(u => String(u.id) === String(id));
+  if (!user) return;
 
-    function saveData() {
-      const user = JSON.parse(localStorage.getItem("demoUser"));
-      if (!user) {
-        alert("No demo user found. Create one first.");
-        return;
-      }
+  document.getElementById("balance").value = user.balance;
+  document.getElementById("account").value = user.account;
+  document.getElementById("routing").value = user.routing;
+}
 
-      user.balance = parseFloat(document.getElementById("balance").value || "0");
-      user.accountNumber = document.getElementById("accountNumber").value.trim();
-      user.cardNumber = document.getElementById("cardNumber").value.trim();
-      user.cardExpiry = document.getElementById("cardExpiry").value.trim();
+function saveUser() {
+  const users = getUsers();
+  const id = document.getElementById("userSelect").value;
+  const i = users.findIndex(u => String(u.id) === String(id));
+  if (i === -1) return;
 
-      localStorage.setItem("demoUser", JSON.stringify(user));
-      alert("Demo account updated.");
-    }
-  </script>
+  users[i].balance = parseFloat(document.getElementById("balance").value || "0");
+  users[i].account = document.getElementById("account").value.trim();
+  users[i].routing = document.getElementById("routing").value.trim();
+
+  saveUsers(users);
+  alert("User updated");
+}
+
+fillSelect();
+</script>
+
 </body>
 </html>
