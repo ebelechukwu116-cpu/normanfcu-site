@@ -1,123 +1,147 @@
-<div class="logo">
-  <div class="logo-icon">N</div>
-  <div class="logo-text">
-    <strong>Norman FCU</strong>
-    <span>Demo Banking</span>
-  </div>
-</div>
-<style>
-.logo{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-.logo-icon{
-  width:42px;
-  height:42px;
-  border-radius:12px;
-  background: linear-gradient(135deg, #38bdf8, #2563eb);
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:bold;
-  font-size:20px;
-  box-shadow: 0 8px 20px rgba(37,99,235,.25);
-}
-.logo-text{
-  display:flex;
-  flex-direction:column;
-  line-height:1.1;
-}
-.logo-text strong{
-  font-size:18px;
-}
-.logo-text span{
-  font-size:12px;
-  color:#64748b;
-}
-</style>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Send Money - Norman FCU</title>
-
-<style>
-body {
-    margin: 0;
-    font-family: Arial;
-    background: #0b1e3c;
-    color: white;
-}
-
-.header {
-    padding: 20px;
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.container {
-    padding: 20px;
-}
-
-.form-box {
-    background: #1e3a8a;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 400px;
-}
-
-input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: none;
-}
-
-button {
-    width: 100%;
-    padding: 10px;
-    background: #2563eb;
-    border: none;
-    color: white;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #1e40af;
-}
-
-a {
-    color: #cbd5e1;
-    display: block;
-    margin-top: 10px;
-}
-</style>
+  <title>Transfer - Norman FCU Demo</title>
 </head>
+<body style="margin:0; font-family:Arial,sans-serif; min-height:100vh; background:linear-gradient(rgba(0,102,204,0.85), rgba(0,51,153,0.95)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1600&q=80'); background-size:cover; background-position:center; color:white;">
 
-<body>
+<div style="display:flex; justify-content:space-between; align-items:center; padding:20px 28px; background:rgba(0,0,0,0.28); backdrop-filter:blur(8px);">
+  <div style="display:flex; align-items:center; gap:12px;">
+    <div style="width:42px; height:42px; border-radius:12px; background:linear-gradient(135deg,#38bdf8,#2563eb); display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:20px;">N</div>
+    <div>
+      <div style="font-size:20px; font-weight:bold;">Norman FCU</div>
+      <div style="font-size:12px; opacity:.9;">Demo Banking</div>
+    </div>
+  </div>
 
-<div class="header">
-    Send Money
+  <div>
+    <a href="dashboard.html" style="color:white; text-decoration:none; margin-left:18px; font-size:15px; font-weight:bold;">Dashboard</a>
+    <a href="transactions.html" style="color:white; text-decoration:none; margin-left:18px; font-size:15px; font-weight:bold;">Transactions</a>
+  </div>
 </div>
 
-<div class="container">
+<div style="max-width:1100px; margin:40px auto; padding:0 20px; display:grid; grid-template-columns:1.1fr .9fr; gap:24px;">
+  
+  <div style="background:rgba(255,255,255,0.14); backdrop-filter:blur(10px); border-radius:18px; padding:24px; box-shadow:0 10px 24px rgba(0,0,0,0.18);">
+    <h2 style="margin-top:0;">Transfer Funds</h2>
+    <p style="opacity:.92; line-height:1.6;">Move funds in this demo finance environment using a clean transfer layout.</p>
 
-    <div class="form-box">
-        <h3>Transfer Funds</h3>
+    <div style="margin-top:18px;">
+      <label style="display:block; margin-bottom:6px; font-size:14px;">Recipient Name</label>
+      <input id="recipient" type="text" placeholder="Enter recipient name" style="width:100%; padding:14px; border:none; border-radius:10px; margin-bottom:14px;">
 
-        <input type="text" placeholder="Recipient Name">
-        <input type="text" placeholder="Account Number">
-        <input type="number" placeholder="Amount ($)">
-        
-        <button>Send</button>
+      <label style="display:block; margin-bottom:6px; font-size:14px;">Account Number</label>
+      <input id="accountNumber" type="text" placeholder="Enter account number" style="width:100%; padding:14px; border:none; border-radius:10px; margin-bottom:14px;">
 
-        <a href="dashboard.html">← Back to Dashboard</a>
-    </div>
+      <label style="display:block; margin-bottom:6px; font-size:14px;">Routing Number</label>
+      <input id="routingNumber" type="text" placeholder="Enter routing number" style="width:100%; padding:14px; border:none; border-radius:10px; margin-bottom:14px;">
+
+      <label style="display:block; margin-bottom:6px; font-size:14px;">Amount</label>
+      <input id="amount" type="number" placeholder="0.00" style="width:100%; padding:14px; border:none; border-radius:10px; margin-bottom:18px;">
+
+      <button onclick="submitTransfer()" style="width:100%; padding:14px; border:none; border-radius:10px; background:#0ea5e9; color:white; font-weight:bold; font-size:16px; cursor:pointer;">
+        Send Transfer
+      </button>
+    </div>
+
+    <div id="statusBox" style="display:none; margin-top:16px; padding:14px; border-radius:10px; background:rgba(255,255,255,0.18);"></div>
+  </div>
+
+  <div>
+    <div style="background:linear-gradient(135deg,#111827,#1d4ed8); border-radius:18px; padding:24px; box-shadow:0 10px 24px rgba(0,0,0,0.24); margin-bottom:20px;">
+      <div style="display:flex; justify-content:space-between;">
+        <strong>Transfer Summary</strong>
+        <span>Demo</span>
+      </div>
+
+      <div style="margin-top:18px; font-size:14px; opacity:.9;">Available Balance</div>
+      <div id="balanceBox" style="font-size:34px; font-weight:bold; margin-top:8px;">$0.00</div>
+
+      <div style="margin-top:20px; font-size:13px; opacity:.85;">From Account</div>
+      <div id="fromAccount" style="margin-top:6px; font-size:16px;">--</div>
+    </div>
+
+    <div style="background:rgba(255,255,255,0.14); backdrop-filter:blur(10px); border-radius:18px; padding:24px; box-shadow:0 10px 24px rgba(0,0,0,0.18);">
+      <h3 style="margin-top:0;">Transfer Tips</h3>
+      <ul style="padding-left:18px; line-height:1.8; margin:0;">
+        <li>Review recipient details carefully</li>
+        <li>Confirm the amount before sending</li>
+        <li>Use the admin page to test updated balances</li>
+      </ul>
+    </div>
+  </div>
 
 </div>
+
+<script>
+function getUser() {
+  return JSON.parse(localStorage.getItem("userData") || "null");
+}
+
+function saveUser(user) {
+  localStorage.setItem("userData", JSON.stringify(user));
+}
+
+function getTransactions() {
+  return JSON.parse(localStorage.getItem("transactions") || "[]");
+}
+
+function saveTransactions(txs) {
+  localStorage.setItem("transactions", JSON.stringify(txs));
+}
+
+function formatDate() {
+  const d = new Date();
+  return d.toLocaleDateString("en-US", { month: "short", day: "2-digit", year: "numeric" });
+}
+
+function renderTransferPage() {
+  const user = getUser();
+  if (!user) return;
+
+  document.getElementById("balanceBox").textContent =
+    "$" + Number(user.balance).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+  document.getElementById("fromAccount").textContent = user.account || "--";
+}
+
+function submitTransfer() {
+  const recipient = document.getElementById("recipient").value.trim();
+  const accountNumber = document.getElementById("accountNumber").value.trim();
+  const routingNumber = document.getElementById("routingNumber").value.trim();
+  const amount = parseFloat(document.getElementById("amount").value || "0");
+
+  if (!recipient || !accountNumber || !routingNumber || amount <= 0) {
+    alert("Please complete all transfer details.");
+    return;
+  }
+
+  const user = getUser();
+  if (!user) {
+    alert("No user data found.");
+    return;
+  }
+
+  user.balance = Number(user.balance) - amount;
+  saveUser(user);
+
+  const txs = getTransactions();
+  txs.unshift({
+    title: "Transfer to " + recipient,
+    amount: "-$" + amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+    date: formatDate()
+  });
+  saveTransactions(txs);
+
+  const statusBox = document.getElementById("statusBox");
+  statusBox.style.display = "block";
+  statusBox.innerHTML = "Transfer submitted successfully in demo mode.";
+
+  renderTransferPage();
+}
+
+renderTransferPage();
+</script>
 
 </body>
 </html>
