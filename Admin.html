@@ -1,68 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Admin Panel</title>
+  <title>Admin Panel - Norman FCU Demo</title>
 </head>
-<body style="margin:0; font-family:Arial; min-height:100vh; background:linear-gradient(rgba(0,102,204,0.82), rgba(0,51,153,0.92)), url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1600&q=80'); background-size:cover; background-position:center; color:white;">
+<body style="margin:0; font-family:Arial,sans-serif; min-height:100vh; background:linear-gradient(rgba(0,102,204,0.82), rgba(0,51,153,0.92)), url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1600&q=80'); background-size:cover; background-position:center; color:white;">
 
 <div style="padding:20px; background:rgba(0,0,0,0.28); font-size:28px; font-weight:bold;">
   Norman FCU Admin
 </div>
 
-<div style="max-width:900px; margin:24px auto; background:rgba(255,255,255,0.95); color:black; padding:24px; border-radius:14px;">
-  <h2>Manage Users</h2>
+<div style="max-width:700px; margin:30px auto; background:rgba(255,255,255,0.96); color:black; padding:24px; border-radius:16px;">
+  <h2>Edit Demo User</h2>
 
-  <select id="userSelect" onchange="loadUser()" style="width:100%; padding:10px; margin:10px 0;"></select>
-
+  <input id="name" placeholder="Name" style="width:100%; padding:10px; margin:10px 0;">
+  <input id="email" placeholder="Email" style="width:100%; padding:10px; margin:10px 0;">
   <input id="balance" placeholder="Balance" style="width:100%; padding:10px; margin:10px 0;">
   <input id="account" placeholder="Account Number" style="width:100%; padding:10px; margin:10px 0;">
   <input id="routing" placeholder="Routing Number" style="width:100%; padding:10px; margin:10px 0;">
+  <input id="cardNumber" placeholder="Card Number Display" style="width:100%; padding:10px; margin:10px 0;">
+  <input id="cardExpiry" placeholder="Card Expiry" style="width:100%; padding:10px; margin:10px 0;">
 
+  <button onclick="loadUser()" style="padding:12px 18px; background:#2563eb; color:white; border:none; border-radius:8px; margin-right:8px;">Load Current Data</button>
   <button onclick="saveUser()" style="padding:12px 18px; background:#0ea5e9; color:white; border:none; border-radius:8px;">Save Changes</button>
+
+  <div style="margin-top:18px;">
+    <a href="dashboard.html">Back to Dashboard</a>
+  </div>
 </div>
 
 <script>
-function getUsers() {
-  return JSON.parse(localStorage.getItem("users") || "[]");
+function getUser() {
+  return JSON.parse(localStorage.getItem("demoUser") || "null");
 }
-
-function saveUsers(users) {
-  localStorage.setItem("users", JSON.stringify(users));
+function saveStoredUser(user) {
+  localStorage.setItem("demoUser", JSON.stringify(user));
 }
-
-function fillSelect() {
-  const users = getUsers();
-  const select = document.getElementById("userSelect");
-  select.innerHTML = users.map(u => `<option value="${u.id}">${u.name} - ${u.email}</option>`).join("");
-  if (users.length) loadUser();
-}
-
 function loadUser() {
-  const users = getUsers();
-  const id = document.getElementById("userSelect").value;
-  const user = users.find(u => String(u.id) === String(id));
-  if (!user) return;
-
-  document.getElementById("balance").value = user.balance;
-  document.getElementById("account").value = user.account;
-  document.getElementById("routing").value = user.routing;
+  const user = getUser();
+  if (!user) {
+    alert("No demo user found yet.");
+    return;
+  }
+  document.getElementById("name").value = user.name || "";
+  document.getElementById("email").value = user.email || "";
+  document.getElementById("balance").value = user.balance || "";
+  document.getElementById("account").value = user.account || "";
+  document.getElementById("routing").value = user.routing || "";
+  document.getElementById("cardNumber").value = user.cardNumber || "";
+  document.getElementById("cardExpiry").value = user.cardExpiry || "";
 }
-
 function saveUser() {
-  const users = getUsers();
-  const id = document.getElementById("userSelect").value;
-  const i = users.findIndex(u => String(u.id) === String(id));
-  if (i === -1) return;
-
-  users[i].balance = parseFloat(document.getElementById("balance").value || "0");
-  users[i].account = document.getElementById("account").value.trim();
-  users[i].routing = document.getElementById("routing").value.trim();
-
-  saveUsers(users);
-  alert("User updated");
+  let user = getUser() || {};
+  user.name = document.getElementById("name").value.trim();
+  user.email = document.getElementById("email").value.trim();
+  user.balance = parseFloat(document.getElementById("balance").value || "0");
+  user.account = document.getElementById("account").value.trim();
+  user.routing = document.getElementById("routing").value.trim();
+  user.cardNumber = document.getElementById("cardNumber").value.trim();
+  user.cardExpiry = document.getElementById("cardExpiry").value.trim();
+  saveStoredUser(user);
+  alert("Demo user updated");
 }
-
-fillSelect();
+loadUser();
 </script>
 
 </body>
