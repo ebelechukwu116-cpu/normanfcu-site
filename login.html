@@ -4,78 +4,40 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #000000, #3b0000, #5b0000);
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
-    .box {
-      background: white;
-      color: black;
-      padding: 25px;
-      border-radius: 15px;
-      width: 90%;
-      max-width: 400px;
-      box-sizing: border-box;
-    }
-    h2 {
-      margin: 0 0 10px;
-      color: #5b0000;
-    }
-    input {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      border-radius: 8px;
-      border: none;
-      background: #f2f2f2;
-      box-sizing: border-box;
-    }
-    button {
-      width: 100%;
-      padding: 12px;
-      background: red;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      margin-top: 10px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    #msg {
-      margin-top: 12px;
-      color: red;
-      min-height: 20px;
-    }
-    a {
-      display: block;
-      margin-top: 10px;
-      text-align: center;
-      color: red;
-      text-decoration: none;
-    }
-  </style>
 </head>
-<body>
+<body style="margin:0; font-family:Arial,sans-serif; min-height:100vh; background:linear-gradient(135deg,#000000,#3b0000,#5b0000); color:white; display:flex; align-items:center; justify-content:center;">
 
-  <div class="box">
-    <h2>Login</h2>
-    <p>Secure member access</p>
+  <div style="width:100%; max-width:950px; display:grid; grid-template-columns:1fr 1fr; gap:30px; align-items:center; padding:30px; box-sizing:border-box;">
 
-    <input id="email" type="email" placeholder="Email">
-    <input id="password" type="password" placeholder="Password">
+    <div>
+      <div style="display:inline-block; padding:8px 14px; border-radius:999px; background:rgba(255,255,255,0.08); margin-bottom:18px;">
+        Secure sign in
+      </div>
 
-    <button type="button" id="loginBtn">Login</button>
+      <h1 style="font-size:48px; margin:0 0 14px;">Welcome back</h1>
+      <p style="font-size:18px; color:#e5e7eb; line-height:1.6; max-width:500px;">
+        Login to access your account, balance, transfers, and recent activity.
+      </p>
+    </div>
 
-    <p id="msg"></p>
+    <div style="background:white; color:#111827; padding:30px; border-radius:18px; box-shadow:0 20px 45px rgba(0,0,0,0.25);">
+      <h2 style="margin:0 0 10px; color:#5b0000; font-size:36px;">Login</h2>
+      <p style="margin:0 0 20px; color:#6b7280;">Secure member access</p>
 
-    <a href="signup.html">Need an account? Create one</a>
+      <input id="email" type="email" placeholder="Email" style="width:100%; padding:14px; margin:8px 0; border:1px solid #ddd; border-radius:10px; box-sizing:border-box; font-size:16px;">
+      <input id="password" type="password" placeholder="Password" style="width:100%; padding:14px; margin:8px 0; border:1px solid #ddd; border-radius:10px; box-sizing:border-box; font-size:16px;">
+
+      <button type="button" id="loginBtn" style="width:100%; padding:14px; margin-top:12px; border:none; border-radius:10px; background:#dc2626; color:white; font-weight:bold; font-size:16px; cursor:pointer;">
+        Login
+      </button>
+
+      <p id="msg" style="margin-top:14px; min-height:20px; color:#b91c1c;"></p>
+
+      <a href="signup.html" style="display:block; text-align:center; margin-top:14px; color:#b91c1c; text-decoration:none; font-weight:bold;">
+        Need an account? Create one
+      </a>
+    </div>
+
   </div>
 
   <script type="module">
@@ -108,7 +70,7 @@
 
       try {
         loginBtn.disabled = true;
-        msg.style.color = "black";
+        msg.style.color = "#111827";
         msg.innerText = "Signing in...";
 
         await signInWithEmailAndPassword(auth, email, password);
@@ -120,7 +82,7 @@
           window.location.href = "dashboard.html";
         }, 800);
       } catch (error) {
-        msg.style.color = "red";
+        msg.style.color = "#b91c1c";
         msg.innerText = error.message;
       } finally {
         loginBtn.disabled = false;
