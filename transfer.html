@@ -1,146 +1,154 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Transfer - Norman FCU Demo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transfer - Norman FCU</title>
 </head>
-<body style="margin:0; font-family:Arial,sans-serif; min-height:100vh; background:linear-gradient(rgba(0,102,204,0.85), rgba(0,51,153,0.95)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1600&q=80'); background-size:cover; background-position:center; color:white;">
 
-<div style="display:flex; justify-content:space-between; align-items:center; padding:20px 28px; background:rgba(0,0,0,0.28); backdrop-filter:blur(8px);">
-  <div style="display:flex; align-items:center; gap:12px;">
-    <div style="width:42px; height:42px; border-radius:12px; background:linear-gradient(135deg,#38bdf8,#2563eb); display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:20px;">N</div>
-    <div>
-      <div style="font-size:20px; font-weight:bold;">Norman FCU</div>
-      <div style="font-size:12px; opacity:.9;">Demo Banking</div>
-    </div>
-  </div>
+<body style="margin:0; font-family:Arial; background:linear-gradient(135deg,#000000,#3b0000,#5b0000); color:white;">
 
-  <div>
-    <a href="dashboard.html" style="color:white; text-decoration:none; margin-left:18px; font-size:15px; font-weight:bold;">Dashboard</a>
-    <a href="transactions.html" style="color:white; text-decoration:none; margin-left:18px; font-size:15px; font-weight:bold;">Transactions</a>
-  </div>
+<div style="display:flex; justify-content:space-between; padding:20px; background:#111;">
+  <h2 style="margin:0; color:red;">Norman FCU</h2>
+  <a href="dashboard.html" style="color:white; text-decoration:none;">Back</a>
 </div>
 
-<div style="max-width:1100px; margin:40px auto; padding:0 20px; display:grid; grid-template-columns:1.1fr .9fr; gap:24px;">
-  
-  <div style="background:rgba(255,255,255,0.14); backdrop-filter:blur(10px); border-radius:18px; padding:24px; box-shadow:0 10px 24px rgba(0,0,0,0.18);">
-    <h2 style="margin-top:0;">Transfer Funds</h2>
-    <p style="opacity:.92; line-height:1.6;">Move funds in this demo finance environment using a clean transfer layout.</p>
+<div style="max-width:500px; margin:40px auto; background:#111; padding:25px; border-radius:12px; box-shadow:0 0 20px rgba(255,0,0,0.2);">
+  <h2 style="margin-top:0;">Transfer Funds</h2>
 
-    <div style="margin-top:18px;">
-      <label style="display:block; margin-bottom:6px; font-size:14px;">Recipient Name</label>
-      <input id="recipient" type="text" placeholder="Enter recipient name" style="width:100%; padding:14px; border:none; border-radius:10px; margin-bottom:14px;">
+  <input id="recipient" type="text" placeholder="Recipient Name" style="width:100%; padding:12px; margin:10px 0; border:none; border-radius:8px; box-sizing:border-box;">
+  <input id="bankName" type="text" placeholder="Recipient Bank" style="width:100%; padding:12px; margin:10px 0; border:none; border-radius:8px; box-sizing:border-box;">
+  <input id="accountNumber" type="text" placeholder="Recipient Account Number" style="width:100%; padding:12px; margin:10px 0; border:none; border-radius:8px; box-sizing:border-box;">
+  <input id="amount" type="number" placeholder="Amount" style="width:100%; padding:12px; margin:10px 0; border:none; border-radius:8px; box-sizing:border-box;">
 
-      <label style="display:block; margin-bottom:6px; font-size:14px;">Account Number</label>
-      <input id="accountNumber" type="text" placeholder="Enter account number" style="width:100%; padding:14px; border:none; border-radius:10px; margin-bottom:14px;">
+  <button id="sendBtn" style="width:100%; padding:12px; background:red; color:white; border:none; border-radius:8px; cursor:pointer; font-weight:bold;">
+    Send Transfer
+  </button>
 
-      <label style="display:block; margin-bottom:6px; font-size:14px;">Routing Number</label>
-      <input id="routingNumber" type="text" placeholder="Enter routing number" style="width:100%; padding:14px; border:none; border-radius:10px; margin-bottom:14px;">
-
-      <label style="display:block; margin-bottom:6px; font-size:14px;">Amount</label>
-      <input id="amount" type="number" placeholder="0.00" style="width:100%; padding:14px; border:none; border-radius:10px; margin-bottom:18px;">
-
-      <button onclick="submitTransfer()" style="width:100%; padding:14px; border:none; border-radius:10px; background:#0ea5e9; color:white; font-weight:bold; font-size:16px; cursor:pointer;">
-        Send Transfer
-      </button>
-    </div>
-
-    <div id="statusBox" style="display:none; margin-top:16px; padding:14px; border-radius:10px; background:rgba(255,255,255,0.18);"></div>
-  </div>
-
-  <div>
-    <div style="background:linear-gradient(135deg,#111827,#1d4ed8); border-radius:18px; padding:24px; box-shadow:0 10px 24px rgba(0,0,0,0.24); margin-bottom:20px;">
-      <div style="display:flex; justify-content:space-between;">
-        <strong>Transfer Summary</strong>
-        <span>Demo</span>
-      </div>
-
-      <div style="margin-top:18px; font-size:14px; opacity:.9;">Available Balance</div>
-      <div id="balanceBox" style="font-size:34px; font-weight:bold; margin-top:8px;">$0.00</div>
-
-      <div style="margin-top:20px; font-size:13px; opacity:.85;">From Account</div>
-      <div id="fromAccount" style="margin-top:6px; font-size:16px;">--</div>
-    </div>
-
-    <div style="background:rgba(255,255,255,0.14); backdrop-filter:blur(10px); border-radius:18px; padding:24px; box-shadow:0 10px 24px rgba(0,0,0,0.18);">
-      <h3 style="margin-top:0;">Transfer Tips</h3>
-      <ul style="padding-left:18px; line-height:1.8; margin:0;">
-        <li>Review recipient details carefully</li>
-        <li>Confirm the amount before sending</li>
-        <li>Use the admin page to test updated balances</li>
-      </ul>
-    </div>
-  </div>
-
+  <p id="status" style="margin-top:14px; color:#ffb3b3;"></p>
 </div>
 
-<script>
-function getUser() {
-  return JSON.parse(localStorage.getItem("userData") || "null");
-}
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  updateDoc,
+  collection,
+  addDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
-function saveUser(user) {
-  localStorage.setItem("userData", JSON.stringify(user));
-}
+const firebaseConfig = {
+  apiKey: "PASTE_YOUR_API_KEY",
+  authDomain: "PASTE_YOUR_AUTH_DOMAIN",
+  projectId: "PASTE_YOUR_PROJECT_ID",
+  storageBucket: "PASTE_YOUR_STORAGE_BUCKET",
+  messagingSenderId: "PASTE_YOUR_MESSAGING_SENDER_ID",
+  appId: "PASTE_YOUR_APP_ID"
+};
 
-function getTransactions() {
-  return JSON.parse(localStorage.getItem("transactions") || "[]");
-}
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-function saveTransactions(txs) {
-  localStorage.setItem("transactions", JSON.stringify(txs));
-}
+const recipientEl = document.getElementById("recipient");
+const bankNameEl = document.getElementById("bankName");
+const accountNumberEl = document.getElementById("accountNumber");
+const amountEl = document.getElementById("amount");
+const sendBtn = document.getElementById("sendBtn");
+const statusEl = document.getElementById("status");
 
-function formatDate() {
-  const d = new Date();
-  return d.toLocaleDateString("en-US", { month: "short", day: "2-digit", year: "numeric" });
-}
+let currentUser = null;
 
-function renderTransferPage() {
-  const user = getUser();
-  if (!user) return;
-
-  document.getElementById("balanceBox").textContent =
-    "$" + Number(user.balance).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
-  document.getElementById("fromAccount").textContent = user.account || "--";
-}
-
-function submitTransfer() {
-  const recipient = document.getElementById("recipient").value.trim();
-  const accountNumber = document.getElementById("accountNumber").value.trim();
-  const routingNumber = document.getElementById("routingNumber").value.trim();
-  const amount = parseFloat(document.getElementById("amount").value || "0");
-
-  if (!recipient || !accountNumber || !routingNumber || amount <= 0) {
-    alert("Please complete all transfer details.");
-    return;
-  }
-
-  const user = getUser();
+onAuthStateChanged(auth, (user) => {
   if (!user) {
-    alert("No user data found.");
+    window.location.href = "login.html";
+    return;
+  }
+  currentUser = user;
+});
+
+sendBtn.addEventListener("click", async () => {
+  const recipient = recipientEl.value.trim();
+  const bankName = bankNameEl.value.trim();
+  const recipientAccount = accountNumberEl.value.trim();
+  const amount = Number(amountEl.value);
+
+  if (!recipient || !bankName || !recipientAccount || !amount) {
+    statusEl.textContent = "Please complete all transfer fields.";
     return;
   }
 
-  user.balance = Number(user.balance) - amount;
-  saveUser(user);
+  if (amount <= 0) {
+    statusEl.textContent = "Amount must be greater than zero.";
+    return;
+  }
 
-  const txs = getTransactions();
-  txs.unshift({
-    title: "Transfer to " + recipient,
-    amount: "-$" + amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
-    date: formatDate()
-  });
-  saveTransactions(txs);
+  if (!currentUser) {
+    statusEl.textContent = "User not signed in.";
+    return;
+  }
 
-  const statusBox = document.getElementById("statusBox");
-  statusBox.style.display = "block";
-  statusBox.innerHTML = "Transfer submitted successfully in demo mode.";
+  try {
+    sendBtn.disabled = true;
+    statusEl.textContent = "Processing transfer...";
 
-  renderTransferPage();
-}
+    const uid = currentUser.uid;
+    const userRef = doc(db, "users", uid);
+    const userSnap = await getDoc(userRef);
 
-renderTransferPage();
+    if (!userSnap.exists()) {
+      statusEl.textContent = "User profile not found.";
+      sendBtn.disabled = false;
+      return;
+    }
+
+    const userData = userSnap.data();
+    const currentBalance = Number(userData.balance) || 0;
+
+    if (amount > currentBalance) {
+      statusEl.textContent = "Insufficient balance.";
+      sendBtn.disabled = false;
+      return;
+    }
+
+    const newBalance = currentBalance - amount;
+
+    await updateDoc(userRef, {
+      balance: newBalance
+    });
+
+    await addDoc(collection(db, "users", uid, "transactions"), {
+      title: "Transfer to " + recipient,
+      bankName: bankName,
+      recipientAccount: recipientAccount,
+      amount: "-$" + amount.toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }),
+      type: "debit",
+      date: new Date().toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric"
+      }),
+      createdAt: serverTimestamp()
+    });
+
+    statusEl.style.color = "#9cffb0";
+    statusEl.textContent = "Transfer successful.";
+
+    setTimeout(() => {
+      window.location.href = "dashboard.html";
+    }, 1200);
+
+  } catch (err) {
+    statusEl.textContent = err.message;
+    sendBtn.disabled = false;
+  }
+});
 </script>
 
 </body>
