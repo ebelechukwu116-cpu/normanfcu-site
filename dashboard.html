@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Dashboard - Norman FCU Demo</title>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Norman FCU Demo</title>
   <style>
     * { box-sizing: border-box; }
 
@@ -20,18 +21,15 @@
       padding: 16px 24px;
       background: rgba(10, 61, 145, 0.95);
       color: white;
-      position: sticky;
-      top: 0;
-      z-index: 10;
     }
 
-    .logo-wrap {
+    .brand {
       display: flex;
       align-items: center;
       gap: 12px;
     }
 
-    .logo-icon {
+    .brand-icon {
       width: 42px;
       height: 42px;
       border-radius: 12px;
@@ -39,30 +37,30 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      color: white;
       font-weight: bold;
       font-size: 20px;
-      color: white;
     }
 
-    .logo-text strong {
+    .brand-text strong {
       display: block;
       font-size: 18px;
     }
 
-    .logo-text span {
+    .brand-text span {
       font-size: 12px;
       opacity: 0.9;
     }
 
-    .top-actions a {
-      text-decoration: none;
+    .nav-links a {
       color: white;
+      text-decoration: none;
       margin-left: 14px;
-      font-size: 14px;
       font-weight: bold;
+      font-size: 14px;
     }
 
-    .wrapper {
+    .wrap {
       max-width: 1180px;
       margin: auto;
       padding: 24px 18px 40px;
@@ -70,7 +68,7 @@
 
     .grid {
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
+      grid-template-columns: 1.15fr .85fr;
       gap: 22px;
     }
 
@@ -85,36 +83,33 @@
     .balance-card {
       background: linear-gradient(135deg, #1d4ed8, #38bdf8);
       color: white;
-      overflow: hidden;
-      position: relative;
     }
 
-    .balance-card .small {
-      opacity: 0.9;
+    .balance-card small {
+      opacity: 0.92;
       font-size: 13px;
     }
 
-    .balance-card .big {
+    .big-balance {
       font-size: 38px;
       font-weight: bold;
       margin-top: 10px;
     }
 
-    .balance-card .meta {
-      margin-top: 16px;
+    .meta {
+      margin-top: 12px;
       font-size: 14px;
       opacity: 0.95;
     }
 
     .bank-card {
       margin-top: 18px;
-      width: 100%;
-      max-width: 420px;
-      border-radius: 18px;
-      padding: 22px;
-      color: white;
       background: linear-gradient(135deg, #0f172a, #1e3a8a);
-      box-shadow: 0 12px 28px rgba(0,0,0,0.2);
+      color: white;
+      border-radius: 18px;
+      padding: 20px;
+      max-width: 420px;
+      box-shadow: 0 16px 30px rgba(0,0,0,.18);
     }
 
     .chip {
@@ -128,23 +123,16 @@
     .card-number {
       font-size: 22px;
       letter-spacing: 2px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .card-row {
       display: flex;
       justify-content: space-between;
       font-size: 13px;
-      opacity: 0.95;
     }
 
-    .account-list p,
-    .side-list p {
-      margin: 10px 0;
-      color: #334155;
-    }
-
-    .action-buttons {
+    .actions {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
@@ -157,8 +145,6 @@
       border-radius: 10px;
       text-decoration: none;
       font-weight: bold;
-      border: none;
-      cursor: pointer;
     }
 
     .btn-primary {
@@ -204,10 +190,9 @@
       font-weight: bold;
     }
 
-    .hero-image,
-    .hero-image-2 {
+    .side-image {
       width: 100%;
-      height: 220px;
+      height: 210px;
       object-fit: cover;
       border-radius: 16px;
       margin-top: 10px;
@@ -220,18 +205,21 @@
       border-radius: 12px;
       color: #0a3d91;
       font-size: 14px;
+      line-height: 1.6;
     }
 
     @media (max-width: 920px) {
       .grid {
         grid-template-columns: 1fr;
       }
+
       .topbar {
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
       }
-      .top-actions a {
+
+      .nav-links a {
         margin-left: 0;
         margin-right: 12px;
       }
@@ -240,15 +228,15 @@
 </head>
 <body>
   <div class="topbar">
-    <div class="logo-wrap">
-      <div class="logo-icon">N</div>
-      <div class="logo-text">
+    <div class="brand">
+      <div class="brand-icon">N</div>
+      <div class="brand-text">
         <strong>Norman FCU</strong>
         <span>Demo Banking Dashboard</span>
       </div>
     </div>
 
-    <div class="top-actions">
+    <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="transfer.html">Transfers</a>
       <a href="transactions.html">Transactions</a>
@@ -256,12 +244,12 @@
     </div>
   </div>
 
-  <div class="wrapper">
+  <div class="wrap">
     <div class="grid">
       <div>
         <div class="card balance-card">
-          <div class="small">Available Balance</div>
-          <div class="big" id="balance">$0.00</div>
+          <small>Available Balance</small>
+          <div class="big-balance" id="balance">$0.00</div>
           <div class="meta" id="accountMeta">Demo account overview</div>
 
           <div class="bank-card">
@@ -276,12 +264,12 @@
 
         <div class="card">
           <h3>Account Details</h3>
-          <div class="account-list" id="accountBox"></div>
+          <div id="accountBox"></div>
 
-          <div class="action-buttons">
+          <div class="actions">
             <a class="btn btn-primary" href="transfer.html">Send Money</a>
             <a class="btn btn-secondary" href="transactions.html">View Transactions</a>
-            <a class="btn btn-secondary" href="admin.html">Open Admin Panel</a>
+            <a class="btn btn-secondary" href="admin.html">Admin Panel</a>
           </div>
         </div>
 
@@ -295,33 +283,17 @@
         <div class="card">
           <h3>Member Services</h3>
           <div class="notice">
-            This is a demo finance environment with generated account details and editable sandbox data.
+            This is a demo finance environment with generated account details and editable sandbox values.
           </div>
 
-          <img
-            class="hero-image"
-            src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80"
-            alt="Finance office"
-          >
-
-          <div class="side-list">
-            <p>Checking and savings style layout</p>
-            <p>Generated demo account number</p>
-            <p>Editable demo card details</p>
-            <p>Local browser storage for testing</p>
-          </div>
+          <img class="side-image" src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80" alt="Finance team">
         </div>
 
         <div class="card">
           <h3>Bank Highlights</h3>
-          <img
-            class="hero-image-2"
-            src="https://images.unsplash.com/photo-1521790797524-b2497295b8a0?auto=format&fit=crop&w=1200&q=80"
-            alt="Customer support"
-          >
+          <img class="side-image" src="https://images.unsplash.com/photo-1521790797524-b2497295b8a0?auto=format&fit=crop&w=1200&q=80" alt="Support desk">
           <p style="margin-top:14px; color:#475569; line-height:1.6;">
-            Explore a more polished finance-style interface with balance cards, transaction rows,
-            and account details presented in a cleaner layout.
+            Explore a more polished finance-style dashboard with styled balance cards, clearer activity rows, and editable demo account details.
           </p>
         </div>
       </div>
@@ -331,31 +303,19 @@
   <script>
     function defaultTransactions() {
       return [
-        { title: "Payroll Deposit", date: "Apr 08, 2026", amount: +2000.00 },
+        { title: "Payroll Deposit", date: "Apr 08, 2026", amount: 2000.00 },
         { title: "Utility Payment", date: "Apr 07, 2026", amount: -120.45 },
         { title: "Card Purchase", date: "Apr 06, 2026", amount: -78.20 },
-        { title: "Transfer Received", date: "Apr 04, 2026", amount: +450.00 }
+        { title: "Transfer Received", date: "Apr 04, 2026", amount: 450.00 }
       ];
     }
 
-    function loadUser() {
-      return JSON.parse(localStorage.getItem("demoUser"));
-    }
+    const user = JSON.parse(localStorage.getItem("demoUser"));
 
-    function renderDashboard() {
-      const user = loadUser();
-
-      if (!user) {
-        document.getElementById("balance").textContent = "$0.00";
-        document.getElementById("accountMeta").textContent = "No demo account found";
-        document.getElementById("accountBox").innerHTML = `
-          <p>No demo account found yet.</p>
-          <p>Create one from <a href="signup.html">signup</a>.</p>
-        `;
-        document.getElementById("txList").innerHTML = `<p>No transactions available.</p>`;
-        return;
-      }
-
+    if (!user) {
+      document.getElementById("accountBox").innerHTML = "<p>No demo account found yet. Create one from signup.</p>";
+      document.getElementById("txList").innerHTML = "<p>No activity available.</p>";
+    } else {
       const txs = user.transactions && user.transactions.length ? user.transactions : defaultTransactions();
 
       document.getElementById("balance").textContent =
@@ -395,8 +355,6 @@
         </div>
       `).join('');
     }
-
-    renderDashboard();
   </script>
 </body>
 </html>
