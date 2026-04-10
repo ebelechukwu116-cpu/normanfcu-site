@@ -1,52 +1,120 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Dashboard - Norman FCU</title>
+  <title>Dashboard - Norman FCU Demo</title>
 </head>
+<body id="page" style="margin:0; font-family:Arial,sans-serif; min-height:100vh; background:linear-gradient(rgba(0,102,204,0.85), rgba(0,51,153,0.95)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1600&q=80'); background-size:cover; background-position:center; color:white;">
 
-<body style="margin:0; font-family:Arial; background:linear-gradient(rgba(0,102,204,0.85), rgba(0,51,153,0.95)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d'); background-size:cover; color:white;">
-
-<!-- HEADER -->
-<div style="display:flex; justify-content:space-between; padding:20px; background:rgba(0,0,0,0.3);">
-    <h2>Norman FCU</h2>
-    <div>
-        <a href="transactions.html" style="color:white; margin-right:15px;">Transactions</a>
-        <a href="transfer.html" style="color:white;">Transfer</a>
-    </div>
+<div style="display:flex; justify-content:space-between; align-items:center; padding:20px; background:rgba(0,0,0,0.28);">
+  <h2 style="margin:0;">Norman FCU Demo</h2>
+  <div>
+    <a href="transactions.html" style="color:white; margin-right:15px;">Transactions</a>
+    <a href="transfer.html" style="color:white; margin-right:15px;">Transfer</a>
+    <a href="admin.html" style="color:white; margin-right:15px;">Admin</a>
+    <a href="#" onclick="toggleTheme()" style="color:white;">Toggle Theme</a>
+  </div>
 </div>
 
-<!-- CONTENT -->
-<div style="padding:30px;">
+<div style="padding:30px; max-width:1000px; margin:auto;">
 
-    <!-- BALANCE CARD -->
-    <div style="background:rgba(255,255,255,0.15); padding:20px; border-radius:15px; backdrop-filter:blur(10px);">
-        <h3>Available Balance</h3>
-        <h1>$12,450.75</h1>
-        <p>Account: <span id="acc"></span></p>
-        <p>Routing: <span id="route"></span></p>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+    <div style="background:rgba(255,255,255,0.14); padding:24px; border-radius:18px; backdrop-filter:blur(10px);">
+      <h3>Available Balance</h3>
+      <h1 id="balanceBox" style="margin:10px 0;">$0.00</h1>
+      <p id="accInfo">Account: --</p>
+      <p id="routeInfo">Routing: --</p>
     </div>
 
-    <!-- ACTION BUTTONS -->
-    <div style="margin-top:20px;">
-        <a href="transfer.html" style="padding:10px 20px; background:#007bff; color:white; border-radius:8px; text-decoration:none;">Send Money</a>
-        <a href="transactions.html" style="padding:10px 20px; background:white; color:#007bff; border-radius:8px; text-decoration:none; margin-left:10px;">View Transactions</a>
+    <div style="background:linear-gradient(135deg,#111827,#1d4ed8); padding:24px; border-radius:18px; box-shadow:0 10px 30px rgba(0,0,0,0.25);">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <strong>Norman FCU</strong>
+        <span>Demo Debit</span>
+      </div>
+
+      <div style="margin-top:28px; width:52px; height:36px; border-radius:8px; background:linear-gradient(135deg,#e5e7eb,#94a3b8);"></div>
+
+      <div id="cardNumber" style="margin-top:24px; font-size:24px; letter-spacing:2px;">**** **** **** 4821</div>
+
+      <div style="display:flex; justify-content:space-between; margin-top:22px; font-size:13px;">
+        <div>
+          <div style="opacity:.8;">CARD HOLDER</div>
+          <div id="cardName">Member Name</div>
+        </div>
+        <div>
+          <div style="opacity:.8;">EXPIRES</div>
+          <div id="cardExpiry">12/28</div>
+        </div>
+      </div>
     </div>
+  </div>
+
+  <div style="margin-top:20px; background:rgba(255,255,255,0.14); padding:22px; border-radius:18px; backdrop-filter:blur(10px);">
+    <h3>User Details</h3>
+    <div id="userBox"></div>
+
+    <div style="margin-top:18px;">
+      <a href="transfer.html" style="display:inline-block; padding:12px 18px; background:white; color:#003366; border-radius:8px; text-decoration:none; margin-right:8px;">Send Money</a>
+      <a href="transactions.html" style="display:inline-block; padding:12px 18px; background:#00c2ff; color:white; border-radius:8px; text-decoration:none;">View Transactions</a>
+    </div>
+  </div>
 
 </div>
 
 <script>
-// GENERATE ACCOUNT NUMBER
-function generateAccount(){
-    return Math.floor(1000000000 + Math.random() * 9000000000);
+function generateAccount() {
+  return String(Math.floor(1000000000 + Math.random() * 9000000000));
 }
-
-// GENERATE ROUTING NUMBER
-function generateRouting(){
-    return Math.floor(100000000 + Math.random() * 900000000);
+function generateRouting() {
+  return "021000021";
 }
-
-document.getElementById("acc").innerText = generateAccount();
-document.getElementById("route").innerText = generateRouting();
+function generateCardLast4() {
+  return String(Math.floor(1000 + Math.random() * 9000));
+}
+function getUser() {
+  let user = JSON.parse(localStorage.getItem("demoUser") || "null");
+  if (!user) {
+    user = {
+      name: "Jordan Miles",
+      email: "member@example.com",
+      account: generateAccount(),
+      routing: generateRouting(),
+      balance: 12450.75,
+      cardNumber: "**** **** **** " + generateCardLast4(),
+      cardExpiry: "12/28"
+    };
+    localStorage.setItem("demoUser", JSON.stringify(user));
+  }
+  return user;
+}
+function render() {
+  const user = getUser();
+  document.getElementById("balanceBox").textContent =
+    "$" + Number(user.balance).toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+  document.getElementById("accInfo").textContent = "Account: " + user.account;
+  document.getElementById("routeInfo").textContent = "Routing: " + user.routing;
+  document.getElementById("cardNumber").textContent = user.cardNumber;
+  document.getElementById("cardName").textContent = user.name;
+  document.getElementById("cardExpiry").textContent = user.cardExpiry;
+  document.getElementById("userBox").innerHTML = `
+    <p><b>Name:</b> ${user.name}</p>
+    <p><b>Email:</b> ${user.email}</p>
+  `;
+}
+function toggleTheme() {
+  const page = document.getElementById("page");
+  if (page.dataset.theme === "light") {
+    page.dataset.theme = "dark";
+    page.style.background = "linear-gradient(rgba(0,102,204,0.85), rgba(0,51,153,0.95)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1600&q=80')";
+    page.style.backgroundSize = "cover";
+    page.style.backgroundPosition = "center";
+    page.style.color = "white";
+  } else {
+    page.dataset.theme = "light";
+    page.style.background = "linear-gradient(135deg,#dbeafe,#ffffff)";
+    page.style.color = "#0f172a";
+  }
+}
+render();
 </script>
 
 </body>
