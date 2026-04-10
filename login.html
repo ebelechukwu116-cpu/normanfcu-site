@@ -1,141 +1,101 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login - Norman FCU</title>
 </head>
-<body style="margin:0; font-family:Arial,sans-serif; min-height:100vh; background:linear-gradient(rgba(0,102,204,0.86), rgba(0,51,153,0.95)), url('https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1600&q=80'); background-size:cover; background-position:center; color:white;">
+<body style="margin:0; font-family:Arial,sans-serif; min-height:100vh; background:linear-gradient(135deg,#000000,#3b0000,#5b0000); color:white;">
 
-  <div style="display:flex; justify-content:space-between; align-items:center; padding:18px 22px; background:rgba(0,0,0,0.28); backdrop-filter:blur(8px);">
-    <div style="display:flex; align-items:center; gap:12px;">
-      <div style="width:42px; height:42px; border-radius:12px; background:linear-gradient(135deg,#38bdf8,#2563eb); display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:20px;">N</div>
-      <div>
-        <div style="font-size:20px; font-weight:bold;">Norman FCU</div>
-        <div style="font-size:12px; opacity:.9;">Demo Banking</div>
-      </div>
-    </div>
-
-    <div style="display:flex; gap:14px; flex-wrap:wrap;">
-      <a href="index.html" style="color:white; text-decoration:none;">Home</a>
+  <div style="display:flex; justify-content:space-between; align-items:center; padding:18px 22px; background:#111;">
+    <div style="font-size:22px; font-weight:bold; color:#ff3b3b;">Norman FCU</div>
+    <div>
+      <a href="index.html" style="color:white; text-decoration:none; margin-right:14px;">Home</a>
       <a href="signup.html" style="color:white; text-decoration:none;">Create Account</a>
     </div>
   </div>
 
-  <div style="background:#facc15; color:black; text-align:center; padding:6px; font-weight:bold;">
-    DEMO BANKING SYSTEM
-  </div>
-
-  <div style="min-height:calc(100vh - 110px); display:flex; align-items:center; justify-content:center; padding:24px;">
-    <div style="width:100%; max-width:980px; display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:center;">
+  <div style="display:flex; align-items:center; justify-content:center; min-height:calc(100vh - 70px); padding:24px;">
+    <div style="width:100%; max-width:900px; display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:center;">
 
       <div>
-        <div style="display:inline-block; padding:8px 12px; border-radius:999px; background:rgba(255,255,255,0.14); border:1px solid rgba(255,255,255,0.18); font-size:13px; margin-bottom:16px;">
-          Secure member access
+        <div style="display:inline-block; padding:8px 12px; border-radius:999px; background:rgba(255,255,255,0.08); margin-bottom:16px;">
+          Secure sign in
         </div>
 
-        <h1 style="font-size:44px; line-height:1.08; margin:0 0 14px;">Login to your account with a cleaner finance-style experience.</h1>
+        <h1 style="font-size:44px; line-height:1.08; margin:0 0 14px;">Access your account with a real login system.</h1>
 
-        <p style="font-size:17px; line-height:1.7; color:#e2e8f0; max-width:540px; margin-bottom:22px;">
-          Access your dashboard, review activity, manage transfers, and explore your account in this demo environment.
+        <p style="font-size:17px; line-height:1.7; color:#e5e7eb; max-width:540px;">
+          Sign in with Firebase Authentication and load your saved profile from Firestore.
         </p>
-
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; max-width:560px;">
-          <div style="background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.18); border-radius:16px; padding:16px;">
-            <strong style="display:block; margin-bottom:8px;">Fast Access</strong>
-            <span style="font-size:14px; color:#dbeafe; line-height:1.5;">Simple login flow with direct access to your dashboard.</span>
-          </div>
-
-          <div style="background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.18); border-radius:16px; padding:16px;">
-            <strong style="display:block; margin-bottom:8px;">Live Support</strong>
-            <span style="font-size:14px; color:#dbeafe; line-height:1.5;">Contact support from the chat widget when needed.</span>
-          </div>
-        </div>
       </div>
 
-      <div style="background:rgba(255,255,255,0.96); color:#0f172a; border-radius:22px; padding:28px; box-shadow:0 22px 50px rgba(0,0,0,0.18);">
-        <h2 style="margin:0 0 8px; color:#0a3d91;">Login</h2>
-        <div style="color:#64748b; font-size:14px; margin-bottom:18px;">Enter your details to continue</div>
+      <div style="background:rgba(255,255,255,0.97); color:#111827; border-radius:22px; padding:28px; box-shadow:0 22px 50px rgba(0,0,0,0.22);">
+        <h2 style="margin:0 0 8px; color:#7a0000;">Login</h2>
+        <div style="color:#6b7280; font-size:14px; margin-bottom:18px;">Secure member access</div>
 
-        <input id="email" type="email" placeholder="Email" style="width:100%; padding:13px; margin:8px 0; border:1px solid #d1d5db; border-radius:10px; box-sizing:border-box;">
+        <input id="email" type="email" placeholder="Email Address" style="width:100%; padding:13px; margin:8px 0; border:1px solid #d1d5db; border-radius:10px; box-sizing:border-box;">
         <input id="password" type="password" placeholder="Password" style="width:100%; padding:13px; margin:8px 0; border:1px solid #d1d5db; border-radius:10px; box-sizing:border-box;">
 
-        <button onclick="login()" style="width:100%; padding:13px; border:none; border-radius:10px; background:#0ea5e9; color:white; font-weight:bold; margin-top:10px; cursor:pointer;">
+        <button id="loginBtn" style="width:100%; padding:13px; border:none; border-radius:10px; background:#dc2626; color:white; font-weight:bold; margin-top:10px; cursor:pointer;">
           Login
         </button>
 
-        <a href="signup.html" style="display:block; text-align:center; margin-top:14px; text-decoration:none; color:#2563eb;">
-          Create Account
+        <div id="status" style="margin-top:14px; font-size:14px; color:#7a0000;"></div>
+
+        <a href="signup.html" style="display:block; text-align:center; margin-top:14px; text-decoration:none; color:#b91c1c;">
+          Need an account? Create one
         </a>
       </div>
 
     </div>
   </div>
 
-  <div id="chatButton" onclick="toggleChat()" style="position:fixed; bottom:20px; right:20px; width:60px; height:60px; border-radius:50%; background:#0ea5e9; color:white; display:flex; align-items:center; justify-content:center; font-size:26px; cursor:pointer; box-shadow:0 10px 24px rgba(0,0,0,0.25); z-index:9999;">
-    💬
-  </div>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 
-  <div id="chatBox" style="display:none; position:fixed; bottom:90px; right:20px; width:320px; max-width:90vw; background:white; color:#111827; border-radius:18px; box-shadow:0 16px 40px rgba(0,0,0,0.25); overflow:hidden; z-index:9999;">
-    <div style="background:linear-gradient(135deg,#00c6ff,#0072ff); color:white; padding:14px; font-weight:bold;">
-      Live Support
-      <span onclick="toggleChat()" style="float:right; cursor:pointer;">✖</span>
-    </div>
+    const firebaseConfig = {
+      apiKey: "PASTE_YOUR_API_KEY",
+      authDomain: "PASTE_YOUR_AUTH_DOMAIN",
+      projectId: "PASTE_YOUR_PROJECT_ID",
+      storageBucket: "PASTE_YOUR_STORAGE_BUCKET",
+      messagingSenderId: "PASTE_YOUR_MESSAGING_SENDER_ID",
+      appId: "PASTE_YOUR_APP_ID"
+    };
 
-    <div id="chatMessages" style="height:240px; overflow-y:auto; padding:10px; background:#f1f5f9;">
-      <div style="background:#e0f2fe; padding:8px 10px; border-radius:10px; margin-bottom:8px;">
-        Hello 👋 Welcome to support. How can we help you today?
-      </div>
-    </div>
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
-    <div style="padding:10px; border-top:1px solid #ddd;">
-      <input id="chatInput" placeholder="Type message..." style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; box-sizing:border-box; margin-bottom:8px;">
-      <button onclick="sendMessage()" style="width:100%; padding:10px; background:#0ea5e9; color:white; border:none; border-radius:8px; cursor:pointer;">
-        Send
-      </button>
-    </div>
-  </div>
+    const loginBtn = document.getElementById("loginBtn");
+    const statusEl = document.getElementById("status");
 
-  <script>
-    function login() {
-      window.location.href = "dashboard.html";
-    }
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        window.location.href = "dashboard.html";
+      }
+    });
 
-    function toggleChat() {
-      const box = document.getElementById("chatBox");
-      box.style.display = box.style.display === "block" ? "none" : "block";
-    }
+    loginBtn.addEventListener("click", async () => {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
 
-    function sendMessage() {
-      const input = document.getElementById("chatInput");
-      const msg = input.value.trim();
-      if (!msg) return;
+      if (!email || !password) {
+        statusEl.textContent = "Please enter email and password.";
+        return;
+      }
 
-      const area = document.getElementById("chatMessages");
-
-      const userDiv = document.createElement("div");
-      userDiv.style.background = "#0ea5e9";
-      userDiv.style.color = "white";
-      userDiv.style.padding = "8px 10px";
-      userDiv.style.borderRadius = "10px";
-      userDiv.style.marginBottom = "8px";
-      userDiv.style.textAlign = "right";
-      userDiv.textContent = msg;
-      area.appendChild(userDiv);
-
-      input.value = "";
-
-      setTimeout(() => {
-        const botDiv = document.createElement("div");
-        botDiv.style.background = "#e0f2fe";
-        botDiv.style.padding = "8px 10px";
-        botDiv.style.borderRadius = "10px";
-        botDiv.style.marginBottom = "8px";
-        botDiv.textContent = "Thanks for reaching out. Support will assist you shortly.";
-        area.appendChild(botDiv);
-        area.scrollTop = area.scrollHeight;
-      }, 700);
-    }
+      try {
+        loginBtn.disabled = true;
+        statusEl.textContent = "Signing in...";
+        await signInWithEmailAndPassword(auth, email, password);
+        window.location.href = "dashboard.html";
+      } catch (err) {
+        statusEl.textContent = err.message;
+      } finally {
+        loginBtn.disabled = false;
+      }
+    });
   </script>
 
 </body>
