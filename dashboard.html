@@ -1,9 +1,85 @@
 <!DOCTYPE html>
 <html>
-<body style="font-family:Arial;padding:40px;">
-<h2>Dashboard</h2>
-<h3>Balance: $12,450.75</h3>
-<a href="transfer.html">Send Money</a><br>
-<a href="transactions.html">Transactions</a>
+<head>
+<title>Dashboard - Norman FCU</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #0b1e3c;
+    color: white;
+}
+
+.header {
+    padding: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.container {
+    padding: 20px;
+}
+
+.card {
+    background: #1e3a8a;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.balance {
+    font-size: 28px;
+    margin-top: 10px;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1e40af;
+}
+
+a {
+    text-decoration: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    Norman Federal Credit Union
+</div>
+
+<div class="container">
+
+    <div class="card">
+        <h3>Available Balance</h3>
+        <div class="balance">$12,450.75</div>
+    </div>
+
+    <div class="card">
+        <h3>Quick Actions</h3>
+
+        <div class="actions">
+            <a href="transfer.html"><button>Send Money</button></a>
+            <a href="transactions.html"><button>Transactions</button></a>
+        </div>
+    </div>
+
+</div>
+
 </body>
 </html>
