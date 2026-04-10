@@ -1,140 +1,242 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Panel</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel - Norman FCU</title>
 </head>
+<body style="margin:0; font-family:Arial,sans-serif; background:linear-gradient(135deg,#000000,#3b0000,#5b0000); color:white; min-height:100vh;">
 
-<body style="margin:0; font-family:Arial; background:linear-gradient(135deg,#000000,#3b0000,#5b0000); color:white;">
+  <div style="display:flex; justify-content:space-between; padding:20px; background:#111;">
+    <h2 style="margin:0; color:red;">Admin Panel</h2>
+    <div>
+      <a href="dashboard.html" style="color:white; text-decoration:none; margin-right:14px;">Dashboard</a>
+      <button id="logoutBtn" style="background:red; color:white; border:none; padding:10px 14px; border-radius:6px; cursor:pointer;">Logout</button>
+    </div>
+  </div>
 
-<div style="display:flex; justify-content:space-between; padding:20px; background:#111;">
-  <h2 style="margin:0; color:red;">Admin Panel</h2>
-  <a href="dashboard.html" style="color:white; text-decoration:none;">Back</a>
-</div>
+  <div style="max-width:1000px; margin:30px auto; padding:0 20px; display:grid; grid-template-columns:320px 1fr; gap:22px;">
 
-<div style="max-width:600px; margin:40px auto; background:#111; padding:25px; border-radius:12px; box-shadow:0 0 20px rgba(255,0,0,0.2);">
+    <div style="background:#111; border-radius:14px; padding:20px; box-shadow:0 0 20px rgba(255,0,0,0.18);">
+      <h3 style="margin-top:0;">Users</h3>
+      <div id="adminState" style="font-size:13px; color:#ffb3b3; margin-bottom:14px;">Checking admin access...</div>
+      <div id="userList" style="display:flex; flex-direction:column; gap:10px;"></div>
+    </div>
 
-  <h3>Manage User</h3>
+    <div style="background:#111; border-radius:14px; padding:20px; box-shadow:0 0 20px rgba(255,0,0,0.18);">
+      <h3 style="margin-top:0;">Manage Selected User</h3>
 
-  <input id="uid" placeholder="User UID" style="width:100%; padding:12px; margin:10px 0; border-radius:8px; border:none;">
-  <button onclick="loadUser()" style="width:100%; padding:12px; background:#333; color:white; border:none; border-radius:8px;">Load User</button>
+      <div id="selectedInfo" style="margin-bottom:16px; color:#ddd;">No user selected.</div>
 
-  <hr style="margin:20px 0; border-color:#333;">
+      <input id="balance" type="number" step="0.01" placeholder="New Balance" style="width:100%; padding:12px; margin:10px 0; border:none; border-radius:8px; box-sizing:border-box;">
+      <input id="title" placeholder="Transaction Title" style="width:100%; padding:12px; margin:10px 0; border:none; border-radius:8px; box-sizing:border-box;">
+      <input id="amount" placeholder="Amount (example: -$150.00 or +$2000.00)" style="width:100%; padding:12px; margin:10px 0; border:none; border-radius:8px; box-sizing:border-box;">
 
-  <p id="userInfo"></p>
+      <div style="display:flex; gap:10px; margin-top:10px; flex-wrap:wrap;">
+        <button id="updateBalanceBtn" style="padding:12px 16px; background:red; color:white; border:none; border-radius:8px; cursor:pointer;">
+          Update Balance
+        </button>
 
-  <input id="balance" type="number" placeholder="New Balance" style="width:100%; padding:12px; margin:10px 0; border-radius:8px; border:none;">
-  <button onclick="updateBalance()" style="width:100%; padding:12px; background:red; color:white; border:none; border-radius:8px;">Update Balance</button>
+        <button id="addTxBtn" style="padding:12px 16px; background:#2a2a2a; color:white; border:none; border-radius:8px; cursor:pointer;">
+          Add Transaction
+        </button>
+      </div>
 
-  <hr style="margin:20px 0; border-color:#333;">
+      <div id="status" style="margin-top:16px; color:#ffb3b3;"></div>
+    </div>
 
-  <h3>Add Transaction</h3>
+  </div>
 
-  <input id="title" placeholder="Title" style="width:100%; padding:12px; margin:10px 0; border-radius:8px; border:none;">
-  <input id="amount" placeholder="Amount (e.g -500 or +200)" style="width:100%; padding:12px; margin:10px 0; border-radius:8px; border:none;">
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+    import {
+      getFirestore,
+      collection,
+      query,
+      orderBy,
+      onSnapshot,
+      doc,
+      getDoc,
+      updateDoc,
+      addDoc,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
-  <button onclick="addTransaction()" style="width:100%; padding:12px; background:#ff2d2d; color:white; border:none; border-radius:8px;">
-    Add Transaction
-  </button>
+    const firebaseConfig = {
+      apiKey: "PASTE_YOUR_API_KEY",
+      authDomain: "PASTE_YOUR_AUTH_DOMAIN",
+      projectId: "PASTE_YOUR_PROJECT_ID",
+      storageBucket: "PASTE_YOUR_STORAGE_BUCKET",
+      messagingSenderId: "PASTE_YOUR_MESSAGING_SENDER_ID",
+      appId: "PASTE_YOUR_APP_ID"
+    };
 
-  <p id="status" style="margin-top:15px; color:#ffb3b3;"></p>
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
 
-</div>
+    const adminState = document.getElementById("adminState");
+    const userList = document.getElementById("userList");
+    const selectedInfo = document.getElementById("selectedInfo");
+    const balanceInput = document.getElementById("balance");
+    const titleInput = document.getElementById("title");
+    const amountInput = document.getElementById("amount");
+    const updateBalanceBtn = document.getElementById("updateBalanceBtn");
+    const addTxBtn = document.getElementById("addTxBtn");
+    const statusEl = document.getElementById("status");
+    const logoutBtn = document.getElementById("logoutBtn");
 
-<script type="module">
+    let selectedUid = null;
+    let selectedUser = null;
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
-import { getFirestore, doc, getDoc, updateDoc, addDoc, collection, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+    logoutBtn.addEventListener("click", async () => {
+      await signOut(auth);
+      window.location.href = "login.html";
+    });
 
-const firebaseConfig = {
-  apiKey: "PASTE_YOUR_API_KEY",
-  authDomain: "PASTE_YOUR_AUTH_DOMAIN",
-  projectId: "PASTE_YOUR_PROJECT_ID",
-  storageBucket: "PASTE_YOUR_STORAGE_BUCKET",
-  messagingSenderId: "PASTE_YOUR_MESSAGING_SENDER_ID",
-  appId: "PASTE_YOUR_APP_ID"
-};
+    function formatMoney(value) {
+      const num = Number(value) || 0;
+      return "$" + num.toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+    function renderSelectedUser() {
+      if (!selectedUser) {
+        selectedInfo.textContent = "No user selected.";
+        return;
+      }
 
-let currentUID = null;
+      selectedInfo.innerHTML = `
+        <div><b>Name:</b> ${selectedUser.fullName || "User"}</div>
+        <div><b>Email:</b> ${selectedUser.email || ""}</div>
+        <div><b>Balance:</b> ${formatMoney(selectedUser.balance)}</div>
+        <div><b>Account:</b> ${selectedUser.accountNumber || "--"}</div>
+      `;
 
-window.loadUser = async function(){
+      balanceInput.value = Number(selectedUser.balance) || 0;
+    }
 
-  const uid = document.getElementById("uid").value.trim();
+    function bindUserList() {
+      const usersRef = collection(db, "users");
+      const usersQuery = query(usersRef, orderBy("fullName"));
 
-  if(!uid){
-    document.getElementById("status").innerText = "Enter UID";
-    return;
-  }
+      onSnapshot(usersQuery, (snapshot) => {
+        if (snapshot.empty) {
+          userList.innerHTML = "<div style='color:#bbb;'>No users found.</div>";
+          return;
+        }
 
-  const userRef = doc(db,"users",uid);
-  const snap = await getDoc(userRef);
+        userList.innerHTML = snapshot.docs.map((snap) => {
+          const u = snap.data();
+          return `
+            <button data-uid="${snap.id}" style="text-align:left; width:100%; padding:12px; border:none; border-radius:8px; background:#1b1b1b; color:white; cursor:pointer;">
+              <div style="font-weight:bold;">${u.fullName || "User"}</div>
+              <div style="font-size:12px; color:#bbb; margin-top:4px;">${u.email || ""}</div>
+            </button>
+          `;
+        }).join("");
 
-  if(!snap.exists()){
-    document.getElementById("status").innerText = "User not found";
-    return;
-  }
+        [...userList.querySelectorAll("button[data-uid]")].forEach((btn) => {
+          btn.addEventListener("click", async () => {
+            selectedUid = btn.dataset.uid;
+            const userRef = doc(db, "users", selectedUid);
+            const snap = await getDoc(userRef);
 
-  currentUID = uid;
+            if (!snap.exists()) {
+              statusEl.textContent = "User record not found.";
+              return;
+            }
 
-  const data = snap.data();
+            selectedUser = snap.data();
+            renderSelectedUser();
+            statusEl.textContent = "";
+          });
+        });
+      });
+    }
 
-  document.getElementById("userInfo").innerText =
-    "Name: " + data.fullName + " | Balance: $" + data.balance;
+    updateBalanceBtn.addEventListener("click", async () => {
+      if (!selectedUid) {
+        statusEl.textContent = "Select a user first.";
+        return;
+      }
 
-};
+      const newBalance = Number(balanceInput.value);
+      if (isNaN(newBalance)) {
+        statusEl.textContent = "Enter a valid balance.";
+        return;
+      }
 
-window.updateBalance = async function(){
+      try {
+        await updateDoc(doc(db, "users", selectedUid), {
+          balance: newBalance
+        });
 
-  if(!currentUID){
-    document.getElementById("status").innerText = "Load user first";
-    return;
-  }
+        selectedUser.balance = newBalance;
+        renderSelectedUser();
+        statusEl.textContent = "Balance updated.";
+      } catch (err) {
+        statusEl.textContent = err.message;
+      }
+    });
 
-  const newBalance = Number(document.getElementById("balance").value);
+    addTxBtn.addEventListener("click", async () => {
+      if (!selectedUid) {
+        statusEl.textContent = "Select a user first.";
+        return;
+      }
 
-  if(isNaN(newBalance)){
-    document.getElementById("status").innerText = "Invalid balance";
-    return;
-  }
+      const title = titleInput.value.trim();
+      const amount = amountInput.value.trim();
 
-  await updateDoc(doc(db,"users",currentUID),{
-    balance: newBalance
-  });
+      if (!title || !amount) {
+        statusEl.textContent = "Enter transaction title and amount.";
+        return;
+      }
 
-  document.getElementById("status").innerText = "Balance updated";
+      try {
+        await addDoc(collection(db, "users", selectedUid, "transactions"), {
+          title,
+          amount,
+          date: new Date().toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric"
+          }),
+          createdAt: serverTimestamp()
+        });
 
-};
+        titleInput.value = "";
+        amountInput.value = "";
+        statusEl.textContent = "Transaction added.";
+      } catch (err) {
+        statusEl.textContent = err.message;
+      }
+    });
 
-window.addTransaction = async function(){
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        window.location.href = "login.html";
+        return;
+      }
 
-  if(!currentUID){
-    document.getElementById("status").innerText = "Load user first";
-    return;
-  }
+      const token = await user.getIdTokenResult();
 
-  const title = document.getElementById("title").value;
-  const amount = document.getElementById("amount").value;
+      if (!token.claims.admin) {
+        adminState.textContent = "Access denied. Admin role required.";
+        userList.innerHTML = "";
+        updateBalanceBtn.disabled = true;
+        addTxBtn.disabled = true;
+        return;
+      }
 
-  if(!title || !amount){
-    document.getElementById("status").innerText = "Fill all fields";
-    return;
-  }
-
-  await addDoc(collection(db,"users",currentUID,"transactions"),{
-    title: title,
-    amount: amount.startsWith("+") || amount.startsWith("-") ? amount : "-" + amount,
-    date: new Date().toLocaleDateString(),
-    createdAt: serverTimestamp()
-  });
-
-  document.getElementById("status").innerText = "Transaction added";
-
-};
-
-</script>
+      adminState.textContent = "Admin access verified.";
+      bindUserList();
+    });
+  </script>
 
 </body>
 </html>
