@@ -1,9 +1,84 @@
 <!DOCTYPE html>
 <html>
-<body style="font-family:Arial;padding:40px;">
-<h2>Transfer Money</h2>
-<input placeholder="Recipient"><br><br>
-<input placeholder="Amount"><br><br>
-<button onclick="alert('Transfer successful (demo)')">Send</button>
+<head>
+<title>Send Money - Norman FCU</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #0b1e3c;
+    color: white;
+}
+
+.header {
+    padding: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.container {
+    padding: 20px;
+}
+
+.form-box {
+    background: #1e3a8a;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background: #2563eb;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1e40af;
+}
+
+a {
+    color: #cbd5e1;
+    display: block;
+    margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    Send Money
+</div>
+
+<div class="container">
+
+    <div class="form-box">
+        <h3>Transfer Funds</h3>
+
+        <input type="text" placeholder="Recipient Name">
+        <input type="text" placeholder="Account Number">
+        <input type="number" placeholder="Amount ($)">
+        
+        <button>Send</button>
+
+        <a href="dashboard.html">← Back to Dashboard</a>
+    </div>
+
+</div>
+
 </body>
 </html>
