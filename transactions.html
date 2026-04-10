@@ -1,56 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Transactions - Norman FCU</title>
 </head>
+
 <body style="margin:0; font-family:Arial,sans-serif; min-height:100vh; background:linear-gradient(rgba(0,102,204,0.82), rgba(0,51,153,0.92)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1600&q=80'); background-size:cover; background-position:center; background-repeat:no-repeat; color:white;">
 
-  <div style="display:flex; align-items:center; justify-content:space-between; padding:20px 28px; background:rgba(0,0,0,0.28); backdrop-filter:blur(8px);">
-    <div style="display:flex; align-items:center; gap:12px;">
-      <div style="width:42px; height:42px; border-radius:12px; background:linear-gradient(135deg,#38bdf8,#2563eb); display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:20px;">N</div>
-      <div>
-        <div style="font-size:20px; font-weight:bold;">Norman FCU</div>
-        <div style="font-size:12px; opacity:.9;">Demo Banking</div>
-      </div>
-    </div>
-
+<div style="display:flex; align-items:center; justify-content:space-between; padding:20px 28px; background:rgba(0,0,0,0.28); backdrop-filter:blur(8px);">
+  <div style="display:flex; align-items:center; gap:12px;">
+    <div style="width:42px; height:42px; border-radius:12px; background:linear-gradient(135deg,#38bdf8,#2563eb); display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:20px;">N</div>
     <div>
-      <a href="dashboard.html" style="color:white; text-decoration:none; margin-left:18px; font-size:15px; font-weight:bold;">Dashboard</a>
-      <a href="transfer.html" style="color:white; text-decoration:none; margin-left:18px; font-size:15px; font-weight:bold;">Transfer</a>
+      <div style="font-size:20px; font-weight:bold;">Norman FCU</div>
+      <div style="font-size:12px; opacity:.9;">Demo Banking</div>
     </div>
   </div>
 
-  <div style="max-width:760px; margin:40px auto; padding:0 20px;">
-    <div style="background:rgba(255,255,255,0.14); backdrop-filter:blur(10px); border-radius:18px; padding:24px; box-shadow:0 10px 24px rgba(0,0,0,0.18);">
-      <h2 style="margin-top:0; margin-bottom:18px;">Transactions</h2>
+  <div>
+    <a href="dashboard.html" style="color:white; text-decoration:none; margin-left:18px; font-size:15px; font-weight:bold;">Dashboard</a>
+    <a href="transfer.html" style="color:white; text-decoration:none; margin-left:18px; font-size:15px; font-weight:bold;">Transfer</a>
+  </div>
+</div>
 
-      <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid rgba(255,255,255,0.2);">
-        <div>
-          <div style="font-weight:bold;">Deposit</div>
-          <div style="font-size:13px; opacity:.9;">Apr 10, 2026</div>
-        </div>
-        <div style="font-weight:bold; color:#d9ffe1;">+$2,000</div>
-      </div>
+<div style="max-width:760px; margin:40px auto; padding:0 20px;">
+  <div style="background:rgba(255,255,255,0.14); backdrop-filter:blur(10px); border-radius:18px; padding:24px; box-shadow:0 10px 24px rgba(0,0,0,0.18);">
+    <h2 style="margin-top:0; margin-bottom:18px;">Transactions</h2>
+    <div id="txBox"></div>
+  </div>
+</div>
 
-      <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid rgba(255,255,255,0.2);">
-        <div>
-          <div style="font-weight:bold;">Transfer</div>
-          <div style="font-size:13px; opacity:.9;">Apr 09, 2026</div>
-        </div>
-        <div style="font-weight:bold; color:#ffd6d6;">-$150</div>
-      </div>
+<script>
+let txs = JSON.parse(localStorage.getItem("transactions")) || [
+  { title: "Deposit", amount: "+$2,000", date: "Apr 10, 2026" },
+  { title: "Transfer", amount: "-$150", date: "Apr 09, 2026" },
+  { title: "Shopping", amount: "-$80", date: "Apr 08, 2026" }
+];
 
-      <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0;">
-        <div>
-          <div style="font-weight:bold;">Shopping</div>
-          <div style="font-size:13px; opacity:.9;">Apr 08, 2026</div>
-        </div>
-        <div style="font-weight:bold; color:#ffd6d6;">-$80</div>
-      </div>
+localStorage.setItem("transactions", JSON.stringify(txs));
+
+document.getElementById("txBox").innerHTML = txs.map(tx => `
+  <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid rgba(255,255,255,0.2);">
+    <div>
+      <div style="font-weight:bold;">${tx.title}</div>
+      <div style="font-size:13px; opacity:.9;">${tx.date}</div>
+    </div>
+    <div style="font-weight:bold; color:${tx.amount.startsWith('+') ? '#d9ffe1' : '#ffd6d6'};">
+      ${tx.amount}
     </div>
   </div>
+`).join('');
+</script>
 
 </body>
 </html>
