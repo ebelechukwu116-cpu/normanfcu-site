@@ -1,74 +1,138 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Norman FCU</title>
 
 <style>
-body {
+*{
     margin:0;
-    font-family:Arial;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
 
-    background:
-    linear-gradient(rgba(10,61,145,0.8), rgba(14,165,233,0.7)),
-    url("https://images.unsplash.com/photo-1554224155-1696413565d3");
-
-    background-size:cover;
-    background-position:center;
+/* 🔥 BACKGROUND */
+body{
+    height:100vh;
+    background: linear-gradient(rgba(0,102,204,0.8), rgba(0,51,153,0.9)),
+    url('https://images.unsplash.com/photo-1605902711622-cfb43c44367f');
+    background-size: cover;
+    background-position: center;
     color:white;
 }
 
-.nav {
+/* NAVBAR */
+.navbar{
     display:flex;
     justify-content:space-between;
     padding:20px;
-    background:rgba(0,0,0,0.4);
+    background:rgba(0,0,0,0.3);
 }
 
-.hero {
-    text-align:center;
-    padding:100px 20px;
-}
-
-.btn {
-    padding:12px 20px;
-    background:#0ea5e9;
+.navbar h2{
     color:white;
-    border-radius:8px;
-    text-decoration:none;
-    margin:5px;
 }
 
-.card {
+.navbar a{
+    color:white;
+    margin-left:15px;
+    text-decoration:none;
+}
+
+/* HERO */
+.hero{
+    text-align:center;
+    margin-top:100px;
+}
+
+.hero h1{
+    font-size:50px;
+}
+
+.hero p{
+    margin-top:15px;
+    font-size:18px;
+}
+
+/* BUTTONS */
+.buttons{
+    margin-top:30px;
+}
+
+.btn{
+    padding:12px 25px;
+    border:none;
+    border-radius:5px;
+    margin:10px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.login-btn{
     background:white;
-    color:black;
+    color:#003366;
+}
+
+.signup-btn{
+    background:#00ccff;
+    color:white;
+}
+
+/* FEATURES */
+.features{
+    display:flex;
+    justify-content:center;
+    margin-top:80px;
+    gap:40px;
+}
+
+.card{
+    background:rgba(255,255,255,0.1);
     padding:20px;
-    margin:20px;
     border-radius:10px;
+    width:200px;
+    text-align:center;
 }
 </style>
-</head>
 
+</head>
 <body>
 
-<div class="nav">
+<div class="navbar">
     <h2>Norman FCU</h2>
     <div>
-        <a href="login.html" style="color:white;">Login</a>
-        <a href="signup.html" style="color:white;">Open Account</a>
+        <a href="login.html">Login</a>
+        <a href="Signup.html">Create Account</a>
     </div>
 </div>
 
 <div class="hero">
     <h1>Modern Digital Banking</h1>
-    <p>Secure and easy banking demo experience</p>
+    <p>Secure. Fast. Trusted banking experience.</p>
 
-    <a href="login.html" class="btn">Login</a>
-    <a href="signup.html" class="btn">Create Account</a>
+    <div class="buttons">
+        <a href="login.html"><button class="btn login-btn">Login</button></a>
+        <a href="Signup.html"><button class="btn signup-btn">Create Account</button></a>
+    </div>
 </div>
 
-<div class="card">
-    <h3>Secure Banking</h3>
-    <p>Safe and reliable system</p>
+<div class="features">
+    <div class="card">
+        <h3>Secure</h3>
+        <p>Bank-grade protection</p>
+    </div>
+
+    <div class="card">
+        <h3>Fast</h3>
+        <p>Instant transfers</p>
+    </div>
+
+    <div class="card">
+        <h3>Reliable</h3>
+        <p>24/7 access</p>
+    </div>
 </div>
 
 </body>
